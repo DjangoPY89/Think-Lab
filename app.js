@@ -15,11 +15,11 @@ document.addEventListener('DOMContentLoaded', () => {
   initShowcaseTabs();
   initRoiCalculator();
   initProcessTimeline();
-  initPortfolioFilters();
   initIntakeWizard();
   initPricingToggle();
   initFaqAccordion();
   initThinkBotAI();
+  initAiChatbotShowcase();
 });
 
 /* ==========================================================================
@@ -216,11 +216,12 @@ function initRoiCalculator() {
   if (!trafficInput || !ticketInput || !convInput) return;
 
   function formatCurrency(num) {
-    return new Intl.NumberFormat('es-MX', {
-      style: 'currency',
-      currency: 'USD',
-      maximumFractionDigits: 0,
-    }).format(num);
+    return (
+      'Gs. ' +
+      new Intl.NumberFormat('es-PY', {
+        maximumFractionDigits: 0,
+      }).format(Math.round(num))
+    );
   }
 
   function updateCalculator() {
@@ -228,7 +229,7 @@ function initRoiCalculator() {
     const ticket = parseInt(ticketInput.value);
     const convRate = parseFloat(convInput.value);
 
-    trafficVal.textContent = new Intl.NumberFormat('es-MX').format(traffic) + ' visitas';
+    trafficVal.textContent = new Intl.NumberFormat('es-PY').format(traffic) + ' visitas';
     ticketVal.textContent = formatCurrency(ticket);
     convVal.textContent = convRate.toFixed(1) + '%';
 
@@ -250,6 +251,31 @@ function initRoiCalculator() {
       progressBar.style.width = `${Math.max(percentage, 25)}%`;
     }
   }
+  const roiCtaBtn = document.getElementById('roi-audit-cta-btn');
+  if (roiCtaBtn) {
+    roiCtaBtn.addEventListener('click', () => {
+      const traffic = parseInt(trafficInput.value);
+      const ticket = parseInt(ticketInput.value);
+      const convRate = parseFloat(convInput.value);
+
+      fetch('/api/roi-assessment', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          traffic,
+          ticket_gs: ticket,
+          conversion_rate: convRate,
+        }),
+      })
+        .then((res) => res.json())
+        .then((data) => {
+          if (data.success) {
+            showToast('Evaluación de ROI registrada para tu auditoría.');
+          }
+        })
+        .catch((err) => console.log('Assessment saved:', err));
+    });
+  }
 
   [trafficInput, ticketInput, convInput].forEach((input) => {
     input.addEventListener('input', updateCalculator);
@@ -265,16 +291,16 @@ function initProcessTimeline() {
   const steps = [
     {
       num: '01',
-      title: 'Estrategia & Arquitectura de Información',
-      desc: 'Definimos objetivos de negocio, embudos de conversión y requerimientos de IA. Establecemos la base de arquitectura de software y diseño.',
-      deliverables: ['Estructura UX & User Flow', 'Auditoría de Conversión', 'Definición de Stack'],
+      title: 'Diagnóstico & Estrategia de Conversión',
+      desc: 'Analizamos tu modelo de negocio, usuarios objetivo y competidores para definir la arquitectura técnica, wireframes y stack óptimo.',
+      deliverables: ['Documento de Arquitectura', 'User Journey Maps', 'Matriz de Requerimientos'],
       duration: 'Semana 1',
     },
     {
       num: '02',
-      title: 'Diseño de Interfaz & Prototipado',
-      desc: 'Desarrollo visual con estándares de clase mundial. Diseño sobrio, espaciado milimétrico y microinteracciones precisas en Figma.',
-      deliverables: ['UI Kit & Tokens de Diseño', 'Diseño Mobile & Desktop', 'Prototipo Interactivo'],
+      title: 'Diseño de Interfaz Apple-grade (UI/UX)',
+      desc: 'Prototipado interactivo en Figma con estética sobria, modo oscuro nativo, microinteracciones y estándares de diseño de clase mundial.',
+      deliverables: ['Design System en Figma', 'Prototipo Interactivo 1:1', 'Assets Optimizados'],
       duration: 'Semana 2',
     },
     {
@@ -308,25 +334,25 @@ function initProcessTimeline() {
   function renderStepDetail(index) {
     const s = steps[index];
     stepDetailContainer.innerHTML = `
-      <div class="apple-card p-8 border border-white/10">
+      <div class="apple-card p-5 sm:p-8 border border-white/10">
         <div class="flex items-center justify-between mb-4">
           <span class="apple-pill-lime text-xs font-mono font-semibold">
             FASE ${s.num} • ${s.duration}
           </span>
-          <span class="text-3xl font-bold text-white/20 font-mono">${s.num}</span>
+          <span class="text-2xl sm:text-3xl font-bold text-white/20 font-mono">${s.num}</span>
         </div>
-        <h3 class="text-2xl font-bold text-white mb-2">${s.title}</h3>
-        <p class="text-[#86868b] leading-relaxed mb-6 text-sm">${s.desc}</p>
+        <h3 class="text-xl sm:text-2xl font-bold text-white mb-2">${s.title}</h3>
+        <p class="text-[#86868b] leading-relaxed mb-5 sm:mb-6 text-xs sm:text-sm">${s.desc}</p>
         
-        <div class="border-t border-white/10 pt-5">
-          <h4 class="text-xs font-mono uppercase text-[#86868b] tracking-wider mb-3">Entregables:</h4>
-          <ul class="space-y-2">
+        <div class="border-t border-white/10 pt-4 sm:pt-5">
+          <h4 class="text-xs font-mono uppercase text-[#86868b] tracking-wider mb-2.5 sm:mb-3">Entregables:</h4>
+          <ul class="space-y-1.5 sm:space-y-2">
             ${s.deliverables
               .map(
                 (d) => `
-              <li class="flex items-center gap-2 text-sm text-[#f5f5f7]">
-                <span class="w-1.5 h-1.5 rounded-full bg-[#a3e635]"></span>
-                ${d}
+              <li class="flex items-center gap-2 text-xs sm:text-sm text-[#f5f5f7]">
+                <span class="w-1.5 h-1.5 rounded-full bg-[#a3e635] flex-shrink-0"></span>
+                <span>${d}</span>
               </li>
             `
               )
@@ -352,209 +378,10 @@ function initProcessTimeline() {
   renderStepDetail(0);
 }
 
-/* ==========================================================================
-   6. Portfolio Filter & Modal
-   ========================================================================== */
-const portfolioItems = [
-  {
-    id: 1,
-    category: 'saas',
-    title: 'NexusAI Cloud Platform',
-    desc: 'Plataforma SaaS para orquestación de agentes de IA en tiempo real.',
-    tag: 'SaaS / AI Suite',
-    metric: '+340% Conversión de Registro',
-    speed: '0.4s Carga',
-    image: 'https://images.unsplash.com/photo-1551288049-bebda4e38f71?q=80&w=1000&auto=format&fit=crop',
-    tech: ['Next.js 14', 'Tailwind CSS', 'Supabase', 'Claude API'],
-  },
-  {
-    id: 2,
-    category: 'ecommerce',
-    title: 'Aura Luxury Apparel',
-    desc: 'E-commerce interactivo de alta costura con visualizador 3D y checkout en 1 clic.',
-    tag: 'E-Commerce',
-    metric: '$1.4M Ventas en el 1er Mes',
-    speed: '0.3s Carga',
-    image: 'https://images.unsplash.com/photo-1460925895917-afdab827c52f?q=80&w=1000&auto=format&fit=crop',
-    tech: ['Shopify Headless', 'Three.js', 'Stripe Elements', 'Edge CDN'],
-  },
-  {
-    id: 3,
-    category: 'ai',
-    title: 'Vocalis Intelligent Assistant',
-    desc: 'Aplicación web de voz con integración de ElevenLabs y transcripción en tiempo real.',
-    tag: 'Voice AI App',
-    metric: '+58K Usuarios Activos',
-    speed: '0.5s Carga',
-    image: 'https://images.unsplash.com/photo-1518770660439-4636190af475?q=80&w=1000&auto=format&fit=crop',
-    tech: ['WebSockets', 'ElevenLabs MCP', 'FastAPI', 'Vercel'],
-  },
-  {
-    id: 4,
-    category: 'landing',
-    title: 'Zenith Capital Hedge Fund',
-    desc: 'Sitio institucional con analíticas financieras en vivo y portal privado de inversores.',
-    tag: 'Fintech Landing',
-    metric: '99.9% Uptime Global',
-    speed: '0.2s Carga',
-    image: 'https://images.unsplash.com/photo-1642543492481-44e81e3914a7?q=80&w=1000&auto=format&fit=crop',
-    tech: ['Next.js', 'Chart.js', 'Auth0', 'Tailwind'],
-  },
-];
 
-function initPortfolioFilters() {
-  const filterBtns = document.querySelectorAll('[data-portfolio-filter]');
-  const grid = document.getElementById('portfolio-grid');
-  const modal = document.getElementById('portfolio-modal');
-  const modalContent = document.getElementById('portfolio-modal-content');
-  const modalClose = document.getElementById('portfolio-modal-close');
-
-  if (!grid) return;
-
-  function renderPortfolio(filter = 'all') {
-    const filtered = filter === 'all' ? portfolioItems : portfolioItems.filter((item) => item.category === filter);
-
-    grid.innerHTML = filtered
-      .map(
-        (item) => `
-      <div class="apple-card group cursor-pointer" data-portfolio-id="${item.id}">
-        <div class="relative h-64 overflow-hidden bg-[#0c0c0e]">
-          <img src="${item.image}" alt="${item.title}" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105 opacity-80 group-hover:opacity-100" />
-          <div class="absolute inset-0 bg-gradient-to-t from-[#101012] via-transparent to-transparent"></div>
-          <div class="absolute top-4 left-4">
-            <span class="apple-pill-lime">
-              ${item.tag}
-            </span>
-          </div>
-          <div class="absolute bottom-4 left-4 right-4 flex items-center justify-between text-xs font-mono">
-            <span class="text-[#86868b] bg-black/60 backdrop-blur-md px-2.5 py-1 rounded-md border border-white/10">
-              ⚡ ${item.speed}
-            </span>
-            <span class="text-[#a3e635] bg-black/60 backdrop-blur-md px-2.5 py-1 rounded-md border border-white/10">
-              ${item.metric}
-            </span>
-          </div>
-        </div>
-        <div class="p-6">
-          <h3 class="text-lg font-semibold text-white group-hover:text-[#a3e635] transition-colors mb-1.5 flex items-center justify-between">
-            ${item.title}
-            <span class="text-[#86868b] text-sm group-hover:translate-x-1 transition-transform">→</span>
-          </h3>
-          <p class="text-sm text-[#86868b] mb-4">${item.desc}</p>
-          <div class="flex flex-wrap gap-1.5">
-            ${item.tech
-              .map(
-                (t) => `
-              <span class="text-[11px] font-mono px-2.5 py-0.5 rounded-full bg-white/[0.04] text-[#86868b] border border-white/5">
-                ${t}
-              </span>
-            `
-              )
-              .join('')}
-          </div>
-        </div>
-      </div>
-    `
-      )
-      .join('');
-
-    grid.querySelectorAll('[data-portfolio-id]').forEach((card) => {
-      card.addEventListener('click', () => {
-        const id = parseInt(card.getAttribute('data-portfolio-id'));
-        openPortfolioModal(id);
-      });
-    });
-  }
-
-  function openPortfolioModal(id) {
-    const item = portfolioItems.find((p) => p.id === id);
-    if (!item || !modal || !modalContent) return;
-
-    modalContent.innerHTML = `
-      <div class="relative">
-        <img src="${item.image}" alt="${item.title}" class="w-full h-64 object-cover rounded-t-3xl" />
-        <div class="absolute inset-0 bg-gradient-to-t from-[#121214] via-transparent to-transparent"></div>
-        <span class="absolute top-4 left-4 apple-pill-lime">
-          ${item.tag}
-        </span>
-      </div>
-      <div class="p-8">
-        <h2 class="text-2xl font-bold text-white mb-2">${item.title}</h2>
-        <p class="text-[#86868b] mb-6 leading-relaxed text-sm">${item.desc}</p>
-        
-        <div class="grid grid-cols-2 gap-4 mb-6">
-          <div class="p-4 rounded-2xl bg-white/[0.03] border border-white/10">
-            <span class="text-xs font-mono text-[#86868b] uppercase">Impacto</span>
-            <div class="text-base font-semibold text-[#a3e635] mt-1">${item.metric}</div>
-          </div>
-          <div class="p-4 rounded-2xl bg-white/[0.03] border border-white/10">
-            <span class="text-xs font-mono text-[#86868b] uppercase">Velocidad</span>
-            <div class="text-base font-semibold text-white mt-1">${item.speed}</div>
-          </div>
-        </div>
-
-        <div class="mb-6">
-          <h4 class="text-xs font-mono uppercase text-[#86868b] mb-2">Stack Tecnológico:</h4>
-          <div class="flex flex-wrap gap-2">
-            ${item.tech
-              .map(
-                (t) => `
-              <span class="text-xs font-mono px-3 py-1 rounded-full bg-white/5 text-[#f5f5f7] border border-white/10">
-                ${t}
-              </span>
-            `
-              )
-              .join('')}
-          </div>
-        </div>
-
-        <div class="flex justify-end gap-3 pt-4 border-t border-white/10">
-          <button id="modal-project-close-btn" class="btn-apple-secondary">
-            Cerrar
-          </button>
-          <a href="#contacto" id="modal-project-cta" class="btn-apple-lime">
-            Iniciar Proyecto
-          </a>
-        </div>
-      </div>
-    `;
-
-    modal.classList.remove('hidden');
-
-    const closeBtn = document.getElementById('modal-project-close-btn');
-    if (closeBtn) {
-      closeBtn.addEventListener('click', () => modal.classList.add('hidden'));
-    }
-    const ctaBtn = document.getElementById('modal-project-cta');
-    if (ctaBtn) {
-      ctaBtn.addEventListener('click', () => modal.classList.add('hidden'));
-    }
-  }
-
-  if (modalClose) {
-    modalClose.addEventListener('click', () => modal.classList.add('hidden'));
-  }
-  if (modal) {
-    modal.addEventListener('click', (e) => {
-      if (e.target === modal) modal.classList.add('hidden');
-    });
-  }
-
-  filterBtns.forEach((btn) => {
-    btn.addEventListener('click', () => {
-      filterBtns.forEach((b) => b.classList.remove('active'));
-      btn.classList.add('active');
-
-      const filter = btn.getAttribute('data-portfolio-filter');
-      renderPortfolio(filter);
-    });
-  });
-
-  renderPortfolio('all');
-}
 
 /* ==========================================================================
-   7. Multi-Step Intake Wizard
+   6. Multi-Step Intake Wizard
    ========================================================================== */
 function initIntakeWizard() {
   let currentStep = 1;
@@ -610,15 +437,28 @@ function initIntakeWizard() {
   }
 
   if (submitBtn) {
-    submitBtn.addEventListener('click', (e) => {
+    submitBtn.addEventListener('click', async (e) => {
       e.preventDefault();
-      const email = document.getElementById('intake-email')?.value;
-      const name = document.getElementById('intake-name')?.value;
+      const email = document.getElementById('intake-email')?.value?.trim();
+      const name = document.getElementById('intake-name')?.value?.trim();
+      const company = document.getElementById('intake-company')?.value?.trim();
+      const details = document.getElementById('intake-details')?.value?.trim();
 
       if (!email || !name) {
         showToast('Por favor completa tu nombre y correo electrónico.');
         return;
       }
+
+      // Collect selected services
+      const selectedServices = Array.from(
+        step1.querySelectorAll('input[type="checkbox"]:checked')
+      ).map((cb) => cb.value || cb.nextElementSibling?.textContent?.trim());
+
+      // Collect selected budget & timeline from step 2
+      const budgetSelect = step2.querySelector('select');
+      const budgetText = budgetSelect ? budgetSelect.options[budgetSelect.selectedIndex]?.text : '';
+      const timelineSelect = step2.querySelectorAll('select')[1];
+      const timelineText = timelineSelect ? timelineSelect.options[timelineSelect.selectedIndex]?.text : '';
 
       step3.classList.add('hidden');
       if (resultPanel) {
@@ -626,28 +466,70 @@ function initIntakeWizard() {
         resultPanel.innerHTML = `
           <div class="text-center py-8">
             <div class="w-10 h-10 border-2 border-white/20 border-t-[#a3e635] rounded-full animate-spin mx-auto mb-4"></div>
-            <h4 class="text-lg font-semibold text-white mb-1">Generando Propuesta Estratégica</h4>
-            <p class="text-xs text-[#86868b] font-mono">Analizando requerimientos y arquitectura</p>
+            <h4 class="text-lg font-semibold text-white mb-1">Registrando Propuesta en Think Lab.</h4>
+            <p class="text-xs text-[#86868b] font-mono">Conectando con base de datos y asignando Lead Architect...</p>
           </div>
         `;
 
-        setTimeout(() => {
-          resultPanel.innerHTML = `
-            <div class="p-6 rounded-2xl bg-white/[0.03] border border-white/10 text-left">
-              <div class="flex items-center gap-3 mb-3">
-                <span class="w-7 h-7 rounded-full bg-[#a3e635]/20 text-[#a3e635] flex items-center justify-center font-bold text-xs">✓</span>
-                <div>
-                  <h4 class="text-base font-semibold text-white">Solicitud Recibida</h4>
-                  <p class="text-xs text-[#86868b]">Confirmación enviada a ${email}</p>
+        try {
+          const response = await fetch('/api/leads', {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+              name,
+              email,
+              company,
+              services: selectedServices.length > 0 ? selectedServices : ['Plataforma Web Completa'],
+              budget: budgetText,
+              timeline: timelineText,
+              details,
+            }),
+          });
+
+          const data = await response.json();
+
+          if (response.ok && data.success) {
+            resultPanel.innerHTML = `
+              <div class="p-6 rounded-2xl bg-white/[0.03] border border-white/10 text-left">
+                <div class="flex items-center gap-3 mb-3">
+                  <span class="w-7 h-7 rounded-full bg-[#a3e635]/20 text-[#a3e635] flex items-center justify-center font-bold text-xs">✓</span>
+                  <div>
+                    <h4 class="text-base font-semibold text-white">Solicitud Recibida (Lead #${data.leadId})</h4>
+                    <p class="text-xs text-[#86868b]">Confirmación registrada para ${email}</p>
+                  </div>
+                </div>
+                <p class="text-sm text-[#86868b] mb-4 leading-relaxed">
+                  Gracias, <strong>${name}</strong>. Tu requerimiento para <strong>${company || 'tu empresa'}</strong> ha sido guardado exitosamente en nuestra base de datos. Un Lead Architect de <strong>Think Lab.</strong> se pondrá en contacto en breve.
+                </p>
+                <div class="p-3 rounded-xl bg-black/50 border border-white/[0.06] text-xs font-mono text-[#86868b] space-y-1">
+                  <div class="text-[#a3e635]">● Estado: Asignado a Arquitectura</div>
+                  <div>Servicios: ${data.data.services}</div>
+                  <div>Presupuesto: ${data.data.budget}</div>
                 </div>
               </div>
-              <p class="text-sm text-[#86868b] mb-3 leading-relaxed">
-                Gracias, <strong>${name}</strong>. Un Lead Architect de <strong>Think Lab.</strong> revisará tu proyecto y se pondrá en contacto en breve.
-              </p>
+            `;
+            showToast('¡Solicitud registrada con éxito en Think Lab.!');
+          } else {
+            throw new Error(data.error || 'Error al procesar la solicitud');
+          }
+        } catch (error) {
+          console.error('Error submitting lead:', error);
+          resultPanel.innerHTML = `
+            <div class="p-6 rounded-2xl bg-red-500/10 border border-red-500/20 text-left">
+              <h4 class="text-sm font-semibold text-red-400 mb-1">Hubo un problema al conectar con el servidor</h4>
+              <p class="text-xs text-[#86868b] mb-3">${error.message || 'No se pudo guardar la información.'}</p>
+              <button id="intake-retry-btn" class="btn-apple-secondary text-xs py-1.5 px-3">
+                Intentar Nuevamente
+              </button>
             </div>
           `;
-          showToast('Solicitud enviada correctamente.');
-        }, 1200);
+          document.getElementById('intake-retry-btn')?.addEventListener('click', () => {
+            resultPanel.classList.add('hidden');
+            step3.classList.remove('hidden');
+          });
+        }
       }
     });
   }
@@ -674,9 +556,9 @@ function initPricingToggle() {
     toggleProject.classList.remove('bg-white', 'text-black');
     toggleProject.classList.add('text-[#86868b]');
 
-    if (starterPrice) starterPrice.textContent = '$1,490';
-    if (growthPrice) growthPrice.textContent = '$2,990';
-    if (enterprisePrice) enterprisePrice.textContent = '$5,490';
+    if (starterPrice) starterPrice.textContent = 'Gs. 5.500.000';
+    if (growthPrice) growthPrice.textContent = 'Gs. 11.500.000';
+    if (enterprisePrice) enterprisePrice.textContent = 'Gs. 21.000.000';
 
     periodLabels.forEach((l) => (l.textContent = '/mes (Retainer Continuo)'));
   });
@@ -687,9 +569,9 @@ function initPricingToggle() {
     toggleMonthly.classList.remove('bg-white', 'text-black');
     toggleMonthly.classList.add('text-[#86868b]');
 
-    if (starterPrice) starterPrice.textContent = '$2,800';
-    if (growthPrice) growthPrice.textContent = '$5,900';
-    if (enterprisePrice) enterprisePrice.textContent = '$11,500';
+    if (starterPrice) starterPrice.textContent = 'Gs. 11.500.000';
+    if (growthPrice) growthPrice.textContent = 'Gs. 24.500.000';
+    if (enterprisePrice) enterprisePrice.textContent = 'Gs. 45.000.000';
 
     periodLabels.forEach((l) => (l.textContent = '/proyecto (Pago Único)'));
   });
@@ -716,125 +598,521 @@ function initFaqAccordion() {
 }
 
 /* ==========================================================================
-   10. Interactive ThinkBot AI
+   10. Think Bot AI - Intelligent Chat & Appointment Agent
    ========================================================================== */
 function initThinkBotAI() {
-  const toggleBtn = document.getElementById('chat-toggle-btn');
-  const chatWindow = document.getElementById('chat-window');
-  const closeBtn = document.getElementById('chat-close-btn');
-  const messagesContainer = document.getElementById('chat-messages');
-  const chatInput = document.getElementById('chat-input');
-  const chatSendBtn = document.getElementById('chat-send-btn');
-  const quickChips = document.querySelectorAll('[data-chat-prompt]');
+  const toggleBtn = document.getElementById('thinkbot-toggle-btn');
+  const closeBtn = document.getElementById('thinkbot-close-btn');
+  const windowEl = document.getElementById('thinkbot-window');
+  const form = document.getElementById('thinkbot-form');
+  const input = document.getElementById('thinkbot-input');
+  const messagesContainer = document.getElementById('thinkbot-messages');
+  const chipsContainer = document.getElementById('thinkbot-chips');
+  const bookingDrawer = document.getElementById('thinkbot-booking-drawer');
+  const cancelBookingBtn = document.getElementById('thinkbot-cancel-booking');
+  const bookingSubmitBtn = document.getElementById('booking-submit-btn');
 
-  if (!toggleBtn || !chatWindow) return;
+  const bookingDateInput = document.getElementById('booking-date');
+  const bookingNameInput = document.getElementById('booking-name');
+  const bookingEmailInput = document.getElementById('booking-email');
+  const bookingTimeInput = document.getElementById('booking-time');
 
-  toggleBtn.addEventListener('click', () => {
-    chatWindow.classList.toggle('hidden');
-    if (!chatWindow.classList.contains('hidden') && chatInput) {
-      chatInput.focus();
+  const resetBtn = document.getElementById('thinkbot-reset-btn');
+
+  if (!toggleBtn || !windowEl) return;
+
+  // Set min date to tomorrow
+  if (bookingDateInput) {
+    const tomorrow = new Date();
+    tomorrow.setDate(tomorrow.getDate() + 1);
+    bookingDateInput.min = tomorrow.toISOString().split('T')[0];
+    bookingDateInput.value = tomorrow.toISOString().split('T')[0];
+  }
+
+  let currentChatSessionId = localStorage.getItem('thinklab_chat_session_id');
+  if (!currentChatSessionId) {
+    currentChatSessionId = 'sess_' + Date.now() + '_' + Math.random().toString(36).substring(2, 8);
+    localStorage.setItem('thinklab_chat_session_id', currentChatSessionId);
+  }
+
+  let isOpen = false;
+
+  function toggleChat(open) {
+    isOpen = typeof open === 'boolean' ? open : !isOpen;
+    if (isOpen) {
+      windowEl.classList.remove('hidden');
+      requestAnimationFrame(() => {
+        windowEl.classList.remove('scale-95', 'opacity-0');
+        windowEl.classList.add('scale-100', 'opacity-100');
+      });
+      if (input) input.focus();
+      scrollToBottom();
+    } else {
+      windowEl.classList.remove('scale-100', 'opacity-100');
+      windowEl.classList.add('scale-95', 'opacity-0');
+      setTimeout(() => {
+        windowEl.classList.add('hidden');
+      }, 300);
     }
-  });
+  }
 
-  if (closeBtn) {
-    closeBtn.addEventListener('click', () => {
-      chatWindow.classList.add('hidden');
+  toggleBtn.addEventListener('click', () => toggleChat());
+  if (closeBtn) closeBtn.addEventListener('click', () => toggleChat(false));
+
+  if (resetBtn) {
+    resetBtn.addEventListener('click', () => {
+      currentChatSessionId = 'sess_' + Date.now() + '_' + Math.random().toString(36).substring(2, 8);
+      localStorage.setItem('thinklab_chat_session_id', currentChatSessionId);
+      if (messagesContainer) {
+        messagesContainer.innerHTML = `
+          <div class="flex items-start gap-2.5">
+            <div class="w-6 h-6 rounded-full bg-white/10 border border-white/15 flex items-center justify-center flex-shrink-0 text-[10px] text-[#a3e635] font-mono">
+              ✦
+            </div>
+            <div class="max-w-[85%] bg-white/[0.05] border border-white/[0.08] rounded-2xl rounded-tl-sm p-3 text-[#f5f5f7] leading-relaxed space-y-2">
+              <p>¡Hola! Es un gusto saludarte. Soy el asesor de atención técnica y comercial de <strong>ThinkLab</strong> (<a href="https://thinklabpy.online/" target="_blank" rel="noopener" class="text-[#a3e635] underline font-medium">thinklabpy.online</a>).</p>
+              <p class="text-[#86868b]">Soy experto en <strong>programación web</strong>, <strong>diseño UI/UX y apps móviles</strong>, y <strong>automatización de chatbots con IA</strong>. Estoy aquí para entender tus requerimientos y recomendarte las mejores alternativas.</p>
+              <p class="text-white font-medium">¿En qué proyecto o solución te gustaría que trabajemos hoy?</p>
+            </div>
+          </div>
+          <div id="thinkbot-chips" class="flex flex-wrap gap-1.5 pt-1 pl-8">
+            <button class="thinkbot-chip" data-chip="🚀 Desarrollo Web & Software">🚀 Desarrollo Web & Software</button>
+            <button class="thinkbot-chip" data-chip="🤖 Chatbots & Agentes de IA">🤖 Chatbots & Agentes de IA</button>
+            <button class="thinkbot-chip" data-chip="📱 Diseño de Apps Móviles">📱 Diseño de Apps Móviles</button>
+            <button class="thinkbot-chip" data-chip="🗓️ Agendar llamada de negocios">🗓️ Agendar llamada de negocios</button>
+          </div>
+        `;
+        const newChips = messagesContainer.querySelector('#thinkbot-chips');
+        if (newChips) {
+          newChips.querySelectorAll('[data-chip]').forEach((btn) => {
+            btn.addEventListener('click', () => {
+              const query = btn.getAttribute('data-chip');
+              sendMessage(query);
+            });
+          });
+        }
+      }
+      if (bookingDrawer) bookingDrawer.classList.add('hidden');
+      showToast('Conversación reiniciada.');
     });
   }
 
-  function appendMessage(sender, text) {
-    const isAi = sender === 'ai';
-    const msgDiv = document.createElement('div');
-    msgDiv.className = `flex ${isAi ? 'justify-start' : 'justify-end'} mb-3`;
-    msgDiv.innerHTML = `
-      <div class="${
-        isAi
-          ? 'bg-[#1c1c1e] text-[#f5f5f7] border border-white/10'
-          : 'bg-[#a3e635] text-black font-medium'
-      } max-w-[85%] rounded-2xl px-4 py-2.5 text-xs shadow-sm">
-        ${isAi ? `<div class="text-[10px] font-mono text-[#a3e635] font-semibold mb-1">THINKBOT AI</div>` : ''}
-        ${text}
-      </div>
-    `;
-    messagesContainer.appendChild(msgDiv);
-    messagesContainer.scrollTop = messagesContainer.scrollHeight;
+  function scrollToBottom() {
+    if (messagesContainer) {
+      messagesContainer.scrollTop = messagesContainer.scrollHeight;
+    }
   }
 
-  function simulateAiResponse(userQuery) {
-    const typingIndicator = document.createElement('div');
-    typingIndicator.id = 'ai-typing';
-    typingIndicator.className = 'flex justify-start mb-3';
-    typingIndicator.innerHTML = `
-      <div class="bg-[#1c1c1e] text-[#86868b] border border-white/10 rounded-2xl px-4 py-2 text-xs flex items-center gap-1.5">
-        <span class="w-1.5 h-1.5 rounded-full bg-[#86868b] animate-bounce"></span>
-        <span class="w-1.5 h-1.5 rounded-full bg-[#86868b] animate-bounce" style="animation-delay: 0.2s"></span>
-        <span class="w-1.5 h-1.5 rounded-full bg-[#86868b] animate-bounce" style="animation-delay: 0.4s"></span>
+  function appendUserMessage(text) {
+    const bubble = document.createElement('div');
+    bubble.className = 'flex justify-end';
+    bubble.innerHTML = `
+      <div class="max-w-[85%] bg-[#a3e635] text-black font-medium rounded-2xl rounded-tr-sm p-3 text-xs leading-relaxed shadow-sm">
+        ${escapeHtml(text)}
       </div>
     `;
-    messagesContainer.appendChild(typingIndicator);
-    messagesContainer.scrollTop = messagesContainer.scrollHeight;
+    messagesContainer.appendChild(bubble);
+    scrollToBottom();
+  }
 
-    setTimeout(() => {
-      const typingEl = document.getElementById('ai-typing');
-      if (typingEl) typingEl.remove();
+  function appendBotMessage(text, isHtml = false) {
+    const bubble = document.createElement('div');
+    bubble.className = 'flex items-start gap-2.5';
+    const formatted = isHtml ? text : formatMarkdownText(text);
+    bubble.innerHTML = `
+      <div class="w-6 h-6 rounded-full bg-white/10 border border-white/15 flex items-center justify-center flex-shrink-0 text-[10px] text-[#a3e635] font-mono">
+        ✦
+      </div>
+      <div class="max-w-[85%] bg-white/[0.05] border border-white/[0.08] rounded-2xl rounded-tl-sm p-3 text-[#f5f5f7] leading-relaxed space-y-2">
+        ${formatted}
+      </div>
+    `;
+    messagesContainer.appendChild(bubble);
+    scrollToBottom();
+  }
 
-      let answer = '';
-      const query = userQuery.toLowerCase();
+  function showTypingIndicator() {
+    const indicator = document.createElement('div');
+    indicator.id = 'thinkbot-typing';
+    indicator.className = 'flex items-start gap-2.5 animate-fade-in';
+    indicator.innerHTML = `
+      <div class="w-6 h-6 rounded-full bg-white/10 border border-white/15 flex items-center justify-center flex-shrink-0 text-[10px] text-[#a3e635] font-mono animate-pulse">
+        ✦
+      </div>
+      <div class="bg-white/[0.05] border border-white/[0.08] rounded-2xl rounded-tl-sm px-3.5 py-2.5 flex items-center gap-2">
+        <div class="flex items-center gap-1.5">
+          <span class="thinkbot-typing-dot"></span>
+          <span class="thinkbot-typing-dot"></span>
+          <span class="thinkbot-typing-dot"></span>
+        </div>
+        <span class="text-[10px] text-[#86868b] font-mono tracking-wide">Pensando...</span>
+      </div>
+    `;
+    messagesContainer.appendChild(indicator);
+    scrollToBottom();
+  }
 
-      if (query.includes('precio') || query.includes('costo') || query.includes('cuanto')) {
-        answer =
-          'Los planes de desarrollo inician en **$1,490/mes** para retainer continuo de producto o **$2,800** para desarrollo de proyecto completo. Puedes consultar proyecciones en nuestra calculadora de ROI.';
-      } else if (query.includes('tiempo') || query.includes('cuanto tarda') || query.includes('plazo')) {
-        answer =
-          'Entregamos plataformas completas en **3 a 4 semanas** con arquitectura modular, diseño sobrio de alta gama y pruebas de rendimiento.';
-      } else if (query.includes('agente') || query.includes('ia') || query.includes('chatbot')) {
-        answer =
-          'Integramos asistentes RAG con Supabase Vector y LLMs avanzados (Claude, Gemini), además de agentes de voz para automatización de consultas y reservas.';
-      } else {
-        answer =
-          'En **Think Lab.** construimos ingeniería web con diseño sobrio y tecnología moderna. ¿En qué tipo de proyecto estás trabajando actualmente?';
+  function removeTypingIndicator() {
+    const indicator = document.getElementById('thinkbot-typing');
+    if (indicator) indicator.remove();
+  }
+
+  function formatMarkdownText(str) {
+    if (!str) return '';
+    return str
+      .replace(/\[(.*?)\]\((.*?)\)/g, '<a href="$2" target="_blank" rel="noopener" class="text-[#a3e635] underline hover:opacity-80 font-medium">$1</a>')
+      .replace(/\*\*(.*?)\*\*/g, '<strong class="text-white font-semibold">$1</strong>')
+      .replace(/\n\n/g, '<br/><br/>')
+      .replace(/\n• /g, '<br/>• ')
+      .replace(/\n(\d+\.\s)/g, '<br/>$1')
+      .replace(/\n/g, '<br/>');
+  }
+
+  function escapeHtml(text) {
+    const map = { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#039;' };
+    return text.replace(/[&<>"']/g, (m) => map[m]);
+  }
+
+  function updateChips(chips = []) {
+    if (!chipsContainer) return;
+    if (chips.length === 0) {
+      chipsContainer.classList.add('hidden');
+      return;
+    }
+    chipsContainer.classList.remove('hidden');
+    chipsContainer.innerHTML = chips
+      .map((c) => `<button class="thinkbot-chip animate-fade-in" data-chip="${escapeHtml(c)}">${escapeHtml(c)}</button>`)
+      .join('');
+    
+    chipsContainer.querySelectorAll('[data-chip]').forEach((btn) => {
+      btn.addEventListener('click', () => {
+        const query = btn.getAttribute('data-chip');
+        sendMessage(query);
+      });
+    });
+  }
+
+  async function sendMessage(text) {
+    if (!text || !text.trim()) return;
+    appendUserMessage(text);
+    if (input) input.value = '';
+    showTypingIndicator();
+
+    const startTimestamp = Date.now();
+    // Simulate thinking delay between 1.2s and 2.6s
+    const targetThinkingDuration = 1200 + Math.floor(Math.random() * 1400);
+
+    try {
+      const res = await fetch('/api/chat', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ 
+          message: text,
+          sessionId: currentChatSessionId 
+        })
+      });
+      const data = await res.json();
+
+      const elapsed = Date.now() - startTimestamp;
+      const remainingDelay = Math.max(0, targetThinkingDuration - elapsed);
+
+      if (remainingDelay > 0) {
+        await new Promise((resolve) => setTimeout(resolve, remainingDelay));
       }
 
-      appendMessage('ai', answer);
-    }, 700);
+      removeTypingIndicator();
+
+      if (data.success && data.data) {
+        appendBotMessage(data.data.text);
+        
+        if (data.data.action === 'show_booking_form' && bookingDrawer) {
+          bookingDrawer.classList.remove('hidden');
+          if (window.lucide) window.lucide.createIcons();
+          scrollToBottom();
+          setTimeout(() => {
+            const nameField = document.getElementById('booking-name');
+            if (nameField && !nameField.value) {
+              nameField.focus();
+            }
+          }, 300);
+        }
+
+        if (data.data.suggestedChips) {
+          updateChips(data.data.suggestedChips);
+        }
+      } else {
+        appendBotMessage('Disculpa, ocurrió un error momentáneo. Puedes contactarnos por WhatsApp directamente: +595 983 463553');
+      }
+    } catch (error) {
+      const elapsed = Date.now() - startTimestamp;
+      const remainingDelay = Math.max(0, 1000 - elapsed);
+      if (remainingDelay > 0) {
+        await new Promise((resolve) => setTimeout(resolve, remainingDelay));
+      }
+      removeTypingIndicator();
+      console.error('Chat error:', error);
+      appendBotMessage('Disculpa, hubo un problema al conectar. Puedes escribirnos a <a href="https://wa.me/595983463553" target="_blank" class="text-[#a3e635] underline">WhatsApp (+595 983 463553)</a>.', true);
+    }
   }
 
-  function handleSend() {
-    const text = chatInput.value.trim();
-    if (!text) return;
-
-    appendMessage('user', text);
-    chatInput.value = '';
-    simulateAiResponse(text);
-  }
-
-  if (chatSendBtn) {
-    chatSendBtn.addEventListener('click', handleSend);
-  }
-
-  if (chatInput) {
-    chatInput.addEventListener('keypress', (e) => {
-      if (e.key === 'Enter') handleSend();
+  if (form) {
+    form.addEventListener('submit', (e) => {
+      e.preventDefault();
+      const text = input ? input.value.trim() : '';
+      if (text) sendMessage(text);
     });
   }
 
-  quickChips.forEach((chip) => {
-    chip.addEventListener('click', () => {
-      const prompt = chip.getAttribute('data-chat-prompt');
-      appendMessage('user', prompt);
-      simulateAiResponse(prompt);
+  // Initial Chips Listener
+  if (chipsContainer) {
+    chipsContainer.querySelectorAll('[data-chip]').forEach((btn) => {
+      btn.addEventListener('click', () => {
+        const query = btn.getAttribute('data-chip');
+        sendMessage(query);
+      });
     });
-  });
+  }
+
+  // Booking Drawer Handling
+  if (cancelBookingBtn && bookingDrawer) {
+    cancelBookingBtn.addEventListener('click', () => {
+      bookingDrawer.classList.add('hidden');
+    });
+  }
+
+  if (bookingSubmitBtn) {
+    bookingSubmitBtn.addEventListener('click', async () => {
+      const name = bookingNameInput?.value?.trim();
+      const email = bookingEmailInput?.value?.trim();
+      const date = bookingDateInput?.value;
+      const time = bookingTimeInput?.value;
+
+      if (!name || !email) {
+        showToast('Por favor completa tu nombre y correo.');
+        return;
+      }
+
+      bookingSubmitBtn.disabled = true;
+      bookingSubmitBtn.innerHTML = '<span>Registrando cita...</span>';
+
+      try {
+        const res = await fetch('/api/appointments', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            client_name: name,
+            client_email: email,
+            meeting_date: date,
+            meeting_time: time,
+            topic: 'Llamada Estratégica con Lead Architect'
+          })
+        });
+
+        const data = await res.json();
+        bookingSubmitBtn.disabled = false;
+        bookingSubmitBtn.innerHTML = '<span>Confirmar Cita con Lead Architect</span><span>→</span>';
+
+        if (res.ok && data.success) {
+          bookingDrawer.classList.add('hidden');
+          appendBotMessage(
+            `🎉 **¡Cita Agendada con Éxito!**\n\n` +
+            `• **Cliente**: ${name}\n` +
+            `• **Fecha**: ${date}\n` +
+            `• **Horario**: ${time} (Asunción, GMT-4)\n\n` +
+            `Te hemos enviado los detalles a **${email}**. Un Lead Architect se conectará puntualmente.`
+          );
+
+          // Render direct WhatsApp confirmation button inside chat
+          const waUrl = `https://wa.me/595983463553?text=Hola%20Think%20Lab.%2C%20acabo%20de%20agendar%20una%20reuni%C3%B3n%20para%20el%20${encodeURIComponent(date)}%20a%20las%20${encodeURIComponent(time)}%20a%20nombre%20de%20${encodeURIComponent(name)}`;
+          appendBotMessage(
+            `<div class="pt-1">` +
+            `<a href="${waUrl}" target="_blank" class="btn-apple-lime text-black font-semibold text-xs py-2 px-3.5 inline-flex items-center gap-1.5 rounded-xl shadow">` +
+            `<span>Enviar confirmación por WhatsApp</span><span>→</span>` +
+            `</a></div>`,
+            true
+          );
+
+          showToast('¡Cita agendada con éxito!');
+        } else {
+          showToast(data.error || 'Error al agendar la cita.');
+        }
+      } catch (err) {
+        bookingSubmitBtn.disabled = false;
+        bookingSubmitBtn.innerHTML = '<span>Confirmar Sesión Técnica (15 min)</span><span>→</span>';
+        console.error('Error booking appointment:', err);
+        showToast('Error de conexión al agendar.');
+      }
+    });
+  }
 }
 
 /* ==========================================================================
-   11. Toast Helper
+   10.1 AI Chatbot & Agent Studio Simulator
+   ========================================================================== */
+function initAiChatbotShowcase() {
+  const tabs = document.querySelectorAll('[data-ai-tab]');
+  const chatContainer = document.getElementById('ai-simulation-chat');
+  const channelLabel = document.getElementById('ai-simulation-channel');
+  const pillLabel = document.getElementById('ai-tab-pill');
+  const titleLabel = document.getElementById('ai-tab-title');
+  const descLabel = document.getElementById('ai-tab-desc');
+  const featuresContainer = document.getElementById('ai-tab-features');
+  const restartBtn = document.getElementById('ai-trigger-sample-btn');
+  const openThinkbotBtn = document.getElementById('open-thinkbot-demo-btn');
+
+  if (!chatContainer || tabs.length === 0) return;
+
+  const SCENARIOS = {
+    whatsapp: {
+      channel: 'WhatsApp Business API // +595 983 463553',
+      pill: 'CAPACIDAD DESTACADA // WHATSAPP AGENT',
+      title: 'Ventas y Calificación BANT Autónoma',
+      desc: 'El agente atiende prospectos en WhatsApp o en tu web, evalúa presupuesto, necesidad y tiempos (BANT), y sincroniza automáticamente las reuniones en Google Calendar.',
+      features: [
+        'Integración directa con WhatsApp Business Cloud API oficial',
+        'Sincronización instantánea con CRM (HubSpot / Notion / Sheets)',
+        'Calificación BANT con derivación fluida a asesor humano'
+      ],
+      messages: [
+        { sender: 'user', text: '¡Hola! Me interesa automatizar la atención de mi tienda en Asunción. ¿Cómo funciona?', time: '10:42' },
+        { sender: 'bot', text: '¡Hola! 🚀 En ThinkLab integramos agentes que atienden consultas, muestran productos y toman pedidos 24/7 conectados a tu stock. ¿Qué volumen de mensajes manejan al día?', time: '10:42' },
+        { sender: 'user', text: 'Recibimos unos 80 mensajes al día y nos cuesta responder rápido en horarios pico.', time: '10:43' },
+        { sender: 'bot', text: 'Podemos reducir el tiempo de respuesta a <2 segundos y sincronizar los leads calificados en tu CRM. ¿Te gustaría coordinar una **demo técnica de 15 minutos** esta semana?', time: '10:43' }
+      ]
+    },
+    rag: {
+      channel: 'RAG Knowledge Core // Supabase pgvector',
+      pill: 'ARQUITECTURA RAG // CERO ALUCINACIONES',
+      title: 'Asistente Corporativo sobre tus Documentos',
+      desc: 'Conecta tus PDFs, manuales operativos, bases de datos y políticas de empresa. El agente responde con precisión milimétrica citando fuentes exactas.',
+      features: [
+        'Búsqueda semántica con embeddings vectoriales en tiempo real',
+        'Respuestas restringidas 100% a tus fuentes y políticas internas',
+        'Seguridad de nivel bancario con encriptación y permisos por rol'
+      ],
+      messages: [
+        { sender: 'user', text: '¿Cuál es la política de garantía y soporte en el Plan Growth de ThinkLab?', time: '14:15' },
+        { sender: 'bot', text: '✦ **Búsqueda Vectorial (140ms)** en `sla_politicas_2026.pdf` (pág. 8):\n\nEl **Plan Growth** incluye garantía de soporte continuo 24/7, monitoreo de disponibilidad 99.9% y SLA de respuesta inferior a 4 horas.', time: '14:15' },
+        { sender: 'user', text: '¿Y cómo se gestiona la propiedad del código fuente?', time: '14:16' },
+        { sender: 'bot', text: '✦ **Cita Directa**: La propiedad es **100% del cliente**. Se transfiere el repositorio GitHub con todo el código, modelos y activos sin costos de licenciamiento ocultos.', time: '14:16' }
+      ]
+    },
+    automation: {
+      channel: 'Workflow Engine // n8n + Webhooks + CRM',
+      pill: 'WORKFLOWS // AUTOMATIZACIÓN DE PROCESOS',
+      title: 'Flujos de Trabajo Autónomos y Conexión Total',
+      desc: 'Dispara acciones complejas ante eventos de usuario: facturación automática con pasarelas de pago, creación de tickets y alertas en tiempo real al equipo.',
+      features: [
+        'Conexión nativa con n8n, Make, Zapier y Webhooks REST',
+        'Creación y actualización automática de contactos en HubSpot',
+        'Envío de confirmaciones instantáneas por WhatsApp y Email'
+      ],
+      messages: [
+        { sender: 'system', text: '⚡ **Evento Detectado**: Solicitud de Cotización recibida desde Formulario Web (Carlos Duarte • Gs. 24.500.000)', time: '16:30' },
+        { sender: 'bot', text: '✓ **Paso 1**: Contacto creado en HubSpot CRM con tag `#Lead-Calificado`\n✓ **Paso 2**: Registro guardado en Supabase PostgreSQL\n✓ **Paso 3**: Cita reservada en Google Calendar para el Jueves 15:00', time: '16:30' },
+        { sender: 'bot', text: '✓ **Paso 4**: WhatsApp de bienvenida enviado al cliente (+595 981 *** ***)\n✓ **Paso 5**: Notificación enviada al canal privado de Slack de los Lead Architects.', time: '16:30' }
+      ]
+    }
+  };
+
+  let activeTab = 'whatsapp';
+
+  function renderScenario(scenarioKey) {
+    activeTab = scenarioKey;
+    const data = SCENARIOS[scenarioKey];
+    if (!data) return;
+
+    if (channelLabel) channelLabel.textContent = data.channel;
+    if (pillLabel) pillLabel.textContent = data.pill;
+    if (titleLabel) titleLabel.textContent = data.title;
+    if (descLabel) descLabel.textContent = data.desc;
+
+    if (featuresContainer) {
+      featuresContainer.innerHTML = data.features
+        .map((f) => `<div class="flex items-center gap-2"><span class="w-1.5 h-1.5 rounded-full bg-[#a3e635] flex-shrink-0"></span><span>${f}</span></div>`)
+        .join('');
+    }
+
+    // Render Chat Messages with animation
+    chatContainer.innerHTML = '';
+    data.messages.forEach((msg, idx) => {
+      setTimeout(() => {
+        const bubble = document.createElement('div');
+        bubble.className = msg.sender === 'user' ? 'flex justify-end' : 'flex items-start gap-2.5';
+        
+        if (msg.sender === 'user') {
+          bubble.innerHTML = `
+            <div class="max-w-[85%] bg-[#a3e635] text-black font-medium rounded-2xl rounded-tr-sm p-3 text-xs leading-relaxed shadow-sm">
+              <p>${msg.text}</p>
+              <div class="text-[9px] text-black/60 text-right mt-1 font-mono">${msg.time} ✓✓</div>
+            </div>
+          `;
+        } else if (msg.sender === 'system') {
+          bubble.innerHTML = `
+            <div class="w-full bg-purple-500/10 border border-purple-500/20 text-purple-300 p-2.5 rounded-xl text-[11px] font-mono">
+              ${msg.text}
+            </div>
+          `;
+        } else {
+          bubble.innerHTML = `
+            <div class="w-6 h-6 rounded-full bg-white/10 border border-white/15 flex items-center justify-center flex-shrink-0 text-[10px] text-[#a3e635] font-mono">
+              ✦
+            </div>
+            <div class="max-w-[85%] bg-white/[0.04] border border-white/[0.08] rounded-2xl rounded-tl-sm p-3 text-[#f5f5f7] leading-relaxed space-y-1">
+              <div class="text-xs">${formatMarkdownText(msg.text)}</div>
+              <div class="text-[9px] text-[#86868b] text-right mt-1 font-mono">${msg.time}</div>
+            </div>
+          `;
+        }
+        chatContainer.appendChild(bubble);
+        chatContainer.scrollTop = chatContainer.scrollHeight;
+      }, idx * 250);
+    });
+  }
+
+  // Tab click listeners
+  tabs.forEach((tab) => {
+    tab.addEventListener('click', () => {
+      const key = tab.getAttribute('data-ai-tab');
+      tabs.forEach((t) => {
+        t.classList.remove('ai-tab-active', 'text-white');
+        t.classList.add('text-[#86868b]');
+      });
+      tab.classList.add('ai-tab-active', 'text-white');
+      tab.classList.remove('text-[#86868b]');
+      renderScenario(key);
+    });
+  });
+
+  if (restartBtn) {
+    restartBtn.addEventListener('click', () => {
+      renderScenario(activeTab);
+    });
+  }
+
+  // Open Think Bot AI widget from section
+  if (openThinkbotBtn) {
+    openThinkbotBtn.addEventListener('click', () => {
+      const toggleBtn = document.getElementById('thinkbot-toggle-btn');
+      if (toggleBtn) {
+        toggleBtn.click();
+      }
+    });
+  }
+
+  // Initial render
+  renderScenario('whatsapp');
+}
+
+/* ==========================================================================
+   11. Global Toast Helper
    ========================================================================== */
 function showToast(message) {
   let container = document.getElementById('toast-container');
   if (!container) {
     container = document.createElement('div');
     container.id = 'toast-container';
+    container.className = 'fixed bottom-5 left-1/2 -translate-x-1/2 z-50 flex flex-col items-center gap-2 pointer-events-none';
     document.body.appendChild(container);
   }
 
@@ -854,3 +1132,6 @@ function showToast(message) {
     setTimeout(() => toast.remove(), 300);
   }, 3500);
 }
+
+window.showToast = showToast;
+

@@ -1,6 +1,4 @@
-.DS_Store
-Thumbs.db
 node_modules/
-.vscode/
-.idea/
+.env
+.DS_Store
 *.log

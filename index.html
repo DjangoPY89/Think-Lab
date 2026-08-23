@@ -2,7 +2,7 @@
 <html lang="es" class="scroll-smooth">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0" />
   <title>Think Lab. — Ingeniería Web de Alta Gama & IA</title>
   <meta name="description" content="Think Lab. es una agencia de ingeniería web de élite. Creamos plataformas web sobrias, ultra-rápidas y automatizadas con Inteligencia Artificial." />
   
@@ -43,7 +43,7 @@
   <!-- Custom Stylesheet -->
   <link rel="stylesheet" href="styles.css" />
 </head>
-<body class="bg-black text-[#f5f5f7] selection:bg-[#a3e635] selection:text-black relative">
+<body class="bg-black text-[#f5f5f7] selection:bg-[#a3e635] selection:text-black relative w-full overflow-x-hidden">
 
   <!-- Interactive Subtle Canvas Background -->
   <canvas id="bg-canvas"></canvas>
@@ -54,9 +54,9 @@
   <!-- =========================================================================
        1. NAVIGATION BAR (Apple Minimalist Glass)
        ========================================================================= -->
-  <header class="fixed top-0 left-0 right-0 z-50 transition-all duration-300 py-4" id="main-nav">
-    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-      <div class="flex items-center justify-between h-12 rounded-full px-6 bg-black/60 backdrop-blur-xl border border-white/[0.08]">
+  <header class="fixed top-0 left-0 right-0 z-50 transition-all duration-300 py-3 sm:py-4" id="main-nav">
+    <div class="max-w-6xl mx-auto px-3 sm:px-6 lg:px-8">
+      <div class="flex items-center justify-between h-12 rounded-full px-4 sm:px-6 bg-black/70 backdrop-blur-xl border border-white/[0.08]">
         
         <!-- Logo -->
         <a href="#" class="flex items-center gap-2 text-sm font-semibold tracking-tight text-white hover:opacity-80 transition-opacity">
@@ -66,10 +66,13 @@
         <!-- Desktop Navigation -->
         <nav class="hidden md:flex items-center gap-7 text-[13px] font-normal text-[#86868b]">
           <a href="#servicios" class="hover:text-white transition-colors">Servicios</a>
-          <a href="#diseno" class="hover:text-white transition-colors">Diseño</a>
+          <a href="#chatbots-ia" class="text-white hover:text-[#a3e635] font-medium transition-colors flex items-center gap-1.5">
+            <span class="w-1.5 h-1.5 rounded-full bg-[#a3e635] beacon-glow"></span>
+            <span>Chatbots IA</span>
+          </a>
           <a href="#calculadora" class="hover:text-white transition-colors">Calculadora ROI</a>
           <a href="#proceso" class="hover:text-white transition-colors">Proceso</a>
-          <a href="#proyectos" class="hover:text-white transition-colors">Proyectos</a>
+          <a href="#destacados" class="hover:text-white transition-colors">Trabajos</a>
           <a href="#precios" class="hover:text-white transition-colors">Precios</a>
           <a href="#faq" class="hover:text-white transition-colors">FAQ</a>
         </nav>
@@ -77,7 +80,7 @@
         <!-- Actions -->
         <div class="hidden sm:flex items-center gap-2.5">
           <a href="https://wa.me/595983463553?text=Hola%20Think%20Lab.%2C%20quiero%20consultar%20sobre%20un%20proyecto%20web" target="_blank" rel="noopener noreferrer" class="btn-apple-secondary text-xs py-1.5 px-3.5 flex items-center gap-2 hover:text-[#25D366] hover:border-[#25D366]/40 transition-all">
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-4 h-4 text-[#25D366]">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-3.5 h-3.5 text-[#25D366]">
               <path d="M12.04 2c-5.46 0-9.91 4.45-9.91 9.91 0 1.75.46 3.45 1.32 4.95L2.05 22l5.25-1.38c1.45.79 3.08 1.21 4.74 1.21 5.46 0 9.91-4.45 9.91-9.91 0-2.65-1.03-5.14-2.9-7.01A9.816 9.816 0 0 0 12.04 2zm.01 1.67c2.2 0 4.26.86 5.82 2.42a8.225 8.225 0 0 1 2.41 5.83c0 4.54-3.7 8.24-8.24 8.24-1.48 0-2.93-.4-4.2-1.15l-.3-.18-3.12.82.83-3.04-.2-.31a8.196 8.196 0 0 1-1.26-4.38c0-4.54 3.7-8.24 8.24-8.24zm4.52 11.66c-.25-.13-1.47-.72-1.7-.81-.23-.08-.39-.13-.56.13-.17.25-.64.81-.79.97-.14.17-.29.19-.54.06-.25-.13-1.06-.39-2.03-1.25-.75-.67-1.26-1.5-1.41-1.75-.14-.25-.02-.38.11-.51.11-.11.25-.29.37-.44.13-.14.17-.25.25-.42.08-.17.04-.31-.02-.44-.06-.13-.56-1.34-.76-1.84-.2-.49-.4-.42-.56-.43h-.47c-.17 0-.44.06-.67.31-.23.25-.88.86-.88 2.1 0 1.24.9 2.44 1.03 2.61.13.17 1.78 2.71 4.3 3.8.6.26 1.07.41 1.44.53.61.19 1.16.17 1.6.1.49-.07 1.47-.6 1.68-1.18.21-.58.21-1.07.14-1.18-.06-.11-.23-.17-.48-.29z"/>
             </svg>
             <span>WhatsApp</span>
@@ -88,7 +91,7 @@
         </div>
 
         <!-- Mobile Menu Toggle -->
-        <button id="mobile-menu-toggle" class="md:hidden p-1 text-[#86868b] hover:text-white focus:outline-none">
+        <button id="mobile-menu-toggle" class="md:hidden p-1.5 text-[#86868b] hover:text-white focus:outline-none" aria-label="Abrir Menú">
           <i data-lucide="menu" class="w-5 h-5"></i>
         </button>
       </div>
@@ -96,10 +99,12 @@
       <!-- Mobile Dropdown Menu -->
       <div id="mobile-menu" class="hidden md:hidden mt-2 bg-[#121214]/95 backdrop-blur-2xl rounded-2xl p-5 border border-white/10 flex flex-col gap-3 text-sm font-medium">
         <a href="#servicios" class="text-[#86868b] hover:text-white py-1">Servicios</a>
-        <a href="#diseno" class="text-[#86868b] hover:text-white py-1">Diseño & Artesanía</a>
+        <a href="#chatbots-ia" class="text-[#a3e635] font-semibold hover:text-white py-1 flex items-center gap-2">
+          <span class="w-2 h-2 rounded-full bg-[#a3e635]"></span> Chatbots & Agentes IA
+        </a>
         <a href="#calculadora" class="text-[#86868b] hover:text-white py-1">Calculadora ROI</a>
         <a href="#proceso" class="text-[#86868b] hover:text-white py-1">Proceso de Desarrollo</a>
-        <a href="#proyectos" class="text-[#86868b] hover:text-white py-1">Casos de Éxito</a>
+        <a href="#destacados" class="text-[#86868b] hover:text-white py-1">Trabajos Destacados</a>
         <a href="#precios" class="text-[#86868b] hover:text-white py-1">Paquetes de Inversión</a>
         <a href="#faq" class="text-[#86868b] hover:text-white py-1">Preguntas Frecuentes</a>
         <div class="pt-2 flex flex-col gap-2">
@@ -120,31 +125,31 @@
   <!-- =========================================================================
        2. HERO SECTION (Sober Apple Precision)
        ========================================================================= -->
-  <section class="relative pt-36 pb-20 md:pt-48 md:pb-28 overflow-hidden z-10">
+  <section class="relative pt-28 pb-16 md:pt-48 md:pb-28 overflow-hidden z-10">
     <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
       
       <!-- Minimal Pill with Blinking Light -->
-      <div class="inline-flex items-center gap-2.5 apple-pill mb-8">
-        <span class="relative flex h-2 w-2">
+      <div class="inline-flex items-center gap-2.5 apple-pill mb-6 sm:mb-8">
+        <span class="relative flex h-2 w-2 flex-shrink-0">
           <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#a3e635] opacity-75"></span>
           <span class="relative inline-flex rounded-full h-2 w-2 bg-[#a3e635] beacon-glow"></span>
         </span>
-        <span>Ingeniería Digital & Sistemas de IA</span>
+        <span class="truncate">Ingeniería Digital & Sistemas de IA</span>
       </div>
 
       <!-- Headline -->
-      <h1 class="apple-headline mb-6 max-w-4xl mx-auto">
+      <h1 class="apple-headline mb-4 sm:mb-6 max-w-4xl mx-auto">
         Ingeniería web.<br />
         <span class="apple-gradient-text">Elevada al extremo.</span>
       </h1>
 
       <!-- Subheadline -->
-      <p class="apple-subheadline max-w-2xl mx-auto mb-10">
+      <p class="apple-subheadline max-w-2xl mx-auto mb-8 sm:mb-10 px-1">
         Diseñamos plataformas digitales sobrias, ultra-rápidas y automatizadas con inteligencia artificial para marcas que exigen distinción y resultados.
       </p>
 
       <!-- Action Group -->
-      <div class="flex flex-col sm:flex-row items-center justify-center gap-4 mb-20">
+      <div class="flex flex-col sm:flex-row items-center justify-center gap-3 sm:gap-4 mb-14 sm:mb-20 w-full sm:w-auto">
         <a href="#contacto" class="btn-apple-primary w-full sm:w-auto">
           Iniciar Proyecto
         </a>
@@ -154,22 +159,22 @@
       </div>
 
       <!-- Metrics Row (Apple minimal format) -->
-      <div class="grid grid-cols-2 md:grid-cols-4 gap-8 pt-10 border-t border-white/[0.08] text-center max-w-4xl mx-auto">
+      <div class="grid grid-cols-2 md:grid-cols-4 gap-4 sm:gap-8 pt-8 sm:pt-10 border-t border-white/[0.08] text-center max-w-4xl mx-auto">
         <div>
-          <div class="text-3xl font-semibold tracking-tight text-white font-mono">+50</div>
-          <div class="text-xs text-[#86868b] mt-1">Plataformas Lanzadas</div>
+          <div class="text-2xl sm:text-3xl font-semibold tracking-tight text-white font-mono">+50</div>
+          <div class="text-[11px] sm:text-xs text-[#86868b] mt-1">Plataformas Lanzadas</div>
         </div>
         <div>
-          <div class="text-3xl font-semibold tracking-tight text-white font-mono">0.3s</div>
-          <div class="text-xs text-[#86868b] mt-1">Tiempo de Carga</div>
+          <div class="text-2xl sm:text-3xl font-semibold tracking-tight text-white font-mono">0.3s</div>
+          <div class="text-[11px] sm:text-xs text-[#86868b] mt-1">Tiempo de Carga</div>
         </div>
         <div>
-          <div class="text-3xl font-semibold tracking-tight text-[#a3e635] font-mono">3.8x</div>
-          <div class="text-xs text-[#86868b] mt-1">Retorno Promedio</div>
+          <div class="text-2xl sm:text-3xl font-semibold tracking-tight text-[#a3e635] font-mono">3.8x</div>
+          <div class="text-[11px] sm:text-xs text-[#86868b] mt-1">Retorno Promedio</div>
         </div>
         <div>
-          <div class="text-3xl font-semibold tracking-tight text-white font-mono">100/100</div>
-          <div class="text-xs text-[#86868b] mt-1">Core Web Vitals</div>
+          <div class="text-2xl sm:text-3xl font-semibold tracking-tight text-white font-mono">100/100</div>
+          <div class="text-[11px] sm:text-xs text-[#86868b] mt-1">Core Web Vitals</div>
         </div>
       </div>
 
@@ -179,125 +184,125 @@
   <!-- =========================================================================
        3. INTERACTIVE SHOWCASE (Apple Architecture & Design)
        ========================================================================= -->
-  <section class="py-16 relative z-10">
+  <section class="py-12 sm:py-16 relative z-10">
     <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
-      <div class="apple-card p-6 sm:p-10 border border-white/[0.08]">
+      <div class="apple-card p-4 sm:p-8 md:p-10 border border-white/[0.08]">
         
         <!-- Tab Bar -->
-        <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between pb-6 border-b border-white/[0.08] gap-4">
+        <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between pb-4 sm:pb-6 border-b border-white/[0.08] gap-3 sm:gap-4 w-full">
           <div class="flex items-center gap-2 text-xs font-mono text-[#86868b]">
             <span class="w-2 h-2 rounded-full bg-[#a3e635]"></span>
             <span>thinklab-core // v2.4</span>
           </div>
 
-          <div class="flex flex-wrap gap-1 p-1 bg-white/[0.04] rounded-full border border-white/[0.06]">
-            <button data-showcase-tab="design" class="apple-tab-btn active">
+          <div class="flex flex-wrap gap-1 p-1 bg-white/[0.04] rounded-2xl sm:rounded-full border border-white/[0.06] w-full sm:w-auto justify-center">
+            <button data-showcase-tab="design" class="apple-tab-btn active flex-1 sm:flex-none">
               Diseño
             </button>
-            <button data-showcase-tab="speed" class="apple-tab-btn">
+            <button data-showcase-tab="speed" class="apple-tab-btn flex-1 sm:flex-none">
               Rendimiento
             </button>
-            <button data-showcase-tab="ai" class="apple-tab-btn">
-              Inteligencia Artificial
+            <button data-showcase-tab="ai" class="apple-tab-btn flex-1 sm:flex-none">
+              IA
             </button>
-            <button data-showcase-tab="cloud" class="apple-tab-btn">
-              Arquitectura Cloud
+            <button data-showcase-tab="cloud" class="apple-tab-btn flex-1 sm:flex-none">
+              Cloud
             </button>
           </div>
         </div>
 
         <!-- Panels -->
-        <div class="pt-8">
+        <div class="pt-6 sm:pt-8">
           
           <!-- Panel 1: Design -->
-          <div data-showcase-panel="design" class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
-            <div class="lg:col-span-6 space-y-4">
+          <div data-showcase-panel="design" class="grid grid-cols-1 lg:grid-cols-12 gap-6 sm:gap-8 items-center">
+            <div class="lg:col-span-6 space-y-3 sm:space-y-4">
               <span class="text-xs font-mono text-[#a3e635] uppercase tracking-wider">ESTÉTICA DE PRECISIÓN</span>
-              <h3 class="text-2xl font-bold text-white tracking-tight">
+              <h3 class="text-xl sm:text-2xl font-bold text-white tracking-tight">
                 Diseño refinado. Sin excesos.
               </h3>
-              <p class="text-[#86868b] text-sm leading-relaxed">
+              <p class="text-[#86868b] text-xs sm:text-sm leading-relaxed">
                 Cada píxel responde a un propósito. Eliminamos el ruido visual para destacar la propuesta de valor de tu marca con tipografía suiza, jerarquía limpia y microinteracciones fluidas.
               </p>
               <div class="space-y-2 pt-2 text-xs text-[#f5f5f7]">
                 <div class="flex items-center gap-2">
-                  <span class="w-1.5 h-1.5 rounded-full bg-[#a3e635]"></span> Renderizado a 60 FPS con aceleración de hardware
+                  <span class="w-1.5 h-1.5 rounded-full bg-[#a3e635] flex-shrink-0"></span> Renderizado a 60 FPS con aceleración de hardware
                 </div>
                 <div class="flex items-center gap-2">
-                  <span class="w-1.5 h-1.5 rounded-full bg-[#a3e635]"></span> Tipografía optimizada para lectura en pantallas Retina
+                  <span class="w-1.5 h-1.5 rounded-full bg-[#a3e635] flex-shrink-0"></span> Tipografía optimizada para lectura en pantallas Retina
                 </div>
                 <div class="flex items-center gap-2">
-                  <span class="w-1.5 h-1.5 rounded-full bg-[#a3e635]"></span> Composición balanceada con espaciado armónico
+                  <span class="w-1.5 h-1.5 rounded-full bg-[#a3e635] flex-shrink-0"></span> Composición balanceada con espaciado armónico
                 </div>
               </div>
             </div>
 
-            <div class="lg:col-span-6 bg-[#0a0a0c] p-6 rounded-2xl border border-white/[0.08] space-y-4">
-              <div class="grid grid-cols-2 gap-3">
-                <div class="p-4 rounded-xl bg-white/[0.02] border border-white/[0.06]">
-                  <span class="text-xs text-[#86868b] font-mono">CONVERSIÓN</span>
-                  <div class="text-2xl font-bold text-white mt-1">+340%</div>
-                  <div class="text-[11px] text-[#86868b] mt-1">Flujo de registro sin fricción</div>
+            <div class="lg:col-span-6 bg-[#0a0a0c] p-4 sm:p-6 rounded-2xl border border-white/[0.08] space-y-3 sm:space-y-4">
+              <div class="grid grid-cols-2 gap-2.5 sm:gap-3">
+                <div class="p-3.5 sm:p-4 rounded-xl bg-white/[0.02] border border-white/[0.06]">
+                  <span class="text-[11px] sm:text-xs text-[#86868b] font-mono">CONVERSIÓN</span>
+                  <div class="text-xl sm:text-2xl font-bold text-white mt-1">+340%</div>
+                  <div class="text-[10px] sm:text-[11px] text-[#86868b] mt-1">Registro optimizado</div>
                 </div>
-                <div class="p-4 rounded-xl bg-white/[0.02] border border-white/[0.06]">
-                  <span class="text-xs text-[#86868b] font-mono">ENGAGEMENT</span>
-                  <div class="text-2xl font-bold text-white mt-1">4m 12s</div>
-                  <div class="text-[11px] text-[#86868b] mt-1">Tiempo de sesión activa</div>
+                <div class="p-3.5 sm:p-4 rounded-xl bg-white/[0.02] border border-white/[0.06]">
+                  <span class="text-[11px] sm:text-xs text-[#86868b] font-mono">ENGAGEMENT</span>
+                  <div class="text-xl sm:text-2xl font-bold text-white mt-1">4m 12s</div>
+                  <div class="text-[10px] sm:text-[11px] text-[#86868b] mt-1">Sesión activa</div>
                 </div>
               </div>
-              <div class="p-4 rounded-xl bg-white/[0.02] border border-white/[0.06] flex items-center justify-between text-xs">
-                <div class="flex items-center gap-2.5">
-                  <span class="w-2 h-2 rounded-full bg-[#a3e635]"></span>
-                  <span class="text-[#f5f5f7]">Lead Capture Engine Activo</span>
+              <div class="p-3 sm:p-4 rounded-xl bg-white/[0.02] border border-white/[0.06] flex items-center justify-between text-xs">
+                <div class="flex items-center gap-2">
+                  <span class="w-2 h-2 rounded-full bg-[#a3e635] flex-shrink-0"></span>
+                  <span class="text-[#f5f5f7] text-[11px] sm:text-xs">Lead Capture Activo</span>
                 </div>
-                <span class="text-[#86868b] font-mono">Edge Latency 14ms</span>
+                <span class="text-[#86868b] font-mono text-[10px] sm:text-xs">Edge 14ms</span>
               </div>
             </div>
           </div>
 
           <!-- Panel 2: Speed (Hidden by default) -->
-          <div data-showcase-panel="speed" class="hidden grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
-            <div class="lg:col-span-6 space-y-4">
+          <div data-showcase-panel="speed" class="hidden grid grid-cols-1 lg:grid-cols-12 gap-6 sm:gap-8 items-center">
+            <div class="lg:col-span-6 space-y-3 sm:space-y-4">
               <span class="text-xs font-mono text-[#a3e635] uppercase tracking-wider">VELOCIDAD INSTANTÁNEA</span>
-              <h3 class="text-2xl font-bold text-white tracking-tight">
+              <h3 class="text-xl sm:text-2xl font-bold text-white tracking-tight">
                 Cero retraso. Máxima respuesta.
               </h3>
-              <p class="text-[#86868b] text-sm leading-relaxed">
+              <p class="text-[#86868b] text-xs sm:text-sm leading-relaxed">
                 Desplegamos en la red Edge global de Vercel con empaquetado optimizado para que cada página responda en milisegundos en cualquier región.
               </p>
             </div>
-            <div class="lg:col-span-6 bg-[#0a0a0c] p-6 rounded-2xl border border-white/[0.08]">
-              <div class="grid grid-cols-3 gap-3 text-center">
-                <div class="p-4 rounded-xl bg-white/[0.02] border border-white/[0.06]">
-                  <div class="text-2xl font-bold text-white font-mono">100</div>
-                  <div class="text-xs text-[#86868b] mt-1">Performance</div>
+            <div class="lg:col-span-6 bg-[#0a0a0c] p-4 sm:p-6 rounded-2xl border border-white/[0.08]">
+              <div class="grid grid-cols-3 gap-2 sm:gap-3 text-center">
+                <div class="p-3 sm:p-4 rounded-xl bg-white/[0.02] border border-white/[0.06]">
+                  <div class="text-xl sm:text-2xl font-bold text-white font-mono">100</div>
+                  <div class="text-[10px] sm:text-xs text-[#86868b] mt-1">Performance</div>
                 </div>
-                <div class="p-4 rounded-xl bg-white/[0.02] border border-white/[0.06]">
-                  <div class="text-2xl font-bold text-white font-mono">100</div>
-                  <div class="text-xs text-[#86868b] mt-1">Accessibility</div>
+                <div class="p-3 sm:p-4 rounded-xl bg-white/[0.02] border border-white/[0.06]">
+                  <div class="text-xl sm:text-2xl font-bold text-white font-mono">100</div>
+                  <div class="text-[10px] sm:text-xs text-[#86868b] mt-1">Accessibility</div>
                 </div>
-                <div class="p-4 rounded-xl bg-white/[0.02] border border-white/[0.06]">
-                  <div class="text-2xl font-bold text-white font-mono">100</div>
-                  <div class="text-xs text-[#86868b] mt-1">SEO</div>
+                <div class="p-3 sm:p-4 rounded-xl bg-white/[0.02] border border-white/[0.06]">
+                  <div class="text-xl sm:text-2xl font-bold text-white font-mono">100</div>
+                  <div class="text-[10px] sm:text-xs text-[#86868b] mt-1">SEO</div>
                 </div>
               </div>
             </div>
           </div>
 
           <!-- Panel 3: AI (Hidden by default) -->
-          <div data-showcase-panel="ai" class="hidden grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
-            <div class="lg:col-span-6 space-y-4">
+          <div data-showcase-panel="ai" class="hidden grid grid-cols-1 lg:grid-cols-12 gap-6 sm:gap-8 items-center">
+            <div class="lg:col-span-6 space-y-3 sm:space-y-4">
               <span class="text-xs font-mono text-[#a3e635] uppercase tracking-wider">INTELIGENCIA AUTOMATIZADA</span>
-              <h3 class="text-2xl font-bold text-white tracking-tight">
+              <h3 class="text-xl sm:text-2xl font-bold text-white tracking-tight">
                 Agentes autónomos conectados a tu negocio.
               </h3>
-              <p class="text-[#86868b] text-sm leading-relaxed">
+              <p class="text-[#86868b] text-xs sm:text-sm leading-relaxed">
                 Integramos modelos de lenguaje con búsqueda vectorial en Supabase para calificar prospectos, resolver dudas y agendar reuniones automáticamente.
               </p>
             </div>
-            <div class="lg:col-span-6 bg-[#0a0a0c] p-6 rounded-2xl border border-white/[0.08] space-y-2.5 font-mono text-xs text-[#86868b]">
+            <div class="lg:col-span-6 bg-[#0a0a0c] p-4 sm:p-6 rounded-2xl border border-white/[0.08] space-y-2.5 font-mono text-xs text-[#86868b]">
               <div class="p-3 bg-white/[0.02] rounded-lg border border-white/[0.06] flex items-center justify-between">
-                <span>ThinkBot RAG Agent</span>
+                <span>Vector RAG Agent</span>
                 <span class="text-[#a3e635]">Online</span>
               </div>
               <div class="p-3 bg-white/[0.02] rounded-lg border border-white/[0.06] flex items-center justify-between">
@@ -312,17 +317,17 @@
           </div>
 
           <!-- Panel 4: Cloud (Hidden by default) -->
-          <div data-showcase-panel="cloud" class="hidden grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
-            <div class="lg:col-span-6 space-y-4">
+          <div data-showcase-panel="cloud" class="hidden grid grid-cols-1 lg:grid-cols-12 gap-6 sm:gap-8 items-center">
+            <div class="lg:col-span-6 space-y-3 sm:space-y-4">
               <span class="text-xs font-mono text-[#a3e635] uppercase tracking-wider">INFRAESTRUCTURA ROBUSTA</span>
-              <h3 class="text-2xl font-bold text-white tracking-tight">
+              <h3 class="text-xl sm:text-2xl font-bold text-white tracking-tight">
                 Bases de datos seguras y escalabilidad sin límites.
               </h3>
-              <p class="text-[#86868b] text-sm leading-relaxed">
+              <p class="text-[#86868b] text-xs sm:text-sm leading-relaxed">
                 PostgreSQL administrado con Supabase, autenticación segura con tokens cifrados y políticas Row Level Security para protección total de datos.
               </p>
             </div>
-            <div class="lg:col-span-6 bg-[#0a0a0c] p-6 rounded-2xl border border-white/[0.08] space-y-2.5 font-mono text-xs text-[#86868b]">
+            <div class="lg:col-span-6 bg-[#0a0a0c] p-4 sm:p-6 rounded-2xl border border-white/[0.08] space-y-2.5 font-mono text-xs text-[#86868b]">
               <div class="p-3 bg-white/[0.02] rounded-lg border border-white/[0.06] text-[#f5f5f7]">
                 ✓ Supabase Database (PostgreSQL + RLS)
               </div>
@@ -343,30 +348,30 @@
   <!-- =========================================================================
        4. INTERACTIVE ROI CALCULATOR
        ========================================================================= -->
-  <section id="calculadora" class="py-24 relative z-10">
+  <section id="calculadora" class="py-16 sm:py-24 relative z-10">
     <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
       
-      <div class="text-center max-w-2xl mx-auto mb-16">
+      <div class="text-center max-w-2xl mx-auto mb-12 sm:mb-16">
         <div class="inline-flex items-center gap-2 apple-pill mb-4">
           <span>Calculadora de Impacto</span>
         </div>
-        <h2 class="text-3xl sm:text-4xl font-bold text-white tracking-tight">
+        <h2 class="text-2xl sm:text-4xl font-bold text-white tracking-tight">
           Estima el retorno de tu inversión.
         </h2>
-        <p class="text-[#86868b] mt-3 text-sm">
+        <p class="text-[#86868b] mt-3 text-xs sm:text-sm px-2">
           Ajusta los parámetros de tu negocio para proyectar el incremento de facturación con una plataforma optimizada.
         </p>
       </div>
 
-      <div class="apple-card p-6 sm:p-10 grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+      <div class="apple-card p-4 sm:p-8 md:p-10 grid grid-cols-1 lg:grid-cols-12 gap-6 sm:gap-8 items-center">
         
         <!-- Controls -->
-        <div class="lg:col-span-6 space-y-6">
+        <div class="lg:col-span-6 space-y-5 sm:space-y-6">
           
           <div>
-            <div class="flex justify-between items-center mb-2.5">
+            <div class="flex justify-between items-center mb-2">
               <label class="text-xs text-[#86868b] font-medium">Tráfico Mensual</label>
-              <span id="roi-traffic-val" class="text-xs font-mono font-semibold text-white bg-white/[0.06] px-2.5 py-1 rounded-md">
+              <span id="roi-traffic-val" class="text-xs font-mono font-semibold text-white bg-white/[0.06] px-2.5 py-0.5 rounded-md">
                 10,000 visitas
               </span>
             </div>
@@ -374,19 +379,19 @@
           </div>
 
           <div>
-            <div class="flex justify-between items-center mb-2.5">
-              <label class="text-xs text-[#86868b] font-medium">Ticket Promedio ($ USD)</label>
-              <span id="roi-ticket-val" class="text-xs font-mono font-semibold text-white bg-white/[0.06] px-2.5 py-1 rounded-md">
-                $500
+            <div class="flex justify-between items-center mb-2">
+              <label class="text-xs text-[#86868b] font-medium">Ticket Promedio (Gs.)</label>
+              <span id="roi-ticket-val" class="text-xs font-mono font-semibold text-white bg-white/[0.06] px-2.5 py-0.5 rounded-md">
+                Gs. 1.500.000
               </span>
             </div>
-            <input type="range" id="roi-ticket" min="50" max="5000" step="50" value="500" />
+            <input type="range" id="roi-ticket" min="100000" max="10000000" step="50000" value="1500000" />
           </div>
 
           <div>
-            <div class="flex justify-between items-center mb-2.5">
+            <div class="flex justify-between items-center mb-2">
               <label class="text-xs text-[#86868b] font-medium">Tasa de Conversión Actual</label>
-              <span id="roi-conversion-val" class="text-xs font-mono font-semibold text-white bg-white/[0.06] px-2.5 py-1 rounded-md">
+              <span id="roi-conversion-val" class="text-xs font-mono font-semibold text-white bg-white/[0.06] px-2.5 py-0.5 rounded-md">
                 1.5%
               </span>
             </div>
@@ -396,7 +401,7 @@
         </div>
 
         <!-- Output -->
-        <div class="lg:col-span-6 bg-[#0a0a0c] p-6 rounded-2xl border border-white/[0.08] space-y-5">
+        <div class="lg:col-span-6 bg-[#0a0a0c] p-4 sm:p-6 rounded-2xl border border-white/[0.08] space-y-4 sm:space-y-5">
           <div class="flex items-center justify-between pb-3 border-b border-white/[0.08]">
             <span class="text-xs font-mono text-[#86868b]">PROYECCIÓN MENSUAL</span>
             <span id="roi-multiplier" class="apple-pill-lime text-xs font-mono font-semibold">
@@ -404,28 +409,28 @@
             </span>
           </div>
 
-          <div class="grid grid-cols-2 gap-3">
-            <div class="p-3.5 rounded-xl bg-white/[0.02] border border-white/[0.06]">
-              <span class="text-xs text-[#86868b]">Ingreso Actual</span>
-              <div id="roi-curr-revenue" class="text-xl font-bold text-white font-mono mt-1">$75,000</div>
+          <div class="grid grid-cols-2 gap-2.5 sm:gap-3">
+            <div class="p-3 sm:p-3.5 rounded-xl bg-white/[0.02] border border-white/[0.06]">
+              <span class="text-[11px] sm:text-xs text-[#86868b]">Ingreso Actual</span>
+              <div id="roi-curr-revenue" class="text-sm sm:text-base md:text-lg font-bold text-white font-mono mt-1 break-words">Gs. 225.000.000</div>
             </div>
-            <div class="p-3.5 rounded-xl bg-white/[0.02] border border-white/[0.06]">
-              <span class="text-xs text-[#a3e635]">Proyección Think Lab.</span>
-              <div id="roi-proj-revenue" class="text-xl font-bold text-[#a3e635] font-mono mt-1">$187,500</div>
+            <div class="p-3 sm:p-3.5 rounded-xl bg-white/[0.02] border border-white/[0.06]">
+              <span class="text-[11px] sm:text-xs text-[#a3e635]">Proyección Think Lab.</span>
+              <div id="roi-proj-revenue" class="text-sm sm:text-base md:text-lg font-bold text-[#a3e635] font-mono mt-1 break-words">Gs. 562.500.000</div>
             </div>
           </div>
 
           <div>
-            <div class="flex justify-between text-xs text-[#86868b] mb-2 font-mono">
+            <div class="flex justify-between text-xs text-[#86868b] mb-1.5 font-mono">
               <span>Incremento Anual Estimado:</span>
-              <span id="roi-extra-annual" class="text-white font-semibold">+$1,350,000/año</span>
+              <span id="roi-extra-annual" class="text-white font-semibold">+Gs. 4.050.000.000/año</span>
             </div>
             <div class="w-full h-2 bg-white/10 rounded-full overflow-hidden">
               <div id="roi-progress-bar" class="h-full bg-[#a3e635] transition-all duration-300" style="width: 70%;"></div>
             </div>
           </div>
 
-          <a href="#contacto" class="btn-apple-primary w-full text-center text-xs py-3 block">
+          <a href="#contacto" id="roi-audit-cta-btn" class="btn-apple-primary w-full text-center text-xs py-3 block">
             Solicitar Auditoría de Conversión →
           </a>
         </div>
@@ -438,265 +443,349 @@
   <!-- =========================================================================
        5. BENTO GRID OF CAPABILITIES (Apple Product Overview Grid)
        ========================================================================= -->
-  <section id="servicios" class="py-24 relative z-10">
+  <section id="servicios" class="py-16 sm:py-24 relative z-10">
     <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
       
-      <div class="text-center max-w-2xl mx-auto mb-16">
+      <div class="text-center max-w-2xl mx-auto mb-12 sm:mb-16">
         <div class="inline-flex items-center gap-2 apple-pill mb-4">
           <span>Capacidades</span>
         </div>
-        <h2 class="text-3xl sm:text-4xl font-bold text-white tracking-tight">
+        <h2 class="text-2xl sm:text-4xl font-bold text-white tracking-tight">
           Ingeniería de software integral.
         </h2>
-        <p class="text-[#86868b] mt-3 text-sm">
+        <p class="text-[#86868b] mt-3 text-xs sm:text-sm px-2">
           Desarrollo web moderno, diseño de interfaz sobrio e integración de modelos de inteligencia artificial.
         </p>
       </div>
 
-      <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-4 sm:gap-6">
         
         <!-- Tile 1 (Span 2) -->
-        <div class="md:col-span-2 apple-card p-8 flex flex-col justify-between">
+        <div class="md:col-span-2 apple-card p-5 sm:p-8 flex flex-col justify-between">
           <div>
-            <div class="w-10 h-10 rounded-xl bg-white/[0.04] border border-white/10 flex items-center justify-center text-[#a3e635] mb-5">
+            <div class="w-10 h-10 rounded-xl bg-white/[0.04] border border-white/10 flex items-center justify-center text-[#a3e635] mb-4 sm:mb-5">
               <i data-lucide="code-2" class="w-5 h-5"></i>
             </div>
             <span class="text-xs font-mono text-[#86868b] uppercase">Desarrollo Web</span>
-            <h3 class="text-xl font-bold text-white mt-1 mb-2">Next.js 14 & TypeScript</h3>
-            <p class="text-[#86868b] text-sm leading-relaxed mb-6">
+            <h3 class="text-lg sm:text-xl font-bold text-white mt-1 mb-2">Next.js 14 & TypeScript</h3>
+            <p class="text-[#86868b] text-xs sm:text-sm leading-relaxed mb-5 sm:mb-6">
               Arquitectura modular con renderizado híbrido y empaquetado ultra-liviano. Código limpio, mantenible y preparado para escalar.
             </p>
           </div>
-          <div class="flex flex-wrap gap-2 text-xs font-mono text-[#86868b] border-t border-white/[0.08] pt-4">
+          <div class="flex flex-wrap gap-2 text-xs font-mono text-[#86868b] border-t border-white/[0.08] pt-3 sm:pt-4">
             <span>Next.js</span> • <span>React</span> • <span>Tailwind CSS</span> • <span>TypeScript</span>
           </div>
         </div>
 
         <!-- Tile 2 -->
-        <div class="apple-card p-8 flex flex-col justify-between">
+        <div class="apple-card p-5 sm:p-8 flex flex-col justify-between">
           <div>
-            <div class="w-10 h-10 rounded-xl bg-white/[0.04] border border-white/10 flex items-center justify-center text-[#a3e635] mb-5">
+            <div class="w-10 h-10 rounded-xl bg-white/[0.04] border border-white/10 flex items-center justify-center text-[#a3e635] mb-4 sm:mb-5">
               <i data-lucide="bot" class="w-5 h-5"></i>
             </div>
             <span class="text-xs font-mono text-[#86868b] uppercase">Sistemas de IA</span>
-            <h3 class="text-xl font-bold text-white mt-1 mb-2">Agentes Inteligentes</h3>
-            <p class="text-[#86868b] text-sm leading-relaxed mb-6">
+            <h3 class="text-lg sm:text-xl font-bold text-white mt-1 mb-2">Agentes Inteligentes</h3>
+            <p class="text-[#86868b] text-xs sm:text-sm leading-relaxed mb-5 sm:mb-6">
               Automatización de atención, calificación de leads y asistentes de voz integrados con RAG y MCP.
             </p>
           </div>
-          <div class="flex flex-wrap gap-2 text-xs font-mono text-[#86868b] border-t border-white/[0.08] pt-4">
+          <div class="flex flex-wrap gap-2 text-xs font-mono text-[#86868b] border-t border-white/[0.08] pt-3 sm:pt-4">
             <span>Claude</span> • <span>Gemini</span> • <span>ElevenLabs</span>
           </div>
         </div>
 
         <!-- Tile 3 -->
-        <div class="apple-card p-8 flex flex-col justify-between">
+        <div class="apple-card p-5 sm:p-8 flex flex-col justify-between">
           <div>
-            <div class="w-10 h-10 rounded-xl bg-white/[0.04] border border-white/10 flex items-center justify-center text-[#a3e635] mb-5">
+            <div class="w-10 h-10 rounded-xl bg-white/[0.04] border border-white/10 flex items-center justify-center text-[#a3e635] mb-4 sm:mb-5">
               <i data-lucide="layout" class="w-5 h-5"></i>
             </div>
             <span class="text-xs font-mono text-[#86868b] uppercase">Diseño de Interfaz</span>
-            <h3 class="text-xl font-bold text-white mt-1 mb-2">UI/UX Sobrio</h3>
-            <p class="text-[#86868b] text-sm leading-relaxed mb-6">
+            <h3 class="text-lg sm:text-xl font-bold text-white mt-1 mb-2">UI/UX Sobrio</h3>
+            <p class="text-[#86868b] text-xs sm:text-sm leading-relaxed mb-5 sm:mb-6">
               Diseño enfocado en claridad, jerarquía y confianza. Sistemas de diseño completos y consistentes.
             </p>
           </div>
-          <div class="flex flex-wrap gap-2 text-xs font-mono text-[#86868b] border-t border-white/[0.08] pt-4">
+          <div class="flex flex-wrap gap-2 text-xs font-mono text-[#86868b] border-t border-white/[0.08] pt-3 sm:pt-4">
             <span>Figma</span> • <span>Design Tokens</span> • <span>Prototipado</span>
           </div>
         </div>
 
         <!-- Tile 4 (Span 2) -->
-        <div class="md:col-span-2 apple-card p-8 flex flex-col justify-between">
+        <div class="md:col-span-2 apple-card p-5 sm:p-8 flex flex-col justify-between">
           <div>
-            <div class="w-10 h-10 rounded-xl bg-white/[0.04] border border-white/10 flex items-center justify-center text-[#a3e635] mb-5">
+            <div class="w-10 h-10 rounded-xl bg-white/[0.04] border border-white/10 flex items-center justify-center text-[#a3e635] mb-4 sm:mb-5">
               <i data-lucide="database" class="w-5 h-5"></i>
             </div>
             <span class="text-xs font-mono text-[#86868b] uppercase">Infraestructura</span>
-            <h3 class="text-xl font-bold text-white mt-1 mb-2">Bases de Datos & Backend Serverless</h3>
-            <p class="text-[#86868b] text-sm leading-relaxed mb-6">
+            <h3 class="text-lg sm:text-xl font-bold text-white mt-1 mb-2">Bases de Datos & Backend Serverless</h3>
+            <p class="text-[#86868b] text-xs sm:text-sm leading-relaxed mb-5 sm:mb-6">
               PostgreSQL administrado en Supabase con autenticación segura, políticas de privacidad RLS y pagos con Stripe.
             </p>
           </div>
-          <div class="flex flex-wrap gap-2 text-xs font-mono text-[#86868b] border-t border-white/[0.08] pt-4">
+          <div class="flex flex-wrap gap-2 text-xs font-mono text-[#86868b] border-t border-white/[0.08] pt-3 sm:pt-4">
             <span>Supabase</span> • <span>PostgreSQL</span> • <span>Stripe</span> • <span>Vercel Edge</span>
           </div>
         </div>
 
         <!-- Tile 5 -->
-        <div class="apple-card p-8 flex flex-col justify-between">
+        <div class="apple-card p-5 sm:p-8 flex flex-col justify-between">
           <div>
-            <div class="w-10 h-10 rounded-xl bg-white/[0.04] border border-white/10 flex items-center justify-center text-[#a3e635] mb-5">
+            <div class="w-10 h-10 rounded-xl bg-white/[0.04] border border-white/10 flex items-center justify-center text-[#a3e635] mb-4 sm:mb-5">
               <i data-lucide="gauge" class="w-5 h-5"></i>
             </div>
             <span class="text-xs font-mono text-[#86868b] uppercase">Optimización</span>
-            <h3 class="text-xl font-bold text-white mt-1 mb-2">Core Web Vitals</h3>
-            <p class="text-[#86868b] text-sm leading-relaxed mb-6">
+            <h3 class="text-lg sm:text-xl font-bold text-white mt-1 mb-2">Core Web Vitals</h3>
+            <p class="text-[#86868b] text-xs sm:text-sm leading-relaxed mb-5 sm:mb-6">
               Puntuación 100/100 en Google PageSpeed, indexación técnica estructurada y tiempos de carga instantáneos.
             </p>
           </div>
-          <div class="flex flex-wrap gap-2 text-xs font-mono text-[#86868b] border-t border-white/[0.08] pt-4">
+          <div class="flex flex-wrap gap-2 text-xs font-mono text-[#86868b] border-t border-white/[0.08] pt-3 sm:pt-4">
             <span>SEO Técnico</span> • <span>PageSpeed 100</span>
           </div>
         </div>
 
         <!-- Tile 6 -->
-        <div class="apple-card p-8 flex flex-col justify-between">
+        <div class="apple-card p-5 sm:p-8 flex flex-col justify-between">
           <div>
-            <div class="w-10 h-10 rounded-xl bg-white/[0.04] border border-white/10 flex items-center justify-center text-[#a3e635] mb-5">
+            <div class="w-10 h-10 rounded-xl bg-white/[0.04] border border-white/10 flex items-center justify-center text-[#a3e635] mb-4 sm:mb-5">
               <i data-lucide="shield-check" class="w-5 h-5"></i>
             </div>
             <span class="text-xs font-mono text-[#86868b] uppercase">Garantía</span>
-            <h3 class="text-xl font-bold text-white mt-1 mb-2">Soporte Continuo</h3>
-            <p class="text-[#86868b] text-sm leading-relaxed mb-6">
+            <h3 class="text-lg sm:text-xl font-bold text-white mt-1 mb-2">Soporte Continuo</h3>
+            <p class="text-[#86868b] text-xs sm:text-sm leading-relaxed mb-5 sm:mb-6">
               Monitoreo activo de disponibilidad, actualizaciones de seguridad y mejoras continuas de producto.
             </p>
           </div>
-          <div class="flex flex-wrap gap-2 text-xs font-mono text-[#86868b] border-t border-white/[0.08] pt-4">
+          <div class="flex flex-wrap gap-2 text-xs font-mono text-[#86868b] border-t border-white/[0.08] pt-3 sm:pt-4">
             <span>99.9% Uptime</span> • <span>Soporte Dedicado</span>
           </div>
         </div>
 
       </div>
 
+    </div>
+  </section>
+
   <!-- =========================================================================
-       5.5 DESIGN CRAFTSMANSHIP & VISUAL EXCELLENCE (Apple Showcase)
+       5.1 ESPECIALISTAS EN CHATBOTS & AGENTES DE IA (Apple AI Hub)
        ========================================================================= -->
-  <section id="diseno" class="py-24 relative z-10">
-    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+  <section id="chatbots-ia" class="py-16 sm:py-28 relative z-10 overflow-hidden border-t border-white/[0.08] ai-mesh-glow">
+    
+    <!-- Background Ambient Glow Orbs -->
+    <div class="absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[350px] bg-[#a3e635]/10 rounded-full blur-[140px] pointer-events-none"></div>
+
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
       
       <!-- Section Header -->
-      <div class="text-center max-w-3xl mx-auto mb-16">
-        <div class="inline-flex items-center gap-2.5 apple-pill mb-4">
-          <span class="w-1.5 h-1.5 rounded-full bg-[#a3e635]"></span>
-          <span>Artesanía Visual & UI/UX</span>
+      <div class="text-center max-w-3xl mx-auto mb-12 sm:mb-16">
+        <div class="inline-flex items-center gap-2 apple-pill mb-4 border border-[#a3e635]/30 bg-[#a3e635]/10">
+          <span class="w-2 h-2 rounded-full bg-[#a3e635] beacon-glow"></span>
+          <span class="text-[#a3e635] font-mono text-[11px] font-semibold tracking-wider">ESPECIALISTAS EN IA // AGENTES AUTÓNOMOS</span>
         </div>
-        <h2 class="text-3xl sm:text-5xl font-bold text-white tracking-tight leading-tight">
-          Obsesión por el detalle.<br />
-          <span class="apple-gradient-text">Calidad visual sin concesiones.</span>
+        <h2 class="text-3xl sm:text-5xl lg:text-6xl font-bold text-white tracking-tight">
+          Chatbots & Agentes de IA que <span class="text-transparent bg-clip-text bg-gradient-to-r from-white via-white to-[#a3e635]">convierten 24/7.</span>
         </h2>
-        <p class="text-[#86868b] mt-4 text-base leading-relaxed max-w-2xl mx-auto">
-          Cada interfaz que construimos es una obra de ingeniería visual: tipografía suiza milimétrica, contrastes puros en negro profundo y microinteracciones a 60 cuadros por segundo.
+        <p class="text-[#86868b] mt-4 text-xs sm:text-sm md:text-base leading-relaxed max-w-2xl mx-auto">
+          Diseñamos e integramos agentes conversacionales autónomos con arquitectura <strong class="text-white">RAG (Retrieval-Augmented Generation)</strong>, cero alucinaciones y conexión nativa con WhatsApp, Web y tus bases de datos.
         </p>
       </div>
 
-      <!-- Visual Showcase Grid -->
-      <div class="space-y-6">
+      <!-- MAIN INTERACTIVE CHATBOT SIMULATOR (Live Apple Glass Container) -->
+      <div class="apple-card p-4 sm:p-8 md:p-10 border border-white/[0.12] shadow-2xl relative mb-12 overflow-hidden">
         
-        <!-- Showcase Main Panoramic Card -->
-        <div class="apple-card group overflow-hidden border border-white/[0.12] bg-[#0c0c0e]">
-          <div class="grid grid-cols-1 lg:grid-cols-12 items-center">
+        <!-- Live Telemetry Status Bar -->
+        <div class="flex flex-wrap items-center justify-between gap-4 pb-6 border-b border-white/[0.08]">
+          
+          <!-- Channels & Model Indicator -->
+          <div class="flex items-center gap-3">
+            <div class="w-10 h-10 rounded-2xl bg-[#1a1a20] border border-white/15 flex items-center justify-center text-lg text-[#a3e635] shadow-inner relative">
+              <span class="font-mono font-bold">✦</span>
+              <span class="absolute -top-1 -right-1 w-3 h-3 rounded-full bg-[#a3e635] border-2 border-black"></span>
+            </div>
+            <div>
+              <div class="flex items-center gap-2">
+                <h3 class="text-sm sm:text-base font-bold text-white">ThinkLab Agent Studio</h3>
+                <span class="text-[10px] font-mono bg-[#a3e635]/15 text-[#a3e635] px-2 py-0.5 rounded-full border border-[#a3e635]/30">v3.2 Edge AI</span>
+              </div>
+              <p class="text-xs text-[#86868b] font-mono">Claude 3.5 Sonnet • GPT-4o • Supabase Vector</p>
+            </div>
+          </div>
+
+          <!-- Interactive Use-Case Tabs -->
+          <div class="flex flex-wrap gap-1.5 p-1 bg-black/40 rounded-xl sm:rounded-full border border-white/10" id="ai-demo-tabs">
+            <button data-ai-tab="whatsapp" class="px-3.5 py-1.5 rounded-lg sm:rounded-full text-xs font-medium transition-all ai-tab-active flex items-center gap-1.5">
+              <span>💬 WhatsApp Sales</span>
+            </button>
+            <button data-ai-tab="rag" class="px-3.5 py-1.5 rounded-lg sm:rounded-full text-xs font-medium text-[#86868b] hover:text-white transition-all flex items-center gap-1.5">
+              <span>🧠 Asistente RAG</span>
+            </button>
+            <button data-ai-tab="automation" class="px-3.5 py-1.5 rounded-lg sm:rounded-full text-xs font-medium text-[#86868b] hover:text-white transition-all flex items-center gap-1.5">
+              <span>⚡ Workflows & CRM</span>
+            </button>
+          </div>
+
+        </div>
+
+        <!-- Simulation Screen Grid -->
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 sm:gap-8 pt-6 sm:pt-8 items-center">
+          
+          <!-- Left: Live Simulated Chat Stream (Apple Glass Phone) -->
+          <div class="lg:col-span-7 bg-[#08080a] p-4 sm:p-6 rounded-2xl border border-white/[0.08] relative overflow-hidden shadow-inner">
             
-            <div class="lg:col-span-5 p-8 sm:p-12 space-y-6">
-              <span class="apple-pill-lime text-xs font-mono font-semibold">
-                PRECISIÓN RETINA • 4K READY
+            <!-- Window Bar -->
+            <div class="flex items-center justify-between pb-3 mb-4 border-b border-white/[0.06] text-xs font-mono text-[#86868b]">
+              <div class="flex items-center gap-2">
+                <span class="w-2.5 h-2.5 rounded-full bg-red-500/80"></span>
+                <span class="w-2.5 h-2.5 rounded-full bg-yellow-500/80"></span>
+                <span class="w-2.5 h-2.5 rounded-full bg-[#a3e635]/80"></span>
+                <span id="ai-simulation-channel" class="text-white font-medium ml-2">WhatsApp API // +595 983 463553</span>
+              </div>
+              <span class="text-[10px] text-[#a3e635] flex items-center gap-1">
+                <span class="w-1.5 h-1.5 rounded-full bg-[#a3e635] animate-ping"></span> En línea
               </span>
-              <h3 class="text-2xl sm:text-3xl font-bold text-white tracking-tight leading-tight">
-                Arquitectura visual diseñada para cautivar y retener.
+            </div>
+
+            <!-- Chat Bubbles Container (Populated dynamically) -->
+            <div id="ai-simulation-chat" class="space-y-3 min-h-[260px] text-xs">
+              <!-- Rendered via JS -->
+            </div>
+
+            <!-- Simulation Action Bar -->
+            <div class="pt-4 mt-3 border-t border-white/[0.06] flex items-center justify-between gap-2">
+              <span class="text-[11px] text-[#86868b] font-mono">Prueba este flujo en vivo:</span>
+              <button id="ai-trigger-sample-btn" class="btn-apple-lime text-black font-semibold text-xs py-1.5 px-3 rounded-lg flex items-center gap-1.5 shadow">
+                <span>Reiniciar Demo</span>
+                <span>↻</span>
+              </button>
+            </div>
+
+          </div>
+
+          <!-- Right: Architecture Metrics & Deep Capabilities -->
+          <div class="lg:col-span-5 space-y-4">
+            
+            <div class="space-y-2">
+              <span id="ai-tab-pill" class="text-xs font-mono text-[#a3e635] uppercase tracking-wider">CAPACIDAD DESTACADA</span>
+              <h3 id="ai-tab-title" class="text-xl sm:text-2xl font-bold text-white tracking-tight">
+                Ventas y Calificación BANT Autónoma
               </h3>
-              <p class="text-[#86868b] text-sm leading-relaxed">
-                Eliminamos las plantillas genéricas. Desarrollamos sistemas de diseño exclusivos inspirados en las mejores aplicaciones de Silicon Valley, donde cada botón, modal y gráfico respira prestigio.
+              <p id="ai-tab-desc" class="text-[#86868b] text-xs sm:text-sm leading-relaxed">
+                El agente atiende prospectos en WhatsApp o en tu web, evalúa presupuesto, necesidad y tiempos (BANT), y sincroniza automáticamente las reuniones en Google Calendar.
               </p>
+            </div>
 
-              <div class="grid grid-cols-2 gap-4 pt-2 border-t border-white/[0.08]">
-                <div>
-                  <div class="text-2xl font-bold text-white font-mono">0.01s</div>
-                  <div class="text-xs text-[#86868b] mt-0.5">Respuesta háptica y táctil</div>
-                </div>
-                <div>
-                  <div class="text-2xl font-bold text-[#a3e635] font-mono">60 FPS</div>
-                  <div class="text-xs text-[#86868b] mt-0.5">Animaciones aceleradas</div>
-                </div>
+            <!-- Live Telemetry KPI Cards -->
+            <div class="grid grid-cols-2 gap-3 pt-2">
+              <div class="p-3.5 rounded-xl bg-white/[0.02] border border-white/[0.06]">
+                <span class="text-[10px] sm:text-[11px] text-[#86868b] font-mono">LATENCIA DE RESPUESTA</span>
+                <div class="text-lg sm:text-xl font-bold text-white font-mono mt-0.5">&lt; 280ms</div>
+                <div class="text-[10px] text-[#a3e635] mt-0.5">Vercel Edge Network</div>
+              </div>
+              <div class="p-3.5 rounded-xl bg-white/[0.02] border border-white/[0.06]">
+                <span class="text-[10px] sm:text-[11px] text-[#86868b] font-mono">PRECISIÓN VECTORIAL</span>
+                <div class="text-lg sm:text-xl font-bold text-[#a3e635] font-mono mt-0.5">99.8%</div>
+                <div class="text-[10px] text-[#86868b] mt-0.5">Cero Alucinaciones</div>
               </div>
             </div>
 
-            <div class="lg:col-span-7 relative h-72 sm:h-96 lg:h-[440px] overflow-hidden bg-[#050507]">
-              <img 
-                src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?q=80&w=1600&auto=format&fit=crop" 
-                alt="Think Lab High Precision Interface Design" 
-                class="w-full h-full object-cover object-left-top transition-transform duration-700 group-hover:scale-105 opacity-90 group-hover:opacity-100"
-              />
-              <div class="absolute inset-0 bg-gradient-to-t lg:bg-gradient-to-r from-[#0c0c0e] via-transparent to-transparent"></div>
-              <div class="absolute bottom-4 right-4 bg-black/70 backdrop-blur-md px-3.5 py-1.5 rounded-full border border-white/10 text-[11px] font-mono text-[#86868b] flex items-center gap-2">
-                <span class="w-1.5 h-1.5 rounded-full bg-[#a3e635]"></span> UI Master System
+            <!-- Feature Bullet List -->
+            <div id="ai-tab-features" class="space-y-2 pt-1 text-xs text-[#f5f5f7]">
+              <div class="flex items-center gap-2">
+                <span class="w-1.5 h-1.5 rounded-full bg-[#a3e635]"></span> Integración directa con WhatsApp Business Cloud API
+              </div>
+              <div class="flex items-center gap-2">
+                <span class="w-1.5 h-1.5 rounded-full bg-[#a3e635]"></span> Sincronización instantánea con CRM (HubSpot / Notion)
+              </div>
+              <div class="flex items-center gap-2">
+                <span class="w-1.5 h-1.5 rounded-full bg-[#a3e635]"></span> Transferencia a asesor humano en caso de lead calificado
               </div>
             </div>
 
+            <!-- Direct CTA to test Think Bot AI widget -->
+            <div class="pt-3 flex flex-col sm:flex-row gap-2.5">
+              <button id="open-thinkbot-demo-btn" class="btn-apple-primary text-xs py-2.5 px-4 flex-1 text-center justify-center flex items-center gap-2">
+                <span class="w-2 h-2 rounded-full bg-[#a3e635]"></span>
+                <span>Probar Think Bot AI</span>
+              </button>
+              <a href="#contacto" class="btn-apple-secondary text-xs py-2.5 px-4 text-center">
+                Cotizar Agente IA
+              </a>
+            </div>
+
+          </div>
+
+        </div>
+
+      </div>
+
+      <!-- 4-COLUMN BENTO GRID: WHY OUR AI CHATBOTS LEAD THE MARKET -->
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5 sm:gap-6">
+        
+        <!-- Card 1: WhatsApp Official -->
+        <div class="ai-card-glow p-6 rounded-3xl flex flex-col justify-between">
+          <div class="space-y-3">
+            <div class="w-10 h-10 rounded-2xl bg-[#25D366]/15 border border-[#25D366]/30 flex items-center justify-center text-[#25D366]">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-5 h-5">
+                <path d="M12.04 2c-5.46 0-9.91 4.45-9.91 9.91 0 1.75.46 3.45 1.32 4.95L2.05 22l5.25-1.38c1.45.79 3.08 1.21 4.74 1.21 5.46 0 9.91-4.45 9.91-9.91 0-2.65-1.03-5.14-2.9-7.01A9.816 9.816 0 0 0 12.04 2zm.01 1.67c2.2 0 4.26.86 5.82 2.42a8.225 8.225 0 0 1 2.41 5.83c0 4.54-3.7 8.24-8.24 8.24-1.48 0-2.93-.4-4.2-1.15l-.3-.18-3.12.82.83-3.04-.2-.31a8.196 8.196 0 0 1-1.26-4.38c0-4.54 3.7-8.24 8.24-8.24zm4.52 11.66c-.25-.13-1.47-.72-1.7-.81-.23-.08-.39-.13-.56.13-.17.25-.64.81-.79.97-.14.17-.29.19-.54.06-.25-.13-1.06-.39-2.03-1.25-.75-.67-1.26-1.5-1.41-1.75-.14-.25-.02-.38.11-.51.11-.11.25-.29.37-.44.13-.14.17-.25.25-.42.08-.17.04-.31-.02-.44-.06-.13-.56-1.34-.76-1.84-.2-.49-.4-.42-.56-.43h-.47c-.17 0-.44.06-.67.31-.23.25-.88.86-.88 2.1 0 1.24.9 2.44 1.03 2.61.13.17 1.78 2.71 4.3 3.8.6.26 1.07.41 1.44.53.61.19 1.16.17 1.6.1.49-.07 1.47-.6 1.68-1.18.21-.58.21-1.07.14-1.18-.06-.11-.23-.17-.48-.29z"/>
+              </svg>
+            </div>
+            <h4 class="text-base font-bold text-white">WhatsApp Multicanal</h4>
+            <p class="text-xs text-[#86868b] leading-relaxed">
+              Atención inmediata en el canal #1 de ventas de Latinoamérica. Respuestas con botones interactivos, catálogos y derivación fluida.
+            </p>
+          </div>
+          <div class="mt-4 pt-3 border-t border-white/[0.06] text-[11px] font-mono text-[#25D366]">
+            API Oficial Meta Cloud
           </div>
         </div>
 
-        <!-- 3-Column Visual Grid -->
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-          
-          <!-- Visual Card 1: Design Systems -->
-          <div class="apple-card group overflow-hidden flex flex-col justify-between">
-            <div class="relative h-60 overflow-hidden bg-[#0c0c0e]">
-              <img 
-                src="https://images.unsplash.com/photo-1507238691740-187a5b1d37b8?q=80&w=1000&auto=format&fit=crop" 
-                alt="Design System & Typography Hierarchy" 
-                class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105 opacity-85 group-hover:opacity-100"
-              />
-              <div class="absolute inset-0 bg-gradient-to-t from-[#101012] via-transparent to-transparent"></div>
-              <span class="absolute top-4 left-4 apple-pill text-[11px]">
-                Tipografía & Retícula
-              </span>
+        <!-- Card 2: RAG Vector Engine -->
+        <div class="ai-card-glow p-6 rounded-3xl flex flex-col justify-between">
+          <div class="space-y-3">
+            <div class="w-10 h-10 rounded-2xl bg-[#a3e635]/15 border border-[#a3e635]/30 flex items-center justify-center text-[#a3e635] font-mono font-bold text-sm">
+              RAG
             </div>
-            <div class="p-6">
-              <h4 class="text-base font-bold text-white mb-2 group-hover:text-[#a3e635] transition-colors">
-                Sistemas de Diseño Consistentes
-              </h4>
-              <p class="text-xs text-[#86868b] leading-relaxed">
-                Escalas tipográficas matemáticas, paletas de color con accesibilidad WCAG AAA y tokens reutilizables para Figma y código.
-              </p>
-            </div>
+            <h4 class="text-base font-bold text-white">Cero Alucinaciones</h4>
+            <p class="text-xs text-[#86868b] leading-relaxed">
+              El agente consulta únicamente tus manuales, políticas, PDFs y base de datos con embeddings vectoriales en Supabase PostgreSQL.
+            </p>
           </div>
-
-          <!-- Visual Card 2: Mobile Dark Mode -->
-          <div class="apple-card group overflow-hidden flex flex-col justify-between">
-            <div class="relative h-60 overflow-hidden bg-[#0c0c0e]">
-              <img 
-                src="https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?q=80&w=1000&auto=format&fit=crop" 
-                alt="Mobile Experience & Dark Mode Precision" 
-                class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105 opacity-85 group-hover:opacity-100"
-              />
-              <div class="absolute inset-0 bg-gradient-to-t from-[#101012] via-transparent to-transparent"></div>
-              <span class="absolute top-4 left-4 apple-pill-lime text-[11px]">
-                Mobile First
-              </span>
-            </div>
-            <div class="p-6">
-              <h4 class="text-base font-bold text-white mb-2 group-hover:text-[#a3e635] transition-colors">
-                Experiencia Móvil de Ultra-Lujo
-              </h4>
-              <p class="text-xs text-[#86868b] leading-relaxed">
-                Navegación ergonómica con gestos táctiles naturales, cargas instantáneas y diseño responsivo adaptado a cada pantalla.
-              </p>
-            </div>
+          <div class="mt-4 pt-3 border-t border-white/[0.06] text-[11px] font-mono text-[#a3e635]">
+            pgvector + Supabase
           </div>
+        </div>
 
-          <!-- Visual Card 3: Engineering Craft -->
-          <div class="apple-card group overflow-hidden flex flex-col justify-between">
-            <div class="relative h-60 overflow-hidden bg-[#0c0c0e]">
-              <img 
-                src="https://images.unsplash.com/photo-1498050108023-c5249f4df085?q=80&w=1000&auto=format&fit=crop" 
-                alt="Engineering Craftsmanship" 
-                class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105 opacity-85 group-hover:opacity-100"
-              />
-              <div class="absolute inset-0 bg-gradient-to-t from-[#101012] via-transparent to-transparent"></div>
-              <span class="absolute top-4 left-4 apple-pill text-[11px]">
-                Clean Code
-              </span>
+        <!-- Card 3: Voice Agents -->
+        <div class="ai-card-glow p-6 rounded-3xl flex flex-col justify-between">
+          <div class="space-y-3">
+            <div class="w-10 h-10 rounded-2xl bg-cyan-500/15 border border-cyan-500/30 flex items-center justify-center text-cyan-400 font-bold">
+              🎙️
             </div>
-            <div class="p-6">
-              <h4 class="text-base font-bold text-white mb-2 group-hover:text-[#a3e635] transition-colors">
-                Integración Pixel-Perfect
-              </h4>
-              <p class="text-xs text-[#86868b] leading-relaxed">
-                Cero discrepancias entre el prototipo y la aplicación en producción. Código TypeScript limpio estructurado por capas.
-              </p>
-            </div>
+            <h4 class="text-base font-bold text-white">Agentes de Voz AI</h4>
+            <p class="text-xs text-[#86868b] leading-relaxed">
+              Llamadas telefónicas y notas de voz hiperrealistas con ElevenLabs y WebSockets bidireccionales en tiempo real.
+            </p>
           </div>
+          <div class="mt-4 pt-3 border-t border-white/[0.06] text-[11px] font-mono text-cyan-400">
+            ElevenLabs + WebSockets
+          </div>
+        </div>
 
+        <!-- Card 4: Workflows & Integrations -->
+        <div class="ai-card-glow p-6 rounded-3xl flex flex-col justify-between">
+          <div class="space-y-3">
+            <div class="w-10 h-10 rounded-2xl bg-purple-500/15 border border-purple-500/30 flex items-center justify-center text-purple-400 font-bold">
+              ⚡
+            </div>
+            <h4 class="text-base font-bold text-white">Workflows n8n & CRM</h4>
+            <p class="text-xs text-[#86868b] leading-relaxed">
+              Conexión bidireccional con HubSpot, Notion, Google Sheets, Make y Stripe para automatizar tareas operativas de punta a punta.
+            </p>
+          </div>
+          <div class="mt-4 pt-3 border-t border-white/[0.06] text-[11px] font-mono text-purple-400">
+            n8n • Webhooks • APIs
+          </div>
         </div>
 
       </div>
@@ -707,44 +796,44 @@
   <!-- =========================================================================
        6. THE 5-STEP BLUEPRINT (Apple Process Timeline)
        ========================================================================= -->
-  <section id="proceso" class="py-24 relative z-10 bg-[#070709] border-y border-white/[0.08]">
+  <section id="proceso" class="py-16 sm:py-24 relative z-10 bg-[#070709] border-y border-white/[0.08]">
     <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
       
-      <div class="text-center max-w-2xl mx-auto mb-16">
+      <div class="text-center max-w-2xl mx-auto mb-12 sm:mb-16">
         <div class="inline-flex items-center gap-2 apple-pill mb-4">
           <span>Metodología</span>
         </div>
-        <h2 class="text-3xl sm:text-4xl font-bold text-white tracking-tight">
+        <h2 class="text-2xl sm:text-4xl font-bold text-white tracking-tight">
           El proceso de 4 semanas.
         </h2>
-        <p class="text-[#86868b] mt-3 text-sm">
+        <p class="text-[#86868b] mt-3 text-xs sm:text-sm px-2">
           Un flujo estructurado en 5 etapas para asegurar calidad y entrega puntual.
         </p>
       </div>
 
-      <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 sm:gap-8 items-start">
         
         <!-- Step Selector -->
-        <div class="lg:col-span-5 space-y-2.5" id="process-step-list">
-          <button data-step-btn="0" class="w-full text-left p-4 rounded-xl border border-white/30 bg-white/10 text-white transition-all flex items-center justify-between text-sm">
+        <div class="lg:col-span-5 space-y-2" id="process-step-list">
+          <button data-step-btn="0" class="w-full text-left p-3.5 sm:p-4 rounded-xl border border-white/30 bg-white/10 text-white transition-all flex items-center justify-between text-xs sm:text-sm">
             <span class="font-medium">01. Estrategia & Arquitectura</span>
-            <i data-lucide="chevron-right" class="w-4 h-4 text-[#a3e635]"></i>
+            <i data-lucide="chevron-right" class="w-4 h-4 text-[#a3e635] flex-shrink-0"></i>
           </button>
-          <button data-step-btn="1" class="w-full text-left p-4 rounded-xl border border-white/5 bg-white/[0.02] text-[#86868b] hover:text-white transition-all flex items-center justify-between text-sm">
+          <button data-step-btn="1" class="w-full text-left p-3.5 sm:p-4 rounded-xl border border-white/5 bg-white/[0.02] text-[#86868b] hover:text-white transition-all flex items-center justify-between text-xs sm:text-sm">
             <span class="font-medium">02. Diseño de Interfaz & UI Kit</span>
-            <i data-lucide="chevron-right" class="w-4 h-4"></i>
+            <i data-lucide="chevron-right" class="w-4 h-4 flex-shrink-0"></i>
           </button>
-          <button data-step-btn="2" class="w-full text-left p-4 rounded-xl border border-white/5 bg-white/[0.02] text-[#86868b] hover:text-white transition-all flex items-center justify-between text-sm">
+          <button data-step-btn="2" class="w-full text-left p-3.5 sm:p-4 rounded-xl border border-white/5 bg-white/[0.02] text-[#86868b] hover:text-white transition-all flex items-center justify-between text-xs sm:text-sm">
             <span class="font-medium">03. Desarrollo Frontend & Backend</span>
-            <i data-lucide="chevron-right" class="w-4 h-4"></i>
+            <i data-lucide="chevron-right" class="w-4 h-4 flex-shrink-0"></i>
           </button>
-          <button data-step-btn="3" class="w-full text-left p-4 rounded-xl border border-white/5 bg-white/[0.02] text-[#86868b] hover:text-white transition-all flex items-center justify-between text-sm">
+          <button data-step-btn="3" class="w-full text-left p-3.5 sm:p-4 rounded-xl border border-white/5 bg-white/[0.02] text-[#86868b] hover:text-white transition-all flex items-center justify-between text-xs sm:text-sm">
             <span class="font-medium">04. Rendimiento & Seguridad</span>
-            <i data-lucide="chevron-right" class="w-4 h-4"></i>
+            <i data-lucide="chevron-right" class="w-4 h-4 flex-shrink-0"></i>
           </button>
-          <button data-step-btn="4" class="w-full text-left p-4 rounded-xl border border-white/5 bg-white/[0.02] text-[#86868b] hover:text-white transition-all flex items-center justify-between text-sm">
+          <button data-step-btn="4" class="w-full text-left p-3.5 sm:p-4 rounded-xl border border-white/5 bg-white/[0.02] text-[#86868b] hover:text-white transition-all flex items-center justify-between text-xs sm:text-sm">
             <span class="font-medium">05. Despliegue Global & Soporte</span>
-            <i data-lucide="chevron-right" class="w-4 h-4"></i>
+            <i data-lucide="chevron-right" class="w-4 h-4 flex-shrink-0"></i>
           </button>
         </div>
 
@@ -759,68 +848,201 @@
   </section>
 
   <!-- =========================================================================
-       7. PORTFOLIO & CASE STUDIES
+       7. TRABAJOS DESTACADOS
        ========================================================================= -->
-  <section id="proyectos" class="py-24 relative z-10">
-    <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+  <section id="destacados" class="py-16 sm:py-24 relative z-10">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
       
-      <div class="text-center max-w-2xl mx-auto mb-12">
+      <div class="text-center max-w-2xl mx-auto mb-12 sm:mb-16">
         <div class="inline-flex items-center gap-2 apple-pill mb-4">
-          <span>Proyectos Recientes</span>
+          <span>✦ Portafolio Seleccionado</span>
         </div>
-        <h2 class="text-3xl sm:text-4xl font-bold text-white tracking-tight">
-          Trabajo seleccionado.
+        <h2 class="text-2xl sm:text-4xl md:text-5xl font-bold text-white tracking-tight">
+          Trabajos Destacados
         </h2>
+        <p class="text-[#86868b] mt-3 text-xs sm:text-sm md:text-base max-w-xl mx-auto px-2">
+          Plataformas que combinan diseño de vanguardia, experiencia de usuario y código sólido.
+        </p>
       </div>
 
-      <!-- Filter Buttons -->
-      <div class="flex flex-wrap items-center justify-center gap-2 mb-12">
-        <button data-portfolio-filter="all" class="apple-tab-btn active text-xs">Todos</button>
-        <button data-portfolio-filter="saas" class="apple-tab-btn text-xs">SaaS</button>
-        <button data-portfolio-filter="ecommerce" class="apple-tab-btn text-xs">E-Commerce</button>
-        <button data-portfolio-filter="ai" class="apple-tab-btn text-xs">Inteligencia Artificial</button>
-        <button data-portfolio-filter="landing" class="apple-tab-btn text-xs">Landing Pages</button>
-      </div>
+      <!-- Featured Grid -->
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+        
+        <!-- Platform 1 -->
+        <div class="apple-card p-5 sm:p-7 flex flex-col justify-between group">
+          <div>
+            <!-- Image Preview -->
+            <div class="relative h-44 sm:h-48 overflow-hidden rounded-2xl mb-5 bg-[#0a0a0c] border border-white/[0.06]">
+              <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?q=80&w=1000&auto=format&fit=crop" alt="Aura Systems SaaS Interface" class="w-full h-full object-cover opacity-85 group-hover:opacity-100 group-hover:scale-105 transition-all duration-700" />
+              <div class="absolute inset-0 bg-gradient-to-t from-[#101012] via-transparent to-transparent"></div>
+              <div class="absolute top-3 left-3">
+                <span class="apple-pill-lime text-[10px] font-mono">SaaS / AI Core</span>
+              </div>
+              <div class="absolute bottom-3 right-3">
+                <span class="text-[10px] font-mono text-white bg-black/60 backdrop-blur-md px-2 py-0.5 rounded-md border border-white/10">0.2s Latencia</span>
+              </div>
+            </div>
 
-      <!-- Portfolio Grid -->
-      <div id="portfolio-grid" class="grid grid-cols-1 md:grid-cols-2 gap-6">
-        <!-- Injected by app.js -->
+            <div class="flex items-center justify-between mb-2">
+              <h3 class="text-xl sm:text-2xl font-bold text-white group-hover:text-[#a3e635] transition-colors">
+                Aura Systems
+              </h3>
+              <span class="text-xs font-mono text-[#86868b]">2026</span>
+            </div>
+            
+            <p class="text-xs sm:text-sm text-[#86868b] leading-relaxed mb-5">
+              Plataforma de orquestación de agentes inteligentes en tiempo real con latencia inferior a 200ms y base de datos vectorial.
+            </p>
+
+            <div class="p-3.5 rounded-xl bg-white/[0.02] border border-white/[0.06] space-y-2 mb-5">
+              <div class="flex justify-between text-xs font-mono">
+                <span class="text-[#86868b]">Rendimiento</span>
+                <span class="text-white font-semibold">0.2s Latencia</span>
+              </div>
+              <div class="flex justify-between text-xs font-mono">
+                <span class="text-[#86868b]">Retención</span>
+                <span class="text-[#a3e635] font-semibold">+310% Crecimiento</span>
+              </div>
+              <div class="flex justify-between text-xs font-mono">
+                <span class="text-[#86868b]">Disponibilidad</span>
+                <span class="text-white font-semibold">99.99% Uptime</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="border-t border-white/[0.08] pt-4 flex items-center justify-between">
+            <span class="text-[11px] font-mono text-[#86868b]">Next.js • Supabase • Claude</span>
+            <a href="#contacto" class="apple-link text-xs">
+              <span>Ver Caso</span>
+              <span>→</span>
+            </a>
+          </div>
+        </div>
+
+        <!-- Platform 2 -->
+        <div class="apple-card p-5 sm:p-7 flex flex-col justify-between group border-white/20 bg-[#131316]">
+          <div>
+            <!-- Image Preview -->
+            <div class="relative h-44 sm:h-48 overflow-hidden rounded-2xl mb-5 bg-[#0a0a0c] border border-white/[0.06]">
+              <img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?q=80&w=1000&auto=format&fit=crop" alt="Vespera Atelier E-Commerce" class="w-full h-full object-cover opacity-85 group-hover:opacity-100 group-hover:scale-105 transition-all duration-700" />
+              <div class="absolute inset-0 bg-gradient-to-t from-[#131316] via-transparent to-transparent"></div>
+              <div class="absolute top-3 left-3">
+                <span class="apple-pill-lime text-[10px] font-mono">Luxury E-Commerce</span>
+              </div>
+              <div class="absolute bottom-3 right-3">
+                <span class="text-[10px] font-mono text-[#a3e635] bg-black/60 backdrop-blur-md px-2 py-0.5 rounded-md border border-white/10">+380% Conv.</span>
+              </div>
+            </div>
+
+            <div class="flex items-center justify-between mb-2">
+              <h3 class="text-xl sm:text-2xl font-bold text-white group-hover:text-[#a3e635] transition-colors">
+                Vespera Atelier
+              </h3>
+              <span class="text-xs font-mono text-[#a3e635]">Destacado</span>
+            </div>
+            
+            <p class="text-xs sm:text-sm text-[#86868b] leading-relaxed mb-5">
+              Experiencia inmersiva de alta costura con visualizador 3D interactivo, checkout instantáneo y sincronización Stripe.
+            </p>
+
+            <div class="p-3.5 rounded-xl bg-white/[0.02] border border-white/[0.06] space-y-2 mb-5">
+              <div class="flex justify-between text-xs font-mono">
+                <span class="text-[#86868b]">Conversión Móvil</span>
+                <span class="text-[#a3e635] font-semibold">+380% Incremento</span>
+              </div>
+              <div class="flex justify-between text-xs font-mono">
+                <span class="text-[#86868b]">Core Web Vitals</span>
+                <span class="text-white font-semibold">100/100 PageSpeed</span>
+              </div>
+              <div class="flex justify-between text-xs font-mono">
+                <span class="text-[#86868b]">Facturación Mes 1</span>
+                <span class="text-white font-semibold">Gs. 18.000M Facturados</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="border-t border-white/[0.08] pt-4 flex items-center justify-between">
+            <span class="text-[11px] font-mono text-[#86868b]">Three.js • Stripe • Edge CDN</span>
+            <a href="#contacto" class="apple-link text-xs">
+              <span>Ver Caso</span>
+              <span>→</span>
+            </a>
+          </div>
+        </div>
+
+        <!-- Platform 3 -->
+        <div class="apple-card p-5 sm:p-7 flex flex-col justify-between group">
+          <div>
+            <!-- Image Preview -->
+            <div class="relative h-44 sm:h-48 overflow-hidden rounded-2xl mb-5 bg-[#0a0a0c] border border-white/[0.06]">
+              <img src="https://images.unsplash.com/photo-1642543492481-44e81e3914a7?q=80&w=1000&auto=format&fit=crop" alt="Zenith Asset Capital Portal" class="w-full h-full object-cover opacity-85 group-hover:opacity-100 group-hover:scale-105 transition-all duration-700" />
+              <div class="absolute inset-0 bg-gradient-to-t from-[#101012] via-transparent to-transparent"></div>
+              <div class="absolute top-3 left-3">
+                <span class="apple-pill-lime text-[10px] font-mono">Fintech & Banking</span>
+              </div>
+              <div class="absolute bottom-3 right-3">
+                <span class="text-[10px] font-mono text-white bg-black/60 backdrop-blur-md px-2 py-0.5 rounded-md border border-white/10">Zero-Trust</span>
+              </div>
+            </div>
+
+            <div class="flex items-center justify-between mb-2">
+              <h3 class="text-xl sm:text-2xl font-bold text-white group-hover:text-[#a3e635] transition-colors">
+                Zenith Asset Capital
+              </h3>
+              <span class="text-xs font-mono text-[#86868b]">2026</span>
+            </div>
+            
+            <p class="text-xs sm:text-sm text-[#86868b] leading-relaxed mb-5">
+              Portal institucional para fondos de inversión privados con encriptación avanzada, auditorías de seguridad y analíticas en tiempo real.
+            </p>
+
+            <div class="p-3.5 rounded-xl bg-white/[0.02] border border-white/[0.06] space-y-2 mb-5">
+              <div class="flex justify-between text-xs font-mono">
+                <span class="text-[#86868b]">Seguridad</span>
+                <span class="text-white font-semibold">Zero-Trust RLS</span>
+              </div>
+              <div class="flex justify-between text-xs font-mono">
+                <span class="text-[#86868b]">Tiempo de Respuesta</span>
+                <span class="text-[#a3e635] font-semibold">0.18s Promedio</span>
+              </div>
+              <div class="flex justify-between text-xs font-mono">
+                <span class="text-[#86868b]">Auditoría</span>
+                <span class="text-white font-semibold">100% Pentest Ok</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="border-t border-white/[0.08] pt-4 flex items-center justify-between">
+            <span class="text-[11px] font-mono text-[#86868b]">PostgreSQL • Auth0 • React</span>
+            <a href="#contacto" class="apple-link text-xs">
+              <span>Ver Caso</span>
+              <span>→</span>
+            </a>
+          </div>
+        </div>
+
       </div>
 
     </div>
   </section>
-
-  <!-- Portfolio Modal -->
-  <div id="portfolio-modal" class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-xl hidden">
-    <div class="relative w-full max-w-xl bg-[#121214] rounded-3xl border border-white/10 shadow-2xl overflow-hidden">
-      <button id="portfolio-modal-close" class="absolute top-4 right-4 z-10 w-8 h-8 rounded-full bg-white/10 text-white flex items-center justify-center text-sm">
-        ✕
-      </button>
-      <div id="portfolio-modal-content"></div>
-    </div>
-  </div>
-
-  <!-- =========================================================================
-       8. MULTI-STEP INTAKE WIZARD
-       ========================================================================= -->
-  <section id="contacto" class="py-24 relative z-10 bg-[#070709] border-t border-white/[0.08]">
+  <section id="contacto" class="py-16 sm:py-24 relative z-10 bg-[#070709] border-t border-white/[0.08]">
     <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
       
-      <div class="text-center max-w-xl mx-auto mb-12">
+      <div class="text-center max-w-xl mx-auto mb-10 sm:mb-12">
         <div class="inline-flex items-center gap-2 apple-pill mb-4">
           <span>Contacto</span>
         </div>
-        <h2 class="text-3xl sm:text-4xl font-bold text-white tracking-tight">
+        <h2 class="text-2xl sm:text-4xl font-bold text-white tracking-tight">
           Inicia tu proyecto con Think Lab.
         </h2>
-        <p class="text-[#86868b] mt-3 text-sm">
+        <p class="text-[#86868b] mt-3 text-xs sm:text-sm px-2">
           Completa este formulario breve para coordinar una sesión estratégica con nuestro equipo de arquitectura.
         </p>
       </div>
 
-      <div class="apple-card p-6 sm:p-10 border border-white/[0.08]">
+      <div class="apple-card p-4 sm:p-8 md:p-10 border border-white/[0.08]">
         
-        <div class="mb-8">
+        <div class="mb-6 sm:mb-8">
           <div class="flex justify-between text-xs text-[#86868b] font-mono mb-2">
             <span id="intake-indicator">Paso 1 de 3</span>
             <span class="text-[#a3e635]">Confidencialidad Garantizada</span>
@@ -833,47 +1055,47 @@
         <form id="intake-form">
           
           <!-- Step 1: Goal -->
-          <div id="intake-step-1" class="space-y-5">
-            <h3 class="text-lg font-semibold text-white mb-2">¿Cuál es el objetivo principal?</h3>
-            <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
-              <label class="p-4 rounded-xl border border-white/10 bg-white/[0.02] hover:border-white/30 cursor-pointer flex items-center gap-3 transition-all">
+          <div id="intake-step-1" class="space-y-4 sm:space-y-5">
+            <h3 class="text-base sm:text-lg font-semibold text-white mb-2">¿Cuál es el objetivo principal?</h3>
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-2.5 sm:gap-3">
+              <label class="p-3.5 sm:p-4 rounded-xl border border-white/10 bg-white/[0.02] hover:border-white/30 cursor-pointer flex items-center gap-3 transition-all">
                 <input type="radio" name="goal" value="increase_sales" checked class="text-white" />
                 <span class="text-xs font-medium text-[#f5f5f7]">Aumentar Conversiones & Ventas</span>
               </label>
-              <label class="p-4 rounded-xl border border-white/10 bg-white/[0.02] hover:border-white/30 cursor-pointer flex items-center gap-3 transition-all">
+              <label class="p-3.5 sm:p-4 rounded-xl border border-white/10 bg-white/[0.02] hover:border-white/30 cursor-pointer flex items-center gap-3 transition-all">
                 <input type="radio" name="goal" value="launch_new" class="text-white" />
                 <span class="text-xs font-medium text-[#f5f5f7]">Lanzar Nuevo Producto o SaaS</span>
               </label>
-              <label class="p-4 rounded-xl border border-white/10 bg-white/[0.02] hover:border-white/30 cursor-pointer flex items-center gap-3 transition-all">
+              <label class="p-3.5 sm:p-4 rounded-xl border border-white/10 bg-white/[0.02] hover:border-white/30 cursor-pointer flex items-center gap-3 transition-all">
                 <input type="radio" name="goal" value="redesign" class="text-white" />
                 <span class="text-xs font-medium text-[#f5f5f7]">Rediseño de Marca & Plataforma</span>
               </label>
-              <label class="p-4 rounded-xl border border-white/10 bg-white/[0.02] hover:border-white/30 cursor-pointer flex items-center gap-3 transition-all">
+              <label class="p-3.5 sm:p-4 rounded-xl border border-white/10 bg-white/[0.02] hover:border-white/30 cursor-pointer flex items-center gap-3 transition-all">
                 <input type="radio" name="goal" value="ai_agents" class="text-white" />
                 <span class="text-xs font-medium text-[#f5f5f7]">Integración de Agentes de IA</span>
               </label>
             </div>
             <div class="flex justify-end pt-3">
-              <button type="button" id="intake-next-1" class="btn-apple-primary text-xs py-2 px-5">
+              <button type="button" id="intake-next-1" class="btn-apple-primary text-xs py-2 px-5 w-full sm:w-auto">
                 Siguiente Paso →
               </button>
             </div>
           </div>
 
           <!-- Step 2: Budget -->
-          <div id="intake-step-2" class="space-y-5 hidden">
-            <h3 class="text-lg font-semibold text-white mb-2">Inversión y plazo estimado</h3>
-            <div class="space-y-4">
+          <div id="intake-step-2" class="space-y-4 sm:space-y-5 hidden">
+            <h3 class="text-base sm:text-lg font-semibold text-white mb-2">Inversión y plazo estimado</h3>
+            <div class="space-y-3 sm:space-y-4">
               <div>
-                <label class="block text-xs font-mono text-[#86868b] mb-2">Rango de Inversión:</label>
+                <label class="block text-xs font-mono text-[#86868b] mb-1.5">Rango de Inversión:</label>
                 <select class="w-full p-3 rounded-xl bg-black border border-white/10 text-xs text-[#f5f5f7] focus:border-white focus:outline-none">
-                  <option value="1500_3000">$1,500 - $3,000 USD (Landing / Proyecto Inicial)</option>
-                  <option value="3000_6000" selected>$3,000 - $6,000 USD (Plataforma Completa & IA)</option>
-                  <option value="6000_plus">$6,000+ USD (Desarrollo Enterprise a Medida)</option>
+                  <option value="10m_25m">Gs. 10.000.000 - Gs. 25.000.000 (Landing / Inicial)</option>
+                  <option value="25m_50m" selected>Gs. 25.000.000 - Gs. 50.000.000 (Plataforma Completa & IA)</option>
+                  <option value="50m_plus">Gs. 50.000.000+ (Desarrollo Enterprise a Medida)</option>
                 </select>
               </div>
               <div>
-                <label class="block text-xs font-mono text-[#86868b] mb-2">Plazo de Entrega Deseado:</label>
+                <label class="block text-xs font-mono text-[#86868b] mb-1.5">Plazo de Entrega Deseado:</label>
                 <select class="w-full p-3 rounded-xl bg-black border border-white/10 text-xs text-[#f5f5f7] focus:border-white focus:outline-none">
                   <option value="urgent">Prioritario (2 a 3 semanas)</option>
                   <option value="1_month" selected>En el transcurso del mes</option>
@@ -881,7 +1103,7 @@
                 </select>
               </div>
             </div>
-            <div class="flex justify-between pt-3">
+            <div class="flex justify-between gap-3 pt-3">
               <button type="button" id="intake-back-2" class="btn-apple-secondary text-xs py-2 px-4">
                 ← Atrás
               </button>
@@ -892,8 +1114,8 @@
           </div>
 
           <!-- Step 3: Contact Info -->
-          <div id="intake-step-3" class="space-y-5 hidden">
-            <h3 class="text-lg font-semibold text-white mb-2">Información de Contacto</h3>
+          <div id="intake-step-3" class="space-y-4 sm:space-y-5 hidden">
+            <h3 class="text-base sm:text-lg font-semibold text-white mb-2">Información de Contacto</h3>
             <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
               <div>
                 <label class="block text-xs font-mono text-[#86868b] mb-1">Nombre Completo *</label>
@@ -909,7 +1131,7 @@
               </div>
             </div>
             <div class="flex justify-end pt-3">
-              <button type="submit" id="intake-submit" class="btn-apple-primary text-xs py-2.5 px-6">
+              <button type="submit" id="intake-submit" class="btn-apple-primary text-xs py-2.5 px-6 w-full sm:w-auto">
                 Enviar Solicitud
               </button>
             </div>
@@ -926,44 +1148,44 @@
   <!-- =========================================================================
        9. PRICING PACKAGES
        ========================================================================= -->
-  <section id="precios" class="py-24 relative z-10">
+  <section id="precios" class="py-16 sm:py-24 relative z-10">
     <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
       
-      <div class="text-center max-w-2xl mx-auto mb-12">
+      <div class="text-center max-w-2xl mx-auto mb-10 sm:mb-12">
         <div class="inline-flex items-center gap-2 apple-pill mb-4">
           <span>Inversión</span>
         </div>
-        <h2 class="text-3xl sm:text-4xl font-bold text-white tracking-tight">
+        <h2 class="text-2xl sm:text-4xl font-bold text-white tracking-tight">
           Estructura de precios transparente.
         </h2>
 
-        <div class="inline-flex items-center p-1 rounded-full bg-white/[0.04] border border-white/[0.08] mt-6 text-xs font-mono">
-          <button id="pricing-monthly-btn" class="px-4 py-1.5 rounded-full bg-white text-black font-semibold transition-all">
+        <div class="inline-flex items-center p-1 rounded-full bg-white/[0.04] border border-white/[0.08] mt-6 text-[11px] sm:text-xs font-mono max-w-full">
+          <button id="pricing-monthly-btn" class="px-3 sm:px-4 py-1.5 rounded-full bg-white text-black font-semibold transition-all">
             Retainer Mensual
           </button>
-          <button id="pricing-project-btn" class="px-4 py-1.5 rounded-full text-[#86868b] hover:text-white transition-all">
-            Pago Único por Proyecto
+          <button id="pricing-project-btn" class="px-3 sm:px-4 py-1.5 rounded-full text-[#86868b] hover:text-white transition-all">
+            Pago Único
           </button>
         </div>
       </div>
 
-      <div class="grid grid-cols-1 md:grid-cols-3 gap-6 items-stretch">
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-4 sm:gap-6 items-stretch">
         
         <!-- Tier 1 -->
-        <div class="apple-card p-6 flex flex-col justify-between">
+        <div class="apple-card p-5 sm:p-6 flex flex-col justify-between">
           <div>
             <span class="text-xs font-mono text-[#86868b] uppercase">Launch</span>
-            <div class="flex items-baseline gap-1 my-4">
-              <span id="price-starter" class="text-3xl font-bold text-white font-mono">$1,490</span>
+            <div class="flex items-baseline gap-1 my-3 sm:my-4">
+              <span id="price-starter" class="text-xl sm:text-2xl font-bold text-white font-mono">Gs. 5.500.000</span>
               <span class="text-xs text-[#86868b] price-period">/mes</span>
             </div>
-            <p class="text-xs text-[#86868b] mb-6">Para empresas en etapa inicial que buscan una presencia web impecable.</p>
+            <p class="text-xs text-[#86868b] mb-5 sm:mb-6">Para empresas en etapa inicial que buscan una presencia web impecable.</p>
 
-            <ul class="space-y-2.5 text-xs text-[#f5f5f7] border-t border-white/[0.08] pt-5 mb-8">
-              <li class="flex items-center gap-2"><i data-lucide="check" class="w-3.5 h-3.5 text-[#a3e635]"></i> Hasta 5 páginas personalizadas</li>
-              <li class="flex items-center gap-2"><i data-lucide="check" class="w-3.5 h-3.5 text-[#a3e635]"></i> Next.js 14 & Tailwind CSS</li>
-              <li class="flex items-center gap-2"><i data-lucide="check" class="w-3.5 h-3.5 text-[#a3e635]"></i> Core Web Vitals 95+</li>
-              <li class="flex items-center gap-2"><i data-lucide="check" class="w-3.5 h-3.5 text-[#a3e635]"></i> Despliegue en Vercel Edge</li>
+            <ul class="space-y-2 text-xs text-[#f5f5f7] border-t border-white/[0.08] pt-4 sm:pt-5 mb-6 sm:mb-8">
+              <li class="flex items-center gap-2"><i data-lucide="check" class="w-3.5 h-3.5 text-[#a3e635] flex-shrink-0"></i> Hasta 5 páginas personalizadas</li>
+              <li class="flex items-center gap-2"><i data-lucide="check" class="w-3.5 h-3.5 text-[#a3e635] flex-shrink-0"></i> Next.js 14 & Tailwind CSS</li>
+              <li class="flex items-center gap-2"><i data-lucide="check" class="w-3.5 h-3.5 text-[#a3e635] flex-shrink-0"></i> Core Web Vitals 95+</li>
+              <li class="flex items-center gap-2"><i data-lucide="check" class="w-3.5 h-3.5 text-[#a3e635] flex-shrink-0"></i> Despliegue en Vercel Edge</li>
             </ul>
           </div>
           <a href="#contacto" class="btn-apple-secondary text-xs py-2 text-center block">
@@ -972,24 +1194,24 @@
         </div>
 
         <!-- Tier 2 (Featured) -->
-        <div class="apple-card p-6 flex flex-col justify-between border-white/30 bg-[#141416]">
+        <div class="apple-card p-5 sm:p-6 flex flex-col justify-between border-white/30 bg-[#141416]">
           <div>
             <div class="flex justify-between items-center">
               <span class="text-xs font-mono text-[#a3e635] uppercase">Growth</span>
               <span class="text-[10px] font-mono bg-[#a3e635]/20 text-[#a3e635] px-2 py-0.5 rounded-full">Recomendado</span>
             </div>
-            <div class="flex items-baseline gap-1 my-4">
-              <span id="price-growth" class="text-3xl font-bold text-white font-mono">$2,990</span>
+            <div class="flex items-baseline gap-1 my-3 sm:my-4">
+              <span id="price-growth" class="text-xl sm:text-2xl font-bold text-white font-mono">Gs. 11.500.000</span>
               <span class="text-xs text-[#86868b] price-period">/mes</span>
             </div>
-            <p class="text-xs text-[#86868b] mb-6">Para marcas que buscan liderar con automatizaciones de IA y conversión continua.</p>
+            <p class="text-xs text-[#86868b] mb-5 sm:mb-6">Para marcas que buscan liderar con automatizaciones de IA y conversión continua.</p>
 
-            <ul class="space-y-2.5 text-xs text-[#f5f5f7] border-t border-white/[0.08] pt-5 mb-8">
-              <li class="flex items-center gap-2"><i data-lucide="check" class="w-3.5 h-3.5 text-[#a3e635]"></i> Todo lo incluido en Launch</li>
-              <li class="flex items-center gap-2"><i data-lucide="check" class="w-3.5 h-3.5 text-[#a3e635]"></i> Agente de IA personalizado (RAG)</li>
-              <li class="flex items-center gap-2"><i data-lucide="check" class="w-3.5 h-3.5 text-[#a3e635]"></i> Supabase PostgreSQL & Auth</li>
-              <li class="flex items-center gap-2"><i data-lucide="check" class="w-3.5 h-3.5 text-[#a3e635]"></i> Integración de pagos con Stripe</li>
-              <li class="flex items-center gap-2"><i data-lucide="check" class="w-3.5 h-3.5 text-[#a3e635]"></i> Soporte continuo prioritario</li>
+            <ul class="space-y-2 text-xs text-[#f5f5f7] border-t border-white/[0.08] pt-4 sm:pt-5 mb-6 sm:mb-8">
+              <li class="flex items-center gap-2"><i data-lucide="check" class="w-3.5 h-3.5 text-[#a3e635] flex-shrink-0"></i> Todo lo incluido en Launch</li>
+              <li class="flex items-center gap-2"><i data-lucide="check" class="w-3.5 h-3.5 text-[#a3e635] flex-shrink-0"></i> Agente de IA personalizado (RAG)</li>
+              <li class="flex items-center gap-2"><i data-lucide="check" class="w-3.5 h-3.5 text-[#a3e635] flex-shrink-0"></i> Supabase PostgreSQL & Auth</li>
+              <li class="flex items-center gap-2"><i data-lucide="check" class="w-3.5 h-3.5 text-[#a3e635] flex-shrink-0"></i> Integración de pagos con Stripe</li>
+              <li class="flex items-center gap-2"><i data-lucide="check" class="w-3.5 h-3.5 text-[#a3e635] flex-shrink-0"></i> Soporte continuo prioritario</li>
             </ul>
           </div>
           <a href="#contacto" class="btn-apple-primary text-xs py-2 text-center block">
@@ -998,20 +1220,20 @@
         </div>
 
         <!-- Tier 3 -->
-        <div class="apple-card p-6 flex flex-col justify-between">
+        <div class="apple-card p-5 sm:p-6 flex flex-col justify-between">
           <div>
             <span class="text-xs font-mono text-[#86868b] uppercase">Enterprise</span>
-            <div class="flex items-baseline gap-1 my-4">
-              <span id="price-enterprise" class="text-3xl font-bold text-white font-mono">$5,490</span>
+            <div class="flex items-baseline gap-1 my-3 sm:my-4">
+              <span id="price-enterprise" class="text-xl sm:text-2xl font-bold text-white font-mono">Gs. 21.000.000</span>
               <span class="text-xs text-[#86868b] price-period">/mes</span>
             </div>
-            <p class="text-xs text-[#86868b] mb-6">Soluciones integrales de ingeniería para marcas corporativas y productos complejos.</p>
+            <p class="text-xs text-[#86868b] mb-5 sm:mb-6">Soluciones integrales de ingeniería para marcas corporativas y productos complejos.</p>
 
-            <ul class="space-y-2.5 text-xs text-[#f5f5f7] border-t border-white/[0.08] pt-5 mb-8">
-              <li class="flex items-center gap-2"><i data-lucide="check" class="w-3.5 h-3.5 text-[#a3e635]"></i> Arquitectura Full-Stack Enterprise</li>
-              <li class="flex items-center gap-2"><i data-lucide="check" class="w-3.5 h-3.5 text-[#a3e635]"></i> Agente de Voz ElevenLabs</li>
-              <li class="flex items-center gap-2"><i data-lucide="check" class="w-3.5 h-3.5 text-[#a3e635]"></i> Auditorías de seguridad y pentesting</li>
-              <li class="flex items-center gap-2"><i data-lucide="check" class="w-3.5 h-3.5 text-[#a3e635]"></i> Ingeniero de software dedicado</li>
+            <ul class="space-y-2 text-xs text-[#f5f5f7] border-t border-white/[0.08] pt-4 sm:pt-5 mb-6 sm:mb-8">
+              <li class="flex items-center gap-2"><i data-lucide="check" class="w-3.5 h-3.5 text-[#a3e635] flex-shrink-0"></i> Arquitectura Full-Stack Enterprise</li>
+              <li class="flex items-center gap-2"><i data-lucide="check" class="w-3.5 h-3.5 text-[#a3e635] flex-shrink-0"></i> Agente de Voz ElevenLabs</li>
+              <li class="flex items-center gap-2"><i data-lucide="check" class="w-3.5 h-3.5 text-[#a3e635] flex-shrink-0"></i> Auditorías de seguridad y pentesting</li>
+              <li class="flex items-center gap-2"><i data-lucide="check" class="w-3.5 h-3.5 text-[#a3e635] flex-shrink-0"></i> Ingeniero de software dedicado</li>
             </ul>
           </div>
           <a href="#contacto" class="btn-apple-secondary text-xs py-2 text-center block">
@@ -1027,44 +1249,44 @@
   <!-- =========================================================================
        10. FAQ ACCORDION
        ========================================================================= -->
-  <section id="faq" class="py-24 relative z-10 bg-[#070709] border-t border-white/[0.08]">
+  <section id="faq" class="py-16 sm:py-24 relative z-10 bg-[#070709] border-t border-white/[0.08]">
     <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
       
-      <div class="text-center max-w-xl mx-auto mb-16">
+      <div class="text-center max-w-xl mx-auto mb-12 sm:mb-16">
         <div class="inline-flex items-center gap-2 apple-pill mb-4">
           <span>Preguntas Frecuentes</span>
         </div>
-        <h2 class="text-3xl sm:text-4xl font-bold text-white tracking-tight">
+        <h2 class="text-2xl sm:text-4xl font-bold text-white tracking-tight">
           Claridad en cada detalle.
         </h2>
       </div>
 
-      <div class="space-y-3">
+      <div class="space-y-2.5 sm:space-y-3">
         
-        <div class="faq-item apple-card p-5">
-          <button class="faq-trigger w-full flex items-center justify-between text-left focus:outline-none">
-            <span class="text-sm font-semibold text-white">¿Cuál es el tiempo de entrega de un proyecto?</span>
-            <i data-lucide="chevron-down" class="faq-icon w-4 h-4 text-[#86868b] transition-transform"></i>
+        <div class="faq-item apple-card p-4 sm:p-5">
+          <button class="faq-trigger w-full flex items-center justify-between text-left focus:outline-none gap-2">
+            <span class="text-xs sm:text-sm font-semibold text-white">¿Cuál es el tiempo de entrega de un proyecto?</span>
+            <i data-lucide="chevron-down" class="faq-icon w-4 h-4 text-[#86868b] transition-transform flex-shrink-0"></i>
           </button>
           <div class="faq-answer text-xs text-[#86868b] pt-3 leading-relaxed">
             Nuestro proceso estructurado toma un promedio de <strong>3 a 4 semanas</strong> desde el descubrimiento inicial hasta el despliegue en producción.
           </div>
         </div>
 
-        <div class="faq-item apple-card p-5">
-          <button class="faq-trigger w-full flex items-center justify-between text-left focus:outline-none">
-            <span class="text-sm font-semibold text-white">¿Cómo se integran los agentes de Inteligencia Artificial?</span>
-            <i data-lucide="chevron-down" class="faq-icon w-4 h-4 text-[#86868b] transition-transform"></i>
+        <div class="faq-item apple-card p-4 sm:p-5">
+          <button class="faq-trigger w-full flex items-center justify-between text-left focus:outline-none gap-2">
+            <span class="text-xs sm:text-sm font-semibold text-white">¿Cómo se integran los agentes de Inteligencia Artificial?</span>
+            <i data-lucide="chevron-down" class="faq-icon w-4 h-4 text-[#86868b] transition-transform flex-shrink-0"></i>
           </button>
           <div class="faq-answer text-xs text-[#86868b] pt-3 leading-relaxed">
             Conectamos modelos de última generación con bases de datos vectoriales en Supabase, permitiendo que el asistente responda con la información exacta de tu negocio de forma segura.
           </div>
         </div>
 
-        <div class="faq-item apple-card p-5">
-          <button class="faq-trigger w-full flex items-center justify-between text-left focus:outline-none">
-            <span class="text-sm font-semibold text-white">¿Quién es el dueño del código fuente y los activos?</span>
-            <i data-lucide="chevron-down" class="faq-icon w-4 h-4 text-[#86868b] transition-transform"></i>
+        <div class="faq-item apple-card p-4 sm:p-5">
+          <button class="faq-trigger w-full flex items-center justify-between text-left focus:outline-none gap-2">
+            <span class="text-xs sm:text-sm font-semibold text-white">¿Quién es el dueño del código fuente y los activos?</span>
+            <i data-lucide="chevron-down" class="faq-icon w-4 h-4 text-[#86868b] transition-transform flex-shrink-0"></i>
           </button>
           <div class="faq-answer text-xs text-[#86868b] pt-3 leading-relaxed">
             Al concluir el desarrollo, transferimos el 100% de los repositorios de GitHub, esquemas de bases de datos y accesos de hosting a tu organización.
@@ -1079,19 +1301,19 @@
   <!-- =========================================================================
        11. FINAL CONVERSION BANNER (Apple Clean)
        ========================================================================= -->
-  <section class="py-24 relative z-10">
+  <section class="py-16 sm:py-24 relative z-10">
     <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-      <div class="apple-card p-12 sm:p-16 border border-white/[0.08]">
+      <div class="apple-card p-8 sm:p-12 md:p-16 border border-white/[0.08]">
         
-        <h2 class="text-3xl sm:text-5xl font-bold text-white tracking-tight max-w-2xl mx-auto mb-4">
+        <h2 class="text-2xl sm:text-4xl md:text-5xl font-bold text-white tracking-tight max-w-2xl mx-auto mb-3 sm:mb-4">
           Construyamos algo extraordinario.
         </h2>
 
-        <p class="text-[#86868b] text-base max-w-lg mx-auto mb-8">
+        <p class="text-[#86868b] text-xs sm:text-base max-w-lg mx-auto mb-6 sm:mb-8 px-2">
           Agenda una llamada estratégica de 15 minutos para analizar los requerimientos de tu proyecto.
         </p>
 
-        <a href="#contacto" class="btn-apple-primary text-sm py-3 px-8">
+        <a href="#contacto" class="btn-apple-primary text-xs sm:text-sm py-2.5 sm:py-3 px-6 sm:px-8">
           Agendar Llamada
         </a>
 
@@ -1100,113 +1322,277 @@
   </section>
 
   <!-- =========================================================================
-       12. FOOTER (Apple Minimalist)
+       12. FOOTER (Apple Minimalist Luxury & System Status)
        ========================================================================= -->
-  <footer class="border-t border-white/[0.08] pt-12 pb-8 relative z-10 bg-black text-[#86868b] text-xs">
-    <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
-      <div class="grid grid-cols-2 md:grid-cols-4 gap-8 mb-10">
+  <footer class="border-t border-white/[0.08] pt-14 sm:pt-16 pb-10 relative z-10 bg-black text-[#86868b] text-xs">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+      
+      <!-- Main Grid -->
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-12 gap-8 lg:gap-10 mb-12 sm:mb-16">
         
-        <div class="col-span-2 space-y-2">
-          <div class="text-sm font-semibold text-white">Think Lab<span class="text-[#a3e635]">.</span></div>
-          <p class="text-xs text-[#86868b] max-w-xs">
-            Agencia de ingeniería web de alta gama y sistemas de inteligencia artificial.
+        <!-- Brand & Vision (5 cols on lg) -->
+        <div class="lg:col-span-5 space-y-4">
+          <div class="flex items-center gap-2">
+            <a href="#" class="text-base font-semibold tracking-tight text-white hover:opacity-90 transition-opacity">
+              Think Lab<span class="text-[#a3e635]">.</span>
+            </a>
+          </div>
+          
+          <p class="text-xs text-[#86868b] max-w-sm leading-relaxed">
+            Estudio de ingeniería digital de alta gama y arquitecturas de inteligencia artificial. Construimos plataformas rápidas, sobrias y diseñadas para escalar.
           </p>
+
+          <!-- Live Status Beacon -->
+          <div class="inline-flex items-center gap-2.5 px-3 py-1.5 rounded-full bg-white/[0.03] border border-white/[0.08] text-[11px] font-mono text-[#f5f5f7]">
+            <span class="relative flex h-2 w-2">
+              <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#a3e635] opacity-75"></span>
+              <span class="relative inline-flex rounded-full h-2 w-2 bg-[#a3e635] beacon-glow"></span>
+            </span>
+            <span>Sistemas Operativos • Latencia Edge &lt; 15ms</span>
+          </div>
+
+          <!-- Direct WhatsApp Action -->
+          <div class="pt-2">
+            <a href="https://wa.me/595983463553?text=Hola%20Think%20Lab.%2C%20quiero%20consultar%20sobre%20un%20proyecto%20web" target="_blank" rel="noopener noreferrer" class="btn-apple-secondary text-xs py-2 px-4 inline-flex items-center gap-2 hover:text-[#25D366] hover:border-[#25D366]/40 transition-all">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-4 h-4 text-[#25D366] flex-shrink-0">
+                <path d="M12.04 2c-5.46 0-9.91 4.45-9.91 9.91 0 1.75.46 3.45 1.32 4.95L2.05 22l5.25-1.38c1.45.79 3.08 1.21 4.74 1.21 5.46 0 9.91-4.45 9.91-9.91 0-2.65-1.03-5.14-2.9-7.01A9.816 9.816 0 0 0 12.04 2zm.01 1.67c2.2 0 4.26.86 5.82 2.42a8.225 8.225 0 0 1 2.41 5.83c0 4.54-3.7 8.24-8.24 8.24-1.48 0-2.93-.4-4.2-1.15l-.3-.18-3.12.82.83-3.04-.2-.31a8.196 8.196 0 0 1-1.26-4.38c0-4.54 3.7-8.24 8.24-8.24zm4.52 11.66c-.25-.13-1.47-.72-1.7-.81-.23-.08-.39-.13-.56.13-.17.25-.64.81-.79.97-.14.17-.29.19-.54.06-.25-.13-1.06-.39-2.03-1.25-.75-.67-1.26-1.5-1.41-1.75-.14-.25-.02-.38.11-.51.11-.11.25-.29.37-.44.13-.14.17-.25.25-.42.08-.17.04-.31-.02-.44-.06-.13-.56-1.34-.76-1.84-.2-.49-.4-.42-.56-.43h-.47c-.17 0-.44.06-.67.31-.23.25-.88.86-.88 2.1 0 1.24.9 2.44 1.03 2.61.13.17 1.78 2.71 4.3 3.8.6.26 1.07.41 1.44.53.61.19 1.16.17 1.6.1.49-.07 1.47-.6 1.68-1.18.21-.58.21-1.07.14-1.18-.06-.11-.23-.17-.48-.29z"/>
+              </svg>
+              <span>WhatsApp Directo: +595 983 463553</span>
+            </a>
+          </div>
         </div>
 
-        <div>
-          <h4 class="font-medium text-white mb-3">Navegación</h4>
-          <ul class="space-y-1.5">
-            <li><a href="#servicios" class="hover:text-white transition-colors">Servicios</a></li>
-            <li><a href="#calculadora" class="hover:text-white transition-colors">Calculadora ROI</a></li>
-            <li><a href="#proceso" class="hover:text-white transition-colors">Metodología</a></li>
-            <li><a href="#proyectos" class="hover:text-white transition-colors">Proyectos</a></li>
+        <!-- Col 1: Soluciones (2 cols) -->
+        <div class="lg:col-span-2 space-y-3">
+          <h4 class="font-semibold text-white tracking-tight">Capacidades</h4>
+          <ul class="space-y-2 text-xs">
+            <li><a href="#servicios" class="hover:text-white transition-colors">Ingeniería Web</a></li>
+            <li><a href="#servicios" class="hover:text-white transition-colors">Agentes de IA</a></li>
+            <li><a href="#servicios" class="hover:text-white transition-colors">Headless Commerce</a></li>
+            <li><a href="#servicios" class="hover:text-white transition-colors">Next.js & Supabase</a></li>
+            <li><a href="#servicios" class="hover:text-white transition-colors">Core Web Vitals</a></li>
           </ul>
         </div>
 
-        <div>
-          <h4 class="font-medium text-white mb-3">Contacto</h4>
-          <ul class="space-y-1.5">
+        <!-- Col 2: Explorar (2 cols) -->
+        <div class="lg:col-span-2 space-y-3">
+          <h4 class="font-semibold text-white tracking-tight">Explorar</h4>
+          <ul class="space-y-2 text-xs">
+            <li><a href="#calculadora" class="hover:text-white transition-colors">Calculadora ROI</a></li>
+            <li><a href="#proceso" class="hover:text-white transition-colors">Metodología 5 Fases</a></li>
+            <li><a href="#destacados" class="hover:text-white transition-colors">Trabajos Destacados</a></li>
+            <li><a href="#precios" class="hover:text-white transition-colors">Paquetes de Inversión</a></li>
+            <li><a href="#faq" class="hover:text-white transition-colors">Preguntas Frecuentes</a></li>
+            <li><a href="/admin" class="hover:text-[#a3e635] text-white/70 transition-colors flex items-center gap-1 font-mono text-[11px]"><span>Panel Métricas</span><span class="text-[9px] bg-white/10 px-1 py-0.5 rounded text-[#a3e635]">Live</span></a></li>
+          </ul>
+        </div>
+
+        <!-- Col 3: Contacto & Info (3 cols) -->
+        <div class="lg:col-span-3 space-y-3">
+          <h4 class="font-semibold text-white tracking-tight">Contacto</h4>
+          <ul class="space-y-2 text-xs">
             <li>
-              <a href="https://wa.me/595983463553?text=Hola%20Think%20Lab.%2C%20quiero%20consultar%20sobre%20un%20proyecto%20web" target="_blank" rel="noopener noreferrer" class="hover:text-[#25D366] transition-colors flex items-center gap-1.5">
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-3.5 h-3.5 text-[#25D366]">
-                  <path d="M12.04 2c-5.46 0-9.91 4.45-9.91 9.91 0 1.75.46 3.45 1.32 4.95L2.05 22l5.25-1.38c1.45.79 3.08 1.21 4.74 1.21 5.46 0 9.91-4.45 9.91-9.91 0-2.65-1.03-5.14-2.9-7.01A9.816 9.816 0 0 0 12.04 2zm.01 1.67c2.2 0 4.26.86 5.82 2.42a8.225 8.225 0 0 1 2.41 5.83c0 4.54-3.7 8.24-8.24 8.24-1.48 0-2.93-.4-4.2-1.15l-.3-.18-3.12.82.83-3.04-.2-.31a8.196 8.196 0 0 1-1.26-4.38c0-4.54 3.7-8.24 8.24-8.24zm4.52 11.66c-.25-.13-1.47-.72-1.7-.81-.23-.08-.39-.13-.56.13-.17.25-.64.81-.79.97-.14.17-.29.19-.54.06-.25-.13-1.06-.39-2.03-1.25-.75-.67-1.26-1.5-1.41-1.75-.14-.25-.02-.38.11-.51.11-.11.25-.29.37-.44.13-.14.17-.25.25-.42.08-.17.04-.31-.02-.44-.06-.13-.56-1.34-.76-1.84-.2-.49-.4-.42-.56-.43h-.47c-.17 0-.44.06-.67.31-.23.25-.88.86-.88 2.1 0 1.24.9 2.44 1.03 2.61.13.17 1.78 2.71 4.3 3.8.6.26 1.07.41 1.44.53.61.19 1.16.17 1.6.1.49-.07 1.47-.6 1.68-1.18.21-.58.21-1.07.14-1.18-.06-.11-.23-.17-.48-.29z"/>
-                </svg>
-                <span>WhatsApp: +595 983 463553</span>
+              <a href="mailto:hola@thinklab.agency" class="hover:text-white transition-colors flex items-center gap-2">
+                <i data-lucide="mail" class="w-3.5 h-3.5 text-[#86868b]"></i>
+                <span>hola@thinklab.agency</span>
               </a>
             </li>
-            <li><a href="mailto:hola@thinklab.agency" class="hover:text-white transition-colors">hola@thinklab.agency</a></li>
-            <li><a href="#" class="hover:text-white transition-colors">Privacidad</a></li>
-            <li><a href="#" class="hover:text-white transition-colors">Términos</a></li>
+            <li class="flex items-center gap-2 text-[#86868b]">
+              <i data-lucide="map-pin" class="w-3.5 h-3.5 text-[#86868b]"></i>
+              <span>Asunción, Paraguay • Global</span>
+            </li>
+            <li class="flex items-center gap-2 text-[#86868b]">
+              <i data-lucide="clock" class="w-3.5 h-3.5 text-[#86868b]"></i>
+              <span>Lun - Vie: 08:00 - 19:00 GMT-4</span>
+            </li>
+            <li class="pt-2">
+              <a href="#contacto" class="btn-apple-lime text-xs py-2 px-3.5 inline-flex items-center justify-center gap-1.5 w-full sm:w-auto shadow-md">
+                <span>Agendar reunión estratégica</span>
+                <span>→</span>
+              </a>
+            </li>
           </ul>
         </div>
 
       </div>
 
-      <div class="border-t border-white/[0.06] pt-6 flex flex-col sm:flex-row items-center justify-between gap-3 text-[11px]">
-        <span>© 2026 Think Lab. Todos los derechos reservados.</span>
-        <span>Diseñado con precisión en Next.js & TypeScript.</span>
+      <!-- Tech Stack Ticker -->
+      <div class="border-t border-white/[0.06] py-5 flex flex-wrap items-center justify-between gap-4 text-[11px] font-mono text-[#86868b]">
+        <span class="text-white/40 uppercase tracking-wider text-[10px]">Stack de Alto Rendimiento:</span>
+        <div class="flex flex-wrap items-center gap-3 sm:gap-6">
+          <span class="hover:text-white transition-colors">Next.js 14</span>
+          <span>•</span>
+          <span class="hover:text-white transition-colors">TypeScript</span>
+          <span>•</span>
+          <span class="hover:text-white transition-colors">Supabase</span>
+          <span>•</span>
+          <span class="hover:text-white transition-colors">Claude AI</span>
+          <span>•</span>
+          <span class="hover:text-white transition-colors">Tailwind CSS</span>
+          <span>•</span>
+          <span class="hover:text-white transition-colors">Vercel Edge</span>
+        </div>
       </div>
+
+      <!-- Sub-Footer -->
+      <div class="border-t border-white/[0.06] pt-6 flex flex-col sm:flex-row items-center justify-between gap-3 text-[11px] text-center sm:text-left">
+        <div>
+          <span>© 2026 Think Lab. Todos los derechos reservados.</span>
+        </div>
+        
+        <div class="flex items-center gap-4 text-[#86868b]">
+          <a href="#" class="hover:text-white transition-colors">Privacidad</a>
+          <span>•</span>
+          <a href="#" class="hover:text-white transition-colors">Términos</a>
+          <span>•</span>
+          <a href="#" class="hover:text-white transition-colors">Seguridad</a>
+        </div>
+      </div>
+
     </div>
   </footer>
 
   <!-- =========================================================================
-       13. FLOATING MINIMALIST THINKBOT AI CHAT WIDGET
+       THINK BOT AI - FLOATING CHAT & BOOKING AGENT
        ========================================================================= -->
-  <div class="fixed bottom-6 right-6 z-50">
+  <div id="thinkbot-container" class="fixed bottom-5 right-4 sm:right-6 z-50 flex flex-col items-end">
     
-    <!-- Trigger Button -->
-    <button id="chat-toggle-btn" class="w-12 h-12 rounded-full bg-[#1c1c1e] text-white border border-white/20 flex items-center justify-center hover:scale-105 transition-all shadow-xl">
-      <i data-lucide="message-square" class="w-5 h-5"></i>
-    </button>
-
-    <!-- Chat Window -->
-    <div id="chat-window" class="chat-window hidden absolute bottom-16 right-0 w-[88vw] sm:w-80 rounded-2xl bg-[#121214]/95 backdrop-blur-2xl border border-white/10 shadow-2xl overflow-hidden mb-2">
+    <!-- Floating Chat Window (Hidden by default) -->
+    <div id="thinkbot-window" class="hidden mb-3 w-[calc(100vw-2rem)] sm:w-[400px] h-[540px] max-h-[85vh] bg-[#0c0c0e]/95 backdrop-blur-2xl border border-white/10 rounded-3xl shadow-2xl flex flex-col overflow-hidden transition-all duration-300 transform scale-95 opacity-0">
       
-      <!-- Header -->
-      <div class="p-3.5 bg-black/60 border-b border-white/[0.08] flex items-center justify-between">
-        <div class="flex items-center gap-2">
-          <span class="w-2 h-2 rounded-full bg-[#a3e635]"></span>
-          <span class="text-xs font-semibold text-white">ThinkBot AI</span>
-        </div>
-        <button id="chat-close-btn" class="text-xs text-[#86868b] hover:text-white">
-          ✕
-        </button>
-      </div>
-
-      <!-- Quick Chips -->
-      <div class="p-2.5 bg-black/40 border-b border-white/[0.06] flex gap-1.5 overflow-x-auto text-[10px] font-mono">
-        <button data-chat-prompt="¿Cuánto cuesta un proyecto?" class="whitespace-nowrap px-2.5 py-1 rounded-full bg-white/[0.04] text-[#86868b] hover:text-white border border-white/5">
-          Precios
-        </button>
-        <button data-chat-prompt="¿Cuánto tardan en entregar?" class="whitespace-nowrap px-2.5 py-1 rounded-full bg-white/[0.04] text-[#86868b] hover:text-white border border-white/5">
-          Plazos
-        </button>
-        <button data-chat-prompt="¿Qué incluye la integración de IA?" class="whitespace-nowrap px-2.5 py-1 rounded-full bg-white/[0.04] text-[#86868b] hover:text-white border border-white/5">
-          Agentes IA
-        </button>
-      </div>
-
-      <!-- Message list -->
-      <div id="chat-messages" class="p-3.5 h-64 overflow-y-auto space-y-2.5 text-xs">
-        <div class="flex justify-start">
-          <div class="bg-[#1c1c1e] text-[#f5f5f7] border border-white/10 max-w-[85%] rounded-2xl px-3.5 py-2">
-            <div class="text-[9px] font-mono text-[#a3e635] font-semibold mb-0.5">THINKBOT AI</div>
-            Hola. ¿En qué podemos asesorarte sobre ingeniería web o agentes de IA?
+      <!-- Chat Header -->
+      <div class="px-4 py-3.5 bg-white/[0.03] border-b border-white/[0.08] flex items-center justify-between">
+        <div class="flex items-center gap-3">
+          <div class="relative w-8 h-8 rounded-full bg-gradient-to-tr from-black to-[#1a1a1e] border border-white/20 flex items-center justify-center text-sm shadow-inner">
+            <span class="text-[#a3e635] font-bold font-mono">✦</span>
+            <span class="absolute bottom-0 right-0 w-2.5 h-2.5 rounded-full bg-[#a3e635] ring-2 ring-black"></span>
+          </div>
+          <div>
+            <div class="flex items-center gap-2">
+              <h3 class="text-xs font-bold text-white tracking-tight">Think Bot AI</h3>
+              <span class="text-[9px] font-mono bg-[#a3e635]/15 text-[#a3e635] px-1.5 py-0.2 rounded border border-[#a3e635]/30">Agente Activo</span>
+            </div>
+            <p class="text-[10px] text-[#86868b] font-mono">Ingeniería & Reserva de Citas</p>
           </div>
         </div>
+
+        <div class="flex items-center gap-1.5">
+          <button id="thinkbot-reset-btn" title="Nueva consulta" class="w-7 h-7 rounded-full bg-white/5 hover:bg-white/10 text-[#86868b] hover:text-white flex items-center justify-center transition-colors text-xs" aria-label="Reiniciar conversación">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-3.5 h-3.5">
+              <path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"/>
+              <path d="M3 3v5h5"/>
+            </svg>
+          </button>
+          <button id="thinkbot-close-btn" class="w-7 h-7 rounded-full bg-white/5 hover:bg-white/10 text-[#86868b] hover:text-white flex items-center justify-center transition-colors text-xs" aria-label="Cerrar chat">
+            ✕
+          </button>
+        </div>
       </div>
 
-      <!-- Input bar -->
-      <div class="p-2.5 bg-black/50 border-t border-white/[0.08] flex items-center gap-2">
-        <input type="text" id="chat-input" placeholder="Pregunta lo que desees..." class="flex-1 bg-white/[0.04] border border-white/10 rounded-xl px-3 py-1.5 text-xs text-white focus:outline-none focus:border-white/30" />
-        <button id="chat-send-btn" class="p-1.5 rounded-xl bg-white text-black hover:bg-[#f5f5f7]">
-          <i data-lucide="send" class="w-3.5 h-3.5"></i>
+      <!-- Chat Messages Scroll Container -->
+      <div id="thinkbot-messages" class="flex-1 p-4 overflow-y-auto space-y-3 text-xs">
+        
+        <!-- Welcome Message from Bot -->
+        <div class="flex items-start gap-2.5">
+          <div class="w-6 h-6 rounded-full bg-white/10 border border-white/15 flex items-center justify-center flex-shrink-0 text-[10px] text-[#a3e635] font-mono">
+            ✦
+          </div>
+          <div class="max-w-[85%] bg-white/[0.05] border border-white/[0.08] rounded-2xl rounded-tl-sm p-3 text-[#f5f5f7] leading-relaxed space-y-2">
+            <p>¡Hola! Es un gusto saludarte. Soy el asesor de atención técnica y comercial de <strong>ThinkLab</strong> (<a href="https://thinklabpy.online/" target="_blank" rel="noopener" class="text-[#a3e635] underline font-medium">thinklabpy.online</a>).</p>
+            <p class="text-[#86868b]">Soy experto en <strong>programación web</strong>, <strong>diseño UI/UX y apps móviles</strong>, y <strong>automatización de chatbots con IA</strong>. Estoy aquí para entender tus requerimientos y recomendarte las mejores alternativas.</p>
+            <p class="text-white font-medium">¿En qué proyecto o solución te gustaría que trabajemos hoy?</p>
+          </div>
+        </div>
+
+        <!-- Quick Action Prompt Chips -->
+        <div id="thinkbot-chips" class="flex flex-wrap gap-1.5 pt-1 pl-8">
+          <button class="thinkbot-chip" data-chip="🚀 Desarrollo Web & Software">🚀 Desarrollo Web & Software</button>
+          <button class="thinkbot-chip" data-chip="🤖 Chatbots & Agentes de IA">🤖 Chatbots & Agentes de IA</button>
+          <button class="thinkbot-chip" data-chip="📱 Diseño de Apps Móviles">📱 Diseño de Apps Móviles</button>
+          <button class="thinkbot-chip" data-chip="🗓️ Agendar llamada de negocios">🗓️ Agendar llamada de negocios</button>
+        </div>
+
+      </div>
+
+      <!-- Inline Booking Drawer / Modal Container -->
+      <div id="thinkbot-booking-drawer" class="hidden px-4 py-3 bg-[#141418] border-t border-white/10 space-y-2.5 text-xs">
+        <div class="flex items-center justify-between text-[11px] font-mono text-white">
+          <span class="flex items-center gap-1.5 text-[#a3e635]">
+            <i data-lucide="calendar" class="w-3.5 h-3.5"></i>
+            <span>Agendar Llamada de Negocios (15 a 25 min)</span>
+          </span>
+          <button id="thinkbot-cancel-booking" class="text-[#86868b] hover:text-white text-[10px]">Cancelar</button>
+        </div>
+        
+        <div class="grid grid-cols-2 gap-2">
+          <input type="text" id="booking-name" placeholder="Tu nombre" class="w-full p-2 rounded-xl bg-black/60 border border-white/10 text-white text-[11px] focus:border-white focus:outline-none" />
+          <input type="email" id="booking-email" placeholder="Tu correo" class="w-full p-2 rounded-xl bg-black/60 border border-white/10 text-white text-[11px] focus:border-white focus:outline-none" />
+        </div>
+
+        <div class="grid grid-cols-2 gap-2">
+          <input type="date" id="booking-date" class="w-full p-2 rounded-xl bg-black/60 border border-white/10 text-white text-[11px] focus:border-white focus:outline-none" />
+          <select id="booking-time" class="w-full p-2 rounded-xl bg-black/60 border border-white/10 text-white text-[11px] focus:border-white focus:outline-none">
+            <option value="09:00">09:00 AM</option>
+            <option value="11:00">11:00 AM</option>
+            <option value="14:30" selected>02:30 PM</option>
+            <option value="16:00">04:00 PM</option>
+            <option value="17:30">05:30 PM</option>
+          </select>
+        </div>
+
+        <button id="booking-submit-btn" class="w-full btn-apple-lime text-black font-semibold text-xs py-2 rounded-xl flex items-center justify-center gap-1.5 shadow-lg">
+          <span>Confirmar Llamada de Negocios</span>
+          <span>→</span>
         </button>
       </div>
+
+      <!-- Chat Input Bar -->
+      <form id="thinkbot-form" class="p-3 bg-black/60 border-t border-white/[0.08] flex items-center gap-2">
+        <input 
+          type="text" 
+          id="thinkbot-input" 
+          placeholder="Escribe tu consulta o pide agendar..." 
+          autocomplete="off"
+          class="flex-1 bg-white/[0.04] border border-white/10 rounded-xl px-3 py-2.5 text-xs text-white placeholder-[#86868b] focus:outline-none focus:border-white/30"
+        />
+        <button 
+          type="submit" 
+          id="thinkbot-send-btn" 
+          class="w-9 h-9 rounded-xl bg-[#a3e635] text-black hover:bg-[#bef264] flex items-center justify-center font-bold text-xs transition-transform active:scale-95 flex-shrink-0 shadow-md"
+          aria-label="Enviar mensaje"
+        >
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="w-4 h-4">
+            <line x1="22" y1="2" x2="11" y2="13"></line>
+            <polygon points="22 2 15 22 11 13 2 9 22 2"></polygon>
+          </svg>
+        </button>
+      </form>
 
     </div>
 
+    <!-- Floating Toggle Button -->
+    <button 
+      id="thinkbot-toggle-btn" 
+      class="group relative flex items-center gap-2.5 bg-[#121214] hover:bg-[#1a1a1e] text-white border border-white/15 px-4 py-3 rounded-full shadow-2xl transition-all duration-300 hover:scale-105 active:scale-95"
+      aria-label="Abrir Think Bot AI"
+    >
+      <div class="relative flex items-center justify-center">
+        <span class="w-6 h-6 rounded-full bg-[#a3e635]/20 text-[#a3e635] flex items-center justify-center font-mono font-bold text-xs">✦</span>
+        <span class="absolute -top-0.5 -right-0.5 w-2 h-2 rounded-full bg-[#a3e635] animate-ping"></span>
+      </div>
+      <div class="text-left leading-tight hidden sm:block">
+        <div class="text-xs font-semibold text-white flex items-center gap-1.5">
+          <span>Think Bot AI</span>
+          <span class="w-1.5 h-1.5 rounded-full bg-[#a3e635]"></span>
+        </div>
+        <div class="text-[10px] text-[#86868b] font-mono">Agendar cita o consultar</div>
+      </div>
+    </button>
+
   </div>
+
+  <!-- Global Toast Notifications Container -->
+  <div id="toast-container" class="fixed bottom-5 left-1/2 -translate-x-1/2 z-50 flex flex-col items-center gap-2 pointer-events-none"></div>
 
   <!-- Main JavaScript Controller -->
   <script src="app.js"></script>

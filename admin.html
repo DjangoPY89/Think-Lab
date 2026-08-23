@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html lang="es" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Think Lab. | Panel de Control & Métricas</title>
+  
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  
+  <!-- Lucide Icons CDN -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+  
+  <!-- Global Stylesheet -->
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body class="bg-black text-[#f5f5f7] min-h-screen antialiased flex flex-col">
+
+  <!-- =========================================================================
+       ADMIN HEADER (Apple Glass)
+       ========================================================================= -->
+  <header class="sticky top-0 z-40 bg-black/80 backdrop-blur-xl border-b border-white/[0.08] py-3.5 px-4 sm:px-8">
+    <div class="max-w-7xl mx-auto flex items-center justify-between">
+      
+      <!-- Brand & Title -->
+      <div class="flex items-center gap-3">
+        <a href="/" class="text-sm font-semibold tracking-tight text-white hover:opacity-80 transition-opacity">
+          Think Lab<span class="text-[#a3e635]">.</span>
+        </a>
+        <span class="text-white/20">/</span>
+        <span class="text-xs font-mono text-[#86868b]">Control Center</span>
+      </div>
+
+      <!-- Quick Actions -->
+      <div class="flex items-center gap-3">
+        <div class="hidden sm:inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/[0.03] border border-white/[0.08] text-[11px] font-mono text-[#86868b]">
+          <span class="w-2 h-2 rounded-full bg-[#a3e635] beacon-glow"></span>
+          <span>Motor SQLite Activo</span>
+        </div>
+        <button id="refresh-btn" class="btn-apple-secondary text-xs py-1.5 px-3 flex items-center gap-1.5">
+          <i data-lucide="refresh-cw" class="w-3.5 h-3.5"></i>
+          <span>Actualizar</span>
+        </button>
+        <a href="/" class="btn-apple-primary text-xs py-1.5 px-3.5 flex items-center gap-1">
+          <span>Ver Sitio Web</span>
+          <span>→</span>
+        </a>
+      </div>
+
+    </div>
+  </header>
+
+  <!-- =========================================================================
+       MAIN DASHBOARD CONTAINER
+       ========================================================================= -->
+  <main class="flex-1 max-w-7xl w-full mx-auto px-4 sm:px-8 py-8 space-y-8">
+    
+    <!-- Title & Subtitle -->
+    <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+      <div>
+        <h1 class="text-2xl sm:text-3xl font-bold text-white tracking-tight">
+          Métricas & Solicitudes de Proyectos
+        </h1>
+        <p class="text-xs sm:text-sm text-[#86868b] mt-1">
+          Panel de administración en tiempo real de prospectos y auditorías ROI.
+        </p>
+      </div>
+
+      <div class="flex items-center gap-2">
+        <button id="filter-all" class="apple-tab-btn active text-xs">Todos</button>
+        <button id="filter-new" class="apple-tab-btn text-xs">Nuevos</button>
+        <button id="filter-contacted" class="apple-tab-btn text-xs">Contactados</button>
+        <button id="filter-closed" class="apple-tab-btn text-xs">Cerrados</button>
+      </div>
+    </div>
+
+    <!-- =======================================================================
+         KPI METRICS CARDS (Visitors & Business Metrics)
+         ======================================================================= -->
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+      
+      <!-- Card 1: Total Visits -->
+      <div class="apple-card p-5 border border-white/[0.08] bg-[#111113]">
+        <div class="flex items-center justify-between text-[#86868b] mb-2">
+          <span class="text-xs font-mono uppercase tracking-wider">Visitantes Totales</span>
+          <i data-lucide="eye" class="w-4 h-4 text-[#a3e635]"></i>
+        </div>
+        <div id="kpi-total-visits" class="text-2xl sm:text-3xl font-bold text-white font-mono">
+          -
+        </div>
+        <div class="text-[11px] text-[#86868b] mt-2 flex items-center justify-between">
+          <span id="kpi-today-visits" class="text-[#a3e635] font-semibold">+0 visitas hoy</span>
+          <span class="font-mono text-[10px]">Landing Page</span>
+        </div>
+      </div>
+
+      <!-- Card 2: Unique Visitors -->
+      <div class="apple-card p-5 border border-white/[0.08]">
+        <div class="flex items-center justify-between text-[#86868b] mb-2">
+          <span class="text-xs font-mono uppercase tracking-wider">Visitantes Únicos</span>
+          <i data-lucide="fingerprint" class="w-4 h-4 text-[#a3e635]"></i>
+        </div>
+        <div id="kpi-unique-visitors" class="text-2xl sm:text-3xl font-bold text-white font-mono">
+          -
+        </div>
+        <div class="text-[11px] text-[#86868b] mt-2">
+          Dispositivos únicos detectados
+        </div>
+      </div>
+
+      <!-- Card 3: Total Leads -->
+      <div class="apple-card p-5 border border-white/[0.08]">
+        <div class="flex items-center justify-between text-[#86868b] mb-2">
+          <span class="text-xs font-mono uppercase tracking-wider">Prospectos (Leads)</span>
+          <i data-lucide="users" class="w-4 h-4 text-[#a3e635]"></i>
+        </div>
+        <div id="kpi-total-leads" class="text-2xl sm:text-3xl font-bold text-white font-mono">
+          -
+        </div>
+        <div class="text-[11px] text-[#86868b] mt-2 flex items-center gap-1">
+          <span id="kpi-new-leads" class="text-[#a3e635] font-semibold">0 nuevos</span>
+          <span>en seguimiento</span>
+        </div>
+      </div>
+
+      <!-- Card 4: Total ROI Audits -->
+      <div class="apple-card p-5 border border-white/[0.08]">
+        <div class="flex items-center justify-between text-[#86868b] mb-2">
+          <span class="text-xs font-mono uppercase tracking-wider">Auditorías ROI</span>
+          <i data-lucide="calculator" class="w-4 h-4 text-[#a3e635]"></i>
+        </div>
+        <div id="kpi-total-audits" class="text-2xl sm:text-3xl font-bold text-white font-mono">
+          -
+        </div>
+        <div class="text-[11px] text-[#86868b] mt-2">
+          Evaluaciones calculadas
+        </div>
+      </div>
+
+      <!-- Card 5: Avg Audit Ticket -->
+      <div class="apple-card p-5 border border-white/[0.08]">
+        <div class="flex items-center justify-between text-[#86868b] mb-2">
+          <span class="text-xs font-mono uppercase tracking-wider">Ticket Promedio (Gs.)</span>
+          <i data-lucide="trending-up" class="w-4 h-4 text-[#a3e635]"></i>
+        </div>
+        <div id="kpi-avg-ticket" class="text-xl sm:text-2xl font-bold text-white font-mono truncate">
+          -
+        </div>
+        <div class="text-[11px] text-[#86868b] mt-2">
+          Escala de valor en Paraguay
+        </div>
+      </div>
+
+      <!-- Card 6: Avg Traffic -->
+      <div class="apple-card p-5 border border-white/[0.08]">
+        <div class="flex items-center justify-between text-[#86868b] mb-2">
+          <span class="text-xs font-mono uppercase tracking-wider">Tráfico Promedio</span>
+          <i data-lucide="activity" class="w-4 h-4 text-[#a3e635]"></i>
+        </div>
+        <div id="kpi-avg-traffic" class="text-2xl sm:text-3xl font-bold text-white font-mono">
+          -
+        </div>
+        <div class="text-[11px] text-[#86868b] mt-2">
+          Visitas estimadas por cliente
+        </div>
+      </div>
+
+    </div>
+
+    <!-- =======================================================================
+         LEADS TABLE SECTION
+         ======================================================================= -->
+    <div class="apple-card border border-white/[0.08] overflow-hidden">
+      
+      <div class="p-5 border-b border-white/[0.08] flex items-center justify-between">
+        <div class="flex items-center gap-2">
+          <h2 class="text-base font-semibold text-white">Bandeja de Prospectos</h2>
+          <span id="leads-count-badge" class="apple-pill-lime text-[11px] font-mono font-bold px-2 py-0.5">0</span>
+        </div>
+        <span class="text-xs text-[#86868b] font-mono hidden sm:inline">Persistencia SQLite • data/thinklab.db</span>
+      </div>
+
+      <!-- Table Container -->
+      <div class="overflow-x-auto">
+        <table class="w-full text-left text-xs text-[#86868b]">
+          <thead class="bg-white/[0.02] text-[#86868b] font-mono uppercase text-[11px] border-b border-white/[0.06]">
+            <tr>
+              <th class="p-4 font-medium">ID</th>
+              <th class="p-4 font-medium">Cliente / Empresa</th>
+              <th class="p-4 font-medium">Contacto</th>
+              <th class="p-4 font-medium">Servicios</th>
+              <th class="p-4 font-medium">Presupuesto (Gs.)</th>
+              <th class="p-4 font-medium">Estado</th>
+              <th class="p-4 font-medium">Fecha</th>
+              <th class="p-4 font-medium text-right">Acciones</th>
+            </tr>
+          </thead>
+          <tbody id="leads-table-body" class="divide-y divide-white/[0.04]">
+            <!-- Injected via admin.js -->
+            <tr>
+              <td colspan="8" class="p-8 text-center text-xs text-[#86868b]">
+                <div class="w-6 h-6 border-2 border-white/20 border-t-[#a3e635] rounded-full animate-spin mx-auto mb-2"></div>
+                Cargando prospectos...
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- =======================================================================
+         APPOINTMENTS & STRATEGY CALLS SECTION (Think Bot AI)
+         ======================================================================= -->
+    <div class="apple-card border border-white/[0.08] overflow-hidden">
+      <div class="p-5 border-b border-white/[0.08] flex items-center justify-between">
+        <div class="flex items-center gap-2">
+          <div class="w-6 h-6 rounded-full bg-[#a3e635]/20 text-[#a3e635] flex items-center justify-center text-xs font-mono font-bold">✦</div>
+          <h2 class="text-base font-semibold text-white">Citas & Llamadas Agendadas (Think Bot AI)</h2>
+          <span id="appointments-count-badge" class="apple-pill-lime text-[11px] font-mono font-bold px-2 py-0.5">0</span>
+        </div>
+        <span class="text-xs text-[#86868b] font-mono hidden sm:inline">Reuniones Estratégicas 25 min</span>
+      </div>
+
+      <div class="overflow-x-auto">
+        <table class="w-full text-left text-xs text-[#86868b]">
+          <thead class="bg-white/[0.02] text-[#86868b] font-mono uppercase text-[11px] border-b border-white/[0.06]">
+            <tr>
+              <th class="p-4 font-medium">ID</th>
+              <th class="p-4 font-medium">Cliente</th>
+              <th class="p-4 font-medium">Email / Contacto</th>
+              <th class="p-4 font-medium">Fecha y Hora</th>
+              <th class="p-4 font-medium">Tema / Propósito</th>
+              <th class="p-4 font-medium">Estado</th>
+              <th class="p-4 font-medium text-right">Acción</th>
+            </tr>
+          </thead>
+          <tbody id="appointments-table-body" class="divide-y divide-white/[0.04]">
+            <tr>
+              <td colspan="7" class="p-6 text-center text-xs text-[#86868b]">
+                Cargando citas...
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    <!-- =======================================================================
+         CHATBOT CONVERSATIONS LOG SECTION (Think Bot AI)
+         ======================================================================= -->
+    <div class="apple-card border border-white/[0.08] overflow-hidden">
+      <div class="p-5 border-b border-white/[0.08] flex items-center justify-between">
+        <div class="flex items-center gap-2">
+          <div class="w-6 h-6 rounded-full bg-blue-500/20 text-blue-400 flex items-center justify-center text-xs font-mono font-bold">💬</div>
+          <h2 class="text-base font-semibold text-white">Mensajes & Consultas en Tiempo Real (Think Bot AI)</h2>
+          <span id="chat-count-badge" class="bg-blue-500/20 text-blue-300 border border-blue-500/30 text-[11px] font-mono font-bold px-2 py-0.5 rounded-full">0</span>
+        </div>
+        <span class="text-xs text-[#86868b] font-mono hidden sm:inline">Historial de Interacciones Backend</span>
+      </div>
+
+      <div class="overflow-x-auto">
+        <table class="w-full text-left text-xs text-[#86868b]">
+          <thead class="bg-white/[0.02] text-[#86868b] font-mono uppercase text-[11px] border-b border-white/[0.06]">
+            <tr>
+              <th class="p-4 font-medium">Sesión</th>
+              <th class="p-4 font-medium">Mensaje del Usuario</th>
+              <th class="p-4 font-medium">Intención Detectada</th>
+              <th class="p-4 font-medium">Respuesta Enviada</th>
+              <th class="p-4 font-medium text-right">Fecha / Hora</th>
+            </tr>
+          </thead>
+          <tbody id="chat-table-body" class="divide-y divide-white/[0.04]">
+            <tr>
+              <td colspan="5" class="p-6 text-center text-xs text-[#86868b]">
+                Cargando historial del chatbot...
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- =======================================================================
+         TWO-COLUMN LOWER SECTION: ROI AUDITS & LIVE TRAFFIC LOG
+         ======================================================================= -->
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-6">
+      
+      <!-- Left: Recent ROI Assessments (7 cols) -->
+      <div class="lg:col-span-7 apple-card p-6 border border-white/[0.08]">
+        <div class="flex items-center justify-between mb-4">
+          <div>
+            <h3 class="text-base font-semibold text-white">Últimas Evaluaciones de Retorno (ROI)</h3>
+            <p class="text-xs text-[#86868b] mt-0.5">Cálculos realizados por usuarios en la calculadora</p>
+          </div>
+          <i data-lucide="calculator" class="w-4 h-4 text-[#a3e635]"></i>
+        </div>
+
+        <div id="roi-list" class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+          <!-- Injected via admin.js -->
+        </div>
+      </div>
+
+      <!-- Right: Live Visitor Stream (5 cols) -->
+      <div class="lg:col-span-5 apple-card p-6 border border-white/[0.08]">
+        <div class="flex items-center justify-between mb-4">
+          <div>
+            <h3 class="text-base font-semibold text-white">Tráfico en Tiempo Real</h3>
+            <p class="text-xs text-[#86868b] mt-0.5">Últimas visitas detectadas en la web</p>
+          </div>
+          <span class="w-2 h-2 rounded-full bg-[#a3e635] beacon-glow"></span>
+        </div>
+
+        <div id="live-visits-list" class="space-y-2.5 max-h-80 overflow-y-auto">
+          <!-- Injected via admin.js -->
+          <div class="text-xs text-[#86868b] text-center py-4">Cargando visitas...</div>
+        </div>
+      </div>
+
+    </div>
+
+  </main>
+
+  <!-- Lead Detail Modal -->
+  <div id="lead-modal" class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-xl hidden">
+    <div class="relative w-full max-w-lg bg-[#121214] rounded-3xl border border-white/10 shadow-2xl p-6 sm:p-8 space-y-4">
+      <div class="flex items-center justify-between pb-3 border-b border-white/10">
+        <h3 class="text-lg font-bold text-white" id="modal-lead-title">Detalles del Prospecto</h3>
+        <button id="lead-modal-close" class="text-xs text-[#86868b] hover:text-white p-1" aria-label="Cerrar modal">✕</button>
+      </div>
+      <div id="modal-lead-body" class="space-y-3 text-xs"></div>
+    </div>
+  </div>
+
+  <!-- Toast Container -->
+  <div id="toast-container"></div>
+
+  <!-- Admin Script -->
+  <script src="admin.js"></script>
+</body>
+</html>
