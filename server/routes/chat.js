@@ -206,7 +206,26 @@ function evaluateExpertResponse(message, sessionId) {
     };
   }
 
-  // D. Programación Web & Software
+  // D. Casos de Éxito / Portafolio / Ejemplos
+  else if (
+    hasAny(norm, ['caso', 'casos', 'exito', 'portafolio', 'ejemplo', 'ejemplos', 'muestra', 'muestras', 'trabajos', 'clientes', 'aqui estamos'])
+  ) {
+    baseResponse = {
+      intent: 'portfolio_expert',
+      text: 'Te comparto algunos de nuestros **Casos de Éxito y Desarrollos en Producción**:\n\n' +
+        '• 🏆 **[Aquí Estamos (https://aqui-estamos-v3.vercel.app/)](https://aqui-estamos-v3.vercel.app/)**:\n' +
+        '  - Plataforma de reservas y servicios profesionales en Asunción.\n' +
+        '  - Agendamiento en 60s, cotizador en tiempo real en Guaraníes (Gs.), 100/100 PageSpeed y conexión con WhatsApp API.\n\n' +
+        '• 🛍️ **Vespera Atelier**:\n' +
+        '  - Luxury E-Commerce con Three.js 3D y pasarela de pago Stripe (+380% de conversión móvil).\n\n' +
+        '• 🤖 **Aura Systems**:\n' +
+        '  - Orquestación de Agentes de IA en tiempo real con latencia inferior a 200ms.\n\n' +
+        '¿Te gustaría que desarrollemos una plataforma con este nivel de velocidad y conversión para tu empresa?',
+      suggestedChips: ['🌐 Ver Aquí Estamos en Vivo', '🚀 Desarrollo Web Next.js 14', '🤖 Chatbot con IA', '💰 Ver Presupuestos']
+    };
+  }
+
+  // E. Programación Web & Software
   else if (
     hasAny(norm, ['web', 'programacion', 'desarrollo', 'software', 'saas', 'nextjs', 'next js', 'react', 'supabase', 'ecommerce', 'tienda', 'tiendas', 'backend', 'frontend', 'sistema', 'crm', 'panel'])
   ) {

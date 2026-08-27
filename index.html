@@ -865,65 +865,67 @@
         </p>
       </div>
 
-      <!-- Featured Grid -->
-      <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+      <!-- Featured Grid (4 Cards Responsive Grid) -->
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6 sm:gap-8">
         
-        <!-- Platform 1 -->
-        <div class="apple-card p-5 sm:p-7 flex flex-col justify-between group">
+        <!-- Platform 1: Caso de Éxito Aquí Estamos -->
+        <div class="apple-card p-5 sm:p-7 flex flex-col justify-between group border-[#a3e635]/30 bg-[#131316] relative overflow-hidden shadow-2xl">
+          <div class="absolute top-0 right-0 w-36 h-36 bg-[#a3e635]/10 rounded-full blur-2xl pointer-events-none"></div>
           <div>
             <!-- Image Preview -->
-            <div class="relative h-44 sm:h-48 overflow-hidden rounded-2xl mb-5 bg-[#0a0a0c] border border-white/[0.06]">
-              <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?q=80&w=1000&auto=format&fit=crop" alt="Aura Systems SaaS Interface" class="w-full h-full object-cover opacity-85 group-hover:opacity-100 group-hover:scale-105 transition-all duration-700" />
-              <div class="absolute inset-0 bg-gradient-to-t from-[#101012] via-transparent to-transparent"></div>
-              <div class="absolute top-3 left-3">
-                <span class="apple-pill-lime text-[10px] font-mono">SaaS / AI Core</span>
+            <div class="relative h-48 sm:h-52 overflow-hidden rounded-2xl mb-5 bg-[#0a0a0c] border border-white/[0.08]">
+              <img src="https://images.unsplash.com/photo-1581578731548-c64695cc6952?q=80&w=1000&auto=format&fit=crop" alt="Aquí Estamos - Plataforma de Servicios y Reservas" class="w-full h-full object-cover opacity-90 group-hover:opacity-100 group-hover:scale-105 transition-all duration-700" />
+              <div class="absolute inset-0 bg-gradient-to-t from-[#131316] via-transparent to-transparent"></div>
+              <div class="absolute top-3 left-3 flex items-center gap-1.5">
+                <span class="apple-pill-lime text-[10px] font-mono font-bold">✦ CASO DE ÉXITO EN VIVO</span>
               </div>
               <div class="absolute bottom-3 right-3">
-                <span class="text-[10px] font-mono text-white bg-black/60 backdrop-blur-md px-2 py-0.5 rounded-md border border-white/10">0.2s Latencia</span>
+                <span class="text-[10px] font-mono text-[#a3e635] bg-black/75 backdrop-blur-md px-2.5 py-0.5 rounded-md border border-[#a3e635]/30 font-semibold">100/100 PageSpeed</span>
               </div>
             </div>
 
             <div class="flex items-center justify-between mb-2">
-              <h3 class="text-xl sm:text-2xl font-bold text-white group-hover:text-[#a3e635] transition-colors">
-                Aura Systems
+              <h3 class="text-xl sm:text-2xl font-bold text-white group-hover:text-[#a3e635] transition-colors flex items-center gap-2">
+                <span>Aquí Estamos</span>
+                <span class="text-[10px] font-mono text-[#a3e635] font-semibold bg-[#a3e635]/10 px-2 py-0.5 rounded-full border border-[#a3e635]/20">Paraguay</span>
               </h3>
-              <span class="text-xs font-mono text-[#86868b]">2026</span>
+              <span class="text-xs font-mono text-[#a3e635]">En Producción</span>
             </div>
             
             <p class="text-xs sm:text-sm text-[#86868b] leading-relaxed mb-5">
-              Plataforma de orquestación de agentes inteligentes en tiempo real con latencia inferior a 200ms y base de datos vectorial.
+              Plataforma digital de reservas y cotización de servicios por horas en Asunción y Gran Asunción. Sistema de agendamiento en 60 segundos, tarifas planas en Gs., personal verificado e integración con WhatsApp Business API.
             </p>
 
             <div class="p-3.5 rounded-xl bg-white/[0.02] border border-white/[0.06] space-y-2 mb-5">
               <div class="flex justify-between text-xs font-mono">
-                <span class="text-[#86868b]">Rendimiento</span>
-                <span class="text-white font-semibold">0.2s Latencia</span>
+                <span class="text-[#86868b]">Agendamiento</span>
+                <span class="text-white font-semibold">60s Reserva Online</span>
               </div>
               <div class="flex justify-between text-xs font-mono">
-                <span class="text-[#86868b]">Retención</span>
-                <span class="text-[#a3e635] font-semibold">+310% Crecimiento</span>
+                <span class="text-[#86868b]">Satisfacción Clientes</span>
+                <span class="text-[#a3e635] font-semibold">4.9 / 5.0 (+1.5k servicios)</span>
               </div>
               <div class="flex justify-between text-xs font-mono">
-                <span class="text-[#86868b]">Disponibilidad</span>
-                <span class="text-white font-semibold">99.99% Uptime</span>
+                <span class="text-[#86868b]">Conversión Directa</span>
+                <span class="text-[#a3e635] font-semibold">+420% Reservas</span>
               </div>
             </div>
           </div>
 
           <div class="border-t border-white/[0.08] pt-4 flex items-center justify-between">
-            <span class="text-[11px] font-mono text-[#86868b]">Next.js • Supabase • Claude</span>
-            <a href="#contacto" class="apple-link text-xs">
-              <span>Ver Caso</span>
-              <span>→</span>
+            <span class="text-[11px] font-mono text-[#86868b]">Next.js 14 • Vercel • WhatsApp API</span>
+            <a href="https://aqui-estamos-v3.vercel.app/" target="_blank" rel="noopener noreferrer" class="btn-apple-lime text-black font-semibold text-xs py-1.5 px-3 rounded-xl flex items-center gap-1 hover:opacity-90 transition-opacity shadow-sm">
+              <span>Visitar Web</span>
+              <span>↗</span>
             </a>
           </div>
         </div>
 
-        <!-- Platform 2 -->
+        <!-- Platform 2: Vespera Atelier -->
         <div class="apple-card p-5 sm:p-7 flex flex-col justify-between group border-white/20 bg-[#131316]">
           <div>
             <!-- Image Preview -->
-            <div class="relative h-44 sm:h-48 overflow-hidden rounded-2xl mb-5 bg-[#0a0a0c] border border-white/[0.06]">
+            <div class="relative h-48 sm:h-52 overflow-hidden rounded-2xl mb-5 bg-[#0a0a0c] border border-white/[0.06]">
               <img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?q=80&w=1000&auto=format&fit=crop" alt="Vespera Atelier E-Commerce" class="w-full h-full object-cover opacity-85 group-hover:opacity-100 group-hover:scale-105 transition-all duration-700" />
               <div class="absolute inset-0 bg-gradient-to-t from-[#131316] via-transparent to-transparent"></div>
               <div class="absolute top-3 left-3">
@@ -970,11 +972,62 @@
           </div>
         </div>
 
-        <!-- Platform 3 -->
+        <!-- Platform 3: Aura Systems -->
         <div class="apple-card p-5 sm:p-7 flex flex-col justify-between group">
           <div>
             <!-- Image Preview -->
-            <div class="relative h-44 sm:h-48 overflow-hidden rounded-2xl mb-5 bg-[#0a0a0c] border border-white/[0.06]">
+            <div class="relative h-48 sm:h-52 overflow-hidden rounded-2xl mb-5 bg-[#0a0a0c] border border-white/[0.06]">
+              <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?q=80&w=1000&auto=format&fit=crop" alt="Aura Systems SaaS Interface" class="w-full h-full object-cover opacity-85 group-hover:opacity-100 group-hover:scale-105 transition-all duration-700" />
+              <div class="absolute inset-0 bg-gradient-to-t from-[#101012] via-transparent to-transparent"></div>
+              <div class="absolute top-3 left-3">
+                <span class="apple-pill-lime text-[10px] font-mono">SaaS / AI Core</span>
+              </div>
+              <div class="absolute bottom-3 right-3">
+                <span class="text-[10px] font-mono text-white bg-black/60 backdrop-blur-md px-2 py-0.5 rounded-md border border-white/10">0.2s Latencia</span>
+              </div>
+            </div>
+
+            <div class="flex items-center justify-between mb-2">
+              <h3 class="text-xl sm:text-2xl font-bold text-white group-hover:text-[#a3e635] transition-colors">
+                Aura Systems
+              </h3>
+              <span class="text-xs font-mono text-[#86868b]">2026</span>
+            </div>
+            
+            <p class="text-xs sm:text-sm text-[#86868b] leading-relaxed mb-5">
+              Plataforma de orquestación de agentes inteligentes en tiempo real con latencia inferior a 200ms y base de datos vectorial.
+            </p>
+
+            <div class="p-3.5 rounded-xl bg-white/[0.02] border border-white/[0.06] space-y-2 mb-5">
+              <div class="flex justify-between text-xs font-mono">
+                <span class="text-[#86868b]">Rendimiento</span>
+                <span class="text-white font-semibold">0.2s Latencia</span>
+              </div>
+              <div class="flex justify-between text-xs font-mono">
+                <span class="text-[#86868b]">Retención</span>
+                <span class="text-[#a3e635] font-semibold">+310% Crecimiento</span>
+              </div>
+              <div class="flex justify-between text-xs font-mono">
+                <span class="text-[#86868b]">Disponibilidad</span>
+                <span class="text-white font-semibold">99.99% Uptime</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="border-t border-white/[0.08] pt-4 flex items-center justify-between">
+            <span class="text-[11px] font-mono text-[#86868b]">Next.js • Supabase • Claude</span>
+            <a href="#contacto" class="apple-link text-xs">
+              <span>Ver Caso</span>
+              <span>→</span>
+            </a>
+          </div>
+        </div>
+
+        <!-- Platform 4: Zenith Asset Capital -->
+        <div class="apple-card p-5 sm:p-7 flex flex-col justify-between group">
+          <div>
+            <!-- Image Preview -->
+            <div class="relative h-48 sm:h-52 overflow-hidden rounded-2xl mb-5 bg-[#0a0a0c] border border-white/[0.06]">
               <img src="https://images.unsplash.com/photo-1642543492481-44e81e3914a7?q=80&w=1000&auto=format&fit=crop" alt="Zenith Asset Capital Portal" class="w-full h-full object-cover opacity-85 group-hover:opacity-100 group-hover:scale-105 transition-all duration-700" />
               <div class="absolute inset-0 bg-gradient-to-t from-[#101012] via-transparent to-transparent"></div>
               <div class="absolute top-3 left-3">
