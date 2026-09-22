@@ -546,3 +546,48 @@ input[type=range]::-webkit-slider-thumb:hover {
   color: #a3e635 !important;
   border-color: rgba(163, 230, 53, 0.35) !important;
 }
+
+/* ==========================================================================
+   Language Switcher (Apple Minimalist Glass)
+   ========================================================================== */
+.apple-lang-switch {
+  display: inline-flex;
+  align-items: center;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 9999px;
+  padding: 2px;
+  position: relative;
+  transition: all 0.2s ease;
+  user-select: none;
+}
+
+.apple-lang-switch:hover {
+  border-color: rgba(255, 255, 255, 0.25);
+  background: rgba(255, 255, 255, 0.08);
+}
+
+.lang-btn {
+  padding: 3px 9px;
+  border-radius: 9999px;
+  font-size: 11px;
+  font-weight: 600;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  color: #86868b;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+  line-height: 1.2;
+}
+
+.lang-btn:hover {
+  color: #ffffff;
+}
+
+.lang-btn.active {
+  background: #ffffff;
+  color: #000000;
+  box-shadow: 0 1px 6px rgba(0, 0, 0, 0.4);
+}
+

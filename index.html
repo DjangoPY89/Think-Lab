@@ -65,56 +65,74 @@
 
         <!-- Desktop Navigation -->
         <nav class="hidden md:flex items-center gap-7 text-[13px] font-normal text-[#86868b]">
-          <a href="#servicios" class="hover:text-white transition-colors">Servicios</a>
+          <a href="#servicios" class="hover:text-white transition-colors" data-i18n="nav_services">Servicios</a>
           <a href="#chatbots-ia" class="text-white hover:text-[#a3e635] font-medium transition-colors flex items-center gap-1.5">
             <span class="w-1.5 h-1.5 rounded-full bg-[#a3e635] beacon-glow"></span>
-            <span>Chatbots IA</span>
+            <span data-i18n="nav_chatbots">Chatbots IA</span>
           </a>
-          <a href="#calculadora" class="hover:text-white transition-colors">Calculadora ROI</a>
-          <a href="#proceso" class="hover:text-white transition-colors">Proceso</a>
-          <a href="#destacados" class="hover:text-white transition-colors">Trabajos</a>
-          <a href="#precios" class="hover:text-white transition-colors">Precios</a>
-          <a href="#faq" class="hover:text-white transition-colors">FAQ</a>
+          <a href="#calculadora" class="hover:text-white transition-colors" data-i18n="nav_roi">Calculadora ROI</a>
+          <a href="#proceso" class="hover:text-white transition-colors" data-i18n="nav_process">Proceso</a>
+          <a href="#destacados" class="hover:text-white transition-colors" data-i18n="nav_works">Trabajos</a>
+          <a href="#precios" class="hover:text-white transition-colors" data-i18n="nav_pricing">Precios</a>
+          <a href="#faq" class="hover:text-white transition-colors" data-i18n="nav_faq">FAQ</a>
         </nav>
 
         <!-- Actions -->
         <div class="hidden sm:flex items-center gap-2.5">
+          <!-- Language Switcher (Desktop) -->
+          <div class="apple-lang-switch mr-1">
+            <button class="lang-btn active" data-lang="es" aria-label="Español">ES</button>
+            <button class="lang-btn" data-lang="en" aria-label="English">EN</button>
+          </div>
           <a href="https://wa.me/595983463553?text=Hola%20Think%20Lab.%2C%20quiero%20consultar%20sobre%20un%20proyecto%20web" target="_blank" rel="noopener noreferrer" class="btn-apple-secondary text-xs py-1.5 px-3.5 flex items-center gap-2 hover:text-[#25D366] hover:border-[#25D366]/40 transition-all">
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-3.5 h-3.5 text-[#25D366]">
               <path d="M12.04 2c-5.46 0-9.91 4.45-9.91 9.91 0 1.75.46 3.45 1.32 4.95L2.05 22l5.25-1.38c1.45.79 3.08 1.21 4.74 1.21 5.46 0 9.91-4.45 9.91-9.91 0-2.65-1.03-5.14-2.9-7.01A9.816 9.816 0 0 0 12.04 2zm.01 1.67c2.2 0 4.26.86 5.82 2.42a8.225 8.225 0 0 1 2.41 5.83c0 4.54-3.7 8.24-8.24 8.24-1.48 0-2.93-.4-4.2-1.15l-.3-.18-3.12.82.83-3.04-.2-.31a8.196 8.196 0 0 1-1.26-4.38c0-4.54 3.7-8.24 8.24-8.24zm4.52 11.66c-.25-.13-1.47-.72-1.7-.81-.23-.08-.39-.13-.56.13-.17.25-.64.81-.79.97-.14.17-.29.19-.54.06-.25-.13-1.06-.39-2.03-1.25-.75-.67-1.26-1.5-1.41-1.75-.14-.25-.02-.38.11-.51.11-.11.25-.29.37-.44.13-.14.17-.25.25-.42.08-.17.04-.31-.02-.44-.06-.13-.56-1.34-.76-1.84-.2-.49-.4-.42-.56-.43h-.47c-.17 0-.44.06-.67.31-.23.25-.88.86-.88 2.1 0 1.24.9 2.44 1.03 2.61.13.17 1.78 2.71 4.3 3.8.6.26 1.07.41 1.44.53.61.19 1.16.17 1.6.1.49-.07 1.47-.6 1.68-1.18.21-.58.21-1.07.14-1.18-.06-.11-.23-.17-.48-.29z"/>
             </svg>
-            <span>WhatsApp</span>
+            <span data-i18n="nav_whatsapp">WhatsApp</span>
           </a>
-          <a href="#contacto" class="btn-apple-primary text-xs py-1.5 px-4">
+          <a href="#contacto" class="btn-apple-primary text-xs py-1.5 px-4" data-i18n="nav_book">
             Agendar Consulta
           </a>
         </div>
 
-        <!-- Mobile Menu Toggle -->
-        <button id="mobile-menu-toggle" class="md:hidden p-1.5 text-[#86868b] hover:text-white focus:outline-none" aria-label="Abrir Menú">
-          <i data-lucide="menu" class="w-5 h-5"></i>
-        </button>
+        <!-- Mobile Menu Toggle & Mobile Switch -->
+        <div class="flex md:hidden items-center gap-2">
+          <div class="apple-lang-switch">
+            <button class="lang-btn active" data-lang="es" aria-label="Español">ES</button>
+            <button class="lang-btn" data-lang="en" aria-label="English">EN</button>
+          </div>
+          <button id="mobile-menu-toggle" class="p-1.5 text-[#86868b] hover:text-white focus:outline-none" aria-label="Abrir Menú">
+            <i data-lucide="menu" class="w-5 h-5"></i>
+          </button>
+        </div>
       </div>
 
       <!-- Mobile Dropdown Menu -->
       <div id="mobile-menu" class="hidden md:hidden mt-2 bg-[#121214]/95 backdrop-blur-2xl rounded-2xl p-5 border border-white/10 flex flex-col gap-3 text-sm font-medium">
-        <a href="#servicios" class="text-[#86868b] hover:text-white py-1">Servicios</a>
+        <div class="flex items-center justify-between pb-2 border-b border-white/10 mb-1">
+          <span class="text-xs text-[#86868b] font-mono">Idioma / Language</span>
+          <div class="apple-lang-switch">
+            <button class="lang-btn active" data-lang="es">ES</button>
+            <button class="lang-btn" data-lang="en">EN</button>
+          </div>
+        </div>
+        <a href="#servicios" class="text-[#86868b] hover:text-white py-1" data-i18n="nav_services">Servicios</a>
         <a href="#chatbots-ia" class="text-[#a3e635] font-semibold hover:text-white py-1 flex items-center gap-2">
-          <span class="w-2 h-2 rounded-full bg-[#a3e635]"></span> Chatbots & Agentes IA
+          <span class="w-2 h-2 rounded-full bg-[#a3e635]"></span> <span data-i18n="mobile_nav_chatbots">Chatbots & Agentes IA</span>
         </a>
-        <a href="#calculadora" class="text-[#86868b] hover:text-white py-1">Calculadora ROI</a>
-        <a href="#proceso" class="text-[#86868b] hover:text-white py-1">Proceso de Desarrollo</a>
-        <a href="#destacados" class="text-[#86868b] hover:text-white py-1">Trabajos Destacados</a>
-        <a href="#precios" class="text-[#86868b] hover:text-white py-1">Paquetes de Inversión</a>
-        <a href="#faq" class="text-[#86868b] hover:text-white py-1">Preguntas Frecuentes</a>
+        <a href="#calculadora" class="text-[#86868b] hover:text-white py-1" data-i18n="nav_roi">Calculadora ROI</a>
+        <a href="#proceso" class="text-[#86868b] hover:text-white py-1" data-i18n="mobile_nav_process">Proceso de Desarrollo</a>
+        <a href="#destacados" class="text-[#86868b] hover:text-white py-1" data-i18n="mobile_nav_works">Trabajos Destacados</a>
+        <a href="#precios" class="text-[#86868b] hover:text-white py-1" data-i18n="mobile_nav_pricing">Paquetes de Inversión</a>
+        <a href="#faq" class="text-[#86868b] hover:text-white py-1" data-i18n="mobile_nav_faq">Preguntas Frecuentes</a>
         <div class="pt-2 flex flex-col gap-2">
           <a href="https://wa.me/595983463553?text=Hola%20Think%20Lab.%2C%20quiero%20consultar%20sobre%20un%20proyecto%20web" target="_blank" rel="noopener noreferrer" class="btn-apple-secondary text-center py-2 flex items-center justify-center gap-2">
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-4 h-4 text-[#25D366]">
               <path d="M12.04 2c-5.46 0-9.91 4.45-9.91 9.91 0 1.75.46 3.45 1.32 4.95L2.05 22l5.25-1.38c1.45.79 3.08 1.21 4.74 1.21 5.46 0 9.91-4.45 9.91-9.91 0-2.65-1.03-5.14-2.9-7.01A9.816 9.816 0 0 0 12.04 2zm.01 1.67c2.2 0 4.26.86 5.82 2.42a8.225 8.225 0 0 1 2.41 5.83c0 4.54-3.7 8.24-8.24 8.24-1.48 0-2.93-.4-4.2-1.15l-.3-.18-3.12.82.83-3.04-.2-.31a8.196 8.196 0 0 1-1.26-4.38c0-4.54 3.7-8.24 8.24-8.24zm4.52 11.66c-.25-.13-1.47-.72-1.7-.81-.23-.08-.39-.13-.56.13-.17.25-.64.81-.79.97-.14.17-.29.19-.54.06-.25-.13-1.06-.39-2.03-1.25-.75-.67-1.26-1.5-1.41-1.75-.14-.25-.02-.38.11-.51.11-.11.25-.29.37-.44.13-.14.17-.25.25-.42.08-.17.04-.31-.02-.44-.06-.13-.56-1.34-.76-1.84-.2-.49-.4-.42-.56-.43h-.47c-.17 0-.44.06-.67.31-.23.25-.88.86-.88 2.1 0 1.24.9 2.44 1.03 2.61.13.17 1.78 2.71 4.3 3.8.6.26 1.07.41 1.44.53.61.19 1.16.17 1.6.1.49-.07 1.47-.6 1.68-1.18.21-.58.21-1.07.14-1.18-.06-.11-.23-.17-.48-.29z"/>
             </svg>
-            <span>Contactar por WhatsApp</span>
+            <span data-i18n="mobile_nav_whatsapp">Contactar por WhatsApp</span>
           </a>
-          <a href="#contacto" class="btn-apple-lime text-center py-2">
+          <a href="#contacto" class="btn-apple-lime text-center py-2" data-i18n="nav_book">
             Agendar Consulta
           </a>
         </div>
@@ -134,26 +152,26 @@
           <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#a3e635] opacity-75"></span>
           <span class="relative inline-flex rounded-full h-2 w-2 bg-[#a3e635] beacon-glow"></span>
         </span>
-        <span class="truncate">Ingeniería Digital & Sistemas de IA</span>
+        <span class="truncate" data-i18n="hero_pill">Ingeniería Digital & Sistemas de IA</span>
       </div>
 
       <!-- Headline -->
       <h1 class="apple-headline mb-4 sm:mb-6 max-w-4xl mx-auto">
-        Ingeniería web.<br />
-        <span class="apple-gradient-text">Elevada al extremo.</span>
+        <span data-i18n="hero_headline_1">Ingeniería web.</span><br />
+        <span class="apple-gradient-text" data-i18n="hero_headline_gradient">Elevada al extremo.</span>
       </h1>
 
       <!-- Subheadline -->
-      <p class="apple-subheadline max-w-2xl mx-auto mb-8 sm:mb-10 px-1">
+      <p class="apple-subheadline max-w-2xl mx-auto mb-8 sm:mb-10 px-1" data-i18n="hero_subheadline">
         Diseñamos plataformas digitales sobrias, ultra-rápidas y automatizadas con inteligencia artificial para marcas que exigen distinción y resultados.
       </p>
 
       <!-- Action Group -->
       <div class="flex flex-col sm:flex-row items-center justify-center gap-3 sm:gap-4 mb-14 sm:mb-20 w-full sm:w-auto">
-        <a href="#contacto" class="btn-apple-primary w-full sm:w-auto">
+        <a href="#contacto" class="btn-apple-primary w-full sm:w-auto" data-i18n="hero_btn_start">
           Iniciar Proyecto
         </a>
-        <a href="#calculadora" class="btn-apple-secondary w-full sm:w-auto">
+        <a href="#calculadora" class="btn-apple-secondary w-full sm:w-auto" data-i18n="hero_btn_roi">
           Calcular Impacto ROI
         </a>
       </div>
@@ -161,20 +179,20 @@
       <!-- Metrics Row (Apple minimal format) -->
       <div class="grid grid-cols-2 md:grid-cols-4 gap-4 sm:gap-8 pt-8 sm:pt-10 border-t border-white/[0.08] text-center max-w-4xl mx-auto">
         <div>
-          <div class="text-2xl sm:text-3xl font-semibold tracking-tight text-white font-mono">+50</div>
-          <div class="text-[11px] sm:text-xs text-[#86868b] mt-1">Plataformas Lanzadas</div>
+          <div class="text-2xl sm:text-3xl font-semibold tracking-tight text-white font-mono" data-i18n="hero_stat_1_val">+50</div>
+          <div class="text-[11px] sm:text-xs text-[#86868b] mt-1" data-i18n="hero_stat_1_lbl">Plataformas Lanzadas</div>
         </div>
         <div>
-          <div class="text-2xl sm:text-3xl font-semibold tracking-tight text-white font-mono">0.3s</div>
-          <div class="text-[11px] sm:text-xs text-[#86868b] mt-1">Tiempo de Carga</div>
+          <div class="text-2xl sm:text-3xl font-semibold tracking-tight text-white font-mono" data-i18n="hero_stat_2_val">0.3s</div>
+          <div class="text-[11px] sm:text-xs text-[#86868b] mt-1" data-i18n="hero_stat_2_lbl">Tiempo de Carga</div>
         </div>
         <div>
-          <div class="text-2xl sm:text-3xl font-semibold tracking-tight text-[#a3e635] font-mono">3.8x</div>
-          <div class="text-[11px] sm:text-xs text-[#86868b] mt-1">Retorno Promedio</div>
+          <div class="text-2xl sm:text-3xl font-semibold tracking-tight text-[#a3e635] font-mono" data-i18n="hero_stat_3_val">3.8x</div>
+          <div class="text-[11px] sm:text-xs text-[#86868b] mt-1" data-i18n="hero_stat_3_lbl">Retorno Promedio</div>
         </div>
         <div>
-          <div class="text-2xl sm:text-3xl font-semibold tracking-tight text-white font-mono">100/100</div>
-          <div class="text-[11px] sm:text-xs text-[#86868b] mt-1">Core Web Vitals</div>
+          <div class="text-2xl sm:text-3xl font-semibold tracking-tight text-white font-mono" data-i18n="hero_stat_4_val">100/100</div>
+          <div class="text-[11px] sm:text-xs text-[#86868b] mt-1" data-i18n="hero_stat_4_lbl">Core Web Vitals</div>
         </div>
       </div>
 
@@ -196,16 +214,16 @@
           </div>
 
           <div class="flex flex-wrap gap-1 p-1 bg-white/[0.04] rounded-2xl sm:rounded-full border border-white/[0.06] w-full sm:w-auto justify-center">
-            <button data-showcase-tab="design" class="apple-tab-btn active flex-1 sm:flex-none">
+            <button data-showcase-tab="design" class="apple-tab-btn active flex-1 sm:flex-none" data-i18n="tab_design">
               Diseño
             </button>
-            <button data-showcase-tab="speed" class="apple-tab-btn flex-1 sm:flex-none">
+            <button data-showcase-tab="speed" class="apple-tab-btn flex-1 sm:flex-none" data-i18n="tab_speed">
               Rendimiento
             </button>
-            <button data-showcase-tab="ai" class="apple-tab-btn flex-1 sm:flex-none">
+            <button data-showcase-tab="ai" class="apple-tab-btn flex-1 sm:flex-none" data-i18n="tab_ai">
               IA
             </button>
-            <button data-showcase-tab="cloud" class="apple-tab-btn flex-1 sm:flex-none">
+            <button data-showcase-tab="cloud" class="apple-tab-btn flex-1 sm:flex-none" data-i18n="tab_cloud">
               Cloud
             </button>
           </div>
@@ -217,22 +235,22 @@
           <!-- Panel 1: Design -->
           <div data-showcase-panel="design" class="grid grid-cols-1 lg:grid-cols-12 gap-6 sm:gap-8 items-center">
             <div class="lg:col-span-6 space-y-3 sm:space-y-4">
-              <span class="text-xs font-mono text-[#a3e635] uppercase tracking-wider">ESTÉTICA DE PRECISIÓN</span>
-              <h3 class="text-xl sm:text-2xl font-bold text-white tracking-tight">
+              <span class="text-xs font-mono text-[#a3e635] uppercase tracking-wider" data-i18n="showcase_design_pill">ESTÉTICA DE PRECISIÓN</span>
+              <h3 class="text-xl sm:text-2xl font-bold text-white tracking-tight" data-i18n="showcase_design_title">
                 Diseño refinado. Sin excesos.
               </h3>
-              <p class="text-[#86868b] text-xs sm:text-sm leading-relaxed">
+              <p class="text-[#86868b] text-xs sm:text-sm leading-relaxed" data-i18n="showcase_design_desc">
                 Cada píxel responde a un propósito. Eliminamos el ruido visual para destacar la propuesta de valor de tu marca con tipografía suiza, jerarquía limpia y microinteracciones fluidas.
               </p>
               <div class="space-y-2 pt-2 text-xs text-[#f5f5f7]">
                 <div class="flex items-center gap-2">
-                  <span class="w-1.5 h-1.5 rounded-full bg-[#a3e635] flex-shrink-0"></span> Renderizado a 60 FPS con aceleración de hardware
+                  <span class="w-1.5 h-1.5 rounded-full bg-[#a3e635] flex-shrink-0"></span> <span data-i18n="showcase_design_b1">Renderizado a 60 FPS con aceleración de hardware</span>
                 </div>
                 <div class="flex items-center gap-2">
-                  <span class="w-1.5 h-1.5 rounded-full bg-[#a3e635] flex-shrink-0"></span> Tipografía optimizada para lectura en pantallas Retina
+                  <span class="w-1.5 h-1.5 rounded-full bg-[#a3e635] flex-shrink-0"></span> <span data-i18n="showcase_design_b2">Tipografía optimizada para lectura en pantallas Retina</span>
                 </div>
                 <div class="flex items-center gap-2">
-                  <span class="w-1.5 h-1.5 rounded-full bg-[#a3e635] flex-shrink-0"></span> Composición balanceada con espaciado armónico
+                  <span class="w-1.5 h-1.5 rounded-full bg-[#a3e635] flex-shrink-0"></span> <span data-i18n="showcase_design_b3">Composición balanceada con espaciado armónico</span>
                 </div>
               </div>
             </div>
@@ -240,20 +258,20 @@
             <div class="lg:col-span-6 bg-[#0a0a0c] p-4 sm:p-6 rounded-2xl border border-white/[0.08] space-y-3 sm:space-y-4">
               <div class="grid grid-cols-2 gap-2.5 sm:gap-3">
                 <div class="p-3.5 sm:p-4 rounded-xl bg-white/[0.02] border border-white/[0.06]">
-                  <span class="text-[11px] sm:text-xs text-[#86868b] font-mono">CONVERSIÓN</span>
-                  <div class="text-xl sm:text-2xl font-bold text-white mt-1">+340%</div>
-                  <div class="text-[10px] sm:text-[11px] text-[#86868b] mt-1">Registro optimizado</div>
+                  <span class="text-[11px] sm:text-xs text-[#86868b] font-mono" data-i18n="showcase_design_kpi1_lbl">CONVERSIÓN</span>
+                  <div class="text-xl sm:text-2xl font-bold text-white mt-1" data-i18n="showcase_design_kpi1_val">+340%</div>
+                  <div class="text-[10px] sm:text-[11px] text-[#86868b] mt-1" data-i18n="showcase_design_kpi1_sub">Registro optimizado</div>
                 </div>
                 <div class="p-3.5 sm:p-4 rounded-xl bg-white/[0.02] border border-white/[0.06]">
-                  <span class="text-[11px] sm:text-xs text-[#86868b] font-mono">ENGAGEMENT</span>
-                  <div class="text-xl sm:text-2xl font-bold text-white mt-1">4m 12s</div>
-                  <div class="text-[10px] sm:text-[11px] text-[#86868b] mt-1">Sesión activa</div>
+                  <span class="text-[11px] sm:text-xs text-[#86868b] font-mono" data-i18n="showcase_design_kpi2_lbl">ENGAGEMENT</span>
+                  <div class="text-xl sm:text-2xl font-bold text-white mt-1" data-i18n="showcase_design_kpi2_val">4m 12s</div>
+                  <div class="text-[10px] sm:text-[11px] text-[#86868b] mt-1" data-i18n="showcase_design_kpi2_sub">Sesión activa</div>
                 </div>
               </div>
               <div class="p-3 sm:p-4 rounded-xl bg-white/[0.02] border border-white/[0.06] flex items-center justify-between text-xs">
                 <div class="flex items-center gap-2">
                   <span class="w-2 h-2 rounded-full bg-[#a3e635] flex-shrink-0"></span>
-                  <span class="text-[#f5f5f7] text-[11px] sm:text-xs">Lead Capture Activo</span>
+                  <span class="text-[#f5f5f7] text-[11px] sm:text-xs" data-i18n="showcase_design_lead_capture">Lead Capture Activo</span>
                 </div>
                 <span class="text-[#86868b] font-mono text-[10px] sm:text-xs">Edge 14ms</span>
               </div>
@@ -263,11 +281,11 @@
           <!-- Panel 2: Speed (Hidden by default) -->
           <div data-showcase-panel="speed" class="hidden grid grid-cols-1 lg:grid-cols-12 gap-6 sm:gap-8 items-center">
             <div class="lg:col-span-6 space-y-3 sm:space-y-4">
-              <span class="text-xs font-mono text-[#a3e635] uppercase tracking-wider">VELOCIDAD INSTANTÁNEA</span>
-              <h3 class="text-xl sm:text-2xl font-bold text-white tracking-tight">
+              <span class="text-xs font-mono text-[#a3e635] uppercase tracking-wider" data-i18n="showcase_speed_pill">VELOCIDAD INSTANTÁNEA</span>
+              <h3 class="text-xl sm:text-2xl font-bold text-white tracking-tight" data-i18n="showcase_speed_title">
                 Cero retraso. Máxima respuesta.
               </h3>
-              <p class="text-[#86868b] text-xs sm:text-sm leading-relaxed">
+              <p class="text-[#86868b] text-xs sm:text-sm leading-relaxed" data-i18n="showcase_speed_desc">
                 Desplegamos en la red Edge global de Vercel con empaquetado optimizado para que cada página responda en milisegundos en cualquier región.
               </p>
             </div>
@@ -292,11 +310,11 @@
           <!-- Panel 3: AI (Hidden by default) -->
           <div data-showcase-panel="ai" class="hidden grid grid-cols-1 lg:grid-cols-12 gap-6 sm:gap-8 items-center">
             <div class="lg:col-span-6 space-y-3 sm:space-y-4">
-              <span class="text-xs font-mono text-[#a3e635] uppercase tracking-wider">INTELIGENCIA AUTOMATIZADA</span>
-              <h3 class="text-xl sm:text-2xl font-bold text-white tracking-tight">
+              <span class="text-xs font-mono text-[#a3e635] uppercase tracking-wider" data-i18n="showcase_ai_pill">INTELIGENCIA AUTOMATIZADA</span>
+              <h3 class="text-xl sm:text-2xl font-bold text-white tracking-tight" data-i18n="showcase_ai_title">
                 Agentes autónomos conectados a tu negocio.
               </h3>
-              <p class="text-[#86868b] text-xs sm:text-sm leading-relaxed">
+              <p class="text-[#86868b] text-xs sm:text-sm leading-relaxed" data-i18n="showcase_ai_desc">
                 Integramos modelos de lenguaje con búsqueda vectorial en Supabase para calificar prospectos, resolver dudas y agendar reuniones automáticamente.
               </p>
             </div>
@@ -319,11 +337,11 @@
           <!-- Panel 4: Cloud (Hidden by default) -->
           <div data-showcase-panel="cloud" class="hidden grid grid-cols-1 lg:grid-cols-12 gap-6 sm:gap-8 items-center">
             <div class="lg:col-span-6 space-y-3 sm:space-y-4">
-              <span class="text-xs font-mono text-[#a3e635] uppercase tracking-wider">INFRAESTRUCTURA ROBUSTA</span>
-              <h3 class="text-xl sm:text-2xl font-bold text-white tracking-tight">
+              <span class="text-xs font-mono text-[#a3e635] uppercase tracking-wider" data-i18n="showcase_cloud_pill">INFRAESTRUCTURA ROBUSTA</span>
+              <h3 class="text-xl sm:text-2xl font-bold text-white tracking-tight" data-i18n="showcase_cloud_title">
                 Bases de datos seguras y escalabilidad sin límites.
               </h3>
-              <p class="text-[#86868b] text-xs sm:text-sm leading-relaxed">
+              <p class="text-[#86868b] text-xs sm:text-sm leading-relaxed" data-i18n="showcase_cloud_desc">
                 PostgreSQL administrado con Supabase, autenticación segura con tokens cifrados y políticas Row Level Security para protección total de datos.
               </p>
             </div>
@@ -353,12 +371,12 @@
       
       <div class="text-center max-w-2xl mx-auto mb-12 sm:mb-16">
         <div class="inline-flex items-center gap-2 apple-pill mb-4">
-          <span>Calculadora de Impacto</span>
+          <span data-i18n="roi_pill">Calculadora de Impacto</span>
         </div>
-        <h2 class="text-2xl sm:text-4xl font-bold text-white tracking-tight">
+        <h2 class="text-2xl sm:text-4xl font-bold text-white tracking-tight" data-i18n="roi_title">
           Estima el retorno de tu inversión.
         </h2>
-        <p class="text-[#86868b] mt-3 text-xs sm:text-sm px-2">
+        <p class="text-[#86868b] mt-3 text-xs sm:text-sm px-2" data-i18n="roi_desc">
           Ajusta los parámetros de tu negocio para proyectar el incremento de facturación con una plataforma optimizada.
         </p>
       </div>
@@ -370,7 +388,7 @@
           
           <div>
             <div class="flex justify-between items-center mb-2">
-              <label class="text-xs text-[#86868b] font-medium">Tráfico Mensual</label>
+              <label class="text-xs text-[#86868b] font-medium" data-i18n="roi_label_traffic">Tráfico Mensual</label>
               <span id="roi-traffic-val" class="text-xs font-mono font-semibold text-white bg-white/[0.06] px-2.5 py-0.5 rounded-md">
                 10,000 visitas
               </span>
@@ -380,7 +398,7 @@
 
           <div>
             <div class="flex justify-between items-center mb-2">
-              <label class="text-xs text-[#86868b] font-medium">Ticket Promedio (Gs.)</label>
+              <label class="text-xs text-[#86868b] font-medium" data-i18n="roi_label_ticket">Ticket Promedio (Gs.)</label>
               <span id="roi-ticket-val" class="text-xs font-mono font-semibold text-white bg-white/[0.06] px-2.5 py-0.5 rounded-md">
                 Gs. 1.500.000
               </span>
@@ -390,7 +408,7 @@
 
           <div>
             <div class="flex justify-between items-center mb-2">
-              <label class="text-xs text-[#86868b] font-medium">Tasa de Conversión Actual</label>
+              <label class="text-xs text-[#86868b] font-medium" data-i18n="roi_label_conversion">Tasa de Conversión Actual</label>
               <span id="roi-conversion-val" class="text-xs font-mono font-semibold text-white bg-white/[0.06] px-2.5 py-0.5 rounded-md">
                 1.5%
               </span>
@@ -403,7 +421,7 @@
         <!-- Output -->
         <div class="lg:col-span-6 bg-[#0a0a0c] p-4 sm:p-6 rounded-2xl border border-white/[0.08] space-y-4 sm:space-y-5">
           <div class="flex items-center justify-between pb-3 border-b border-white/[0.08]">
-            <span class="text-xs font-mono text-[#86868b]">PROYECCIÓN MENSUAL</span>
+            <span class="text-xs font-mono text-[#86868b]" data-i18n="roi_monthly_projection">PROYECCIÓN MENSUAL</span>
             <span id="roi-multiplier" class="apple-pill-lime text-xs font-mono font-semibold">
               2.5x Retorno
             </span>
@@ -411,18 +429,18 @@
 
           <div class="grid grid-cols-2 gap-2.5 sm:gap-3">
             <div class="p-3 sm:p-3.5 rounded-xl bg-white/[0.02] border border-white/[0.06]">
-              <span class="text-[11px] sm:text-xs text-[#86868b]">Ingreso Actual</span>
+              <span class="text-[11px] sm:text-xs text-[#86868b]" data-i18n="roi_curr_revenue_lbl">Ingreso Actual</span>
               <div id="roi-curr-revenue" class="text-sm sm:text-base md:text-lg font-bold text-white font-mono mt-1 break-words">Gs. 225.000.000</div>
             </div>
             <div class="p-3 sm:p-3.5 rounded-xl bg-white/[0.02] border border-white/[0.06]">
-              <span class="text-[11px] sm:text-xs text-[#a3e635]">Proyección Think Lab.</span>
+              <span class="text-[11px] sm:text-xs text-[#a3e635]" data-i18n="roi_proj_revenue_lbl">Proyección Think Lab.</span>
               <div id="roi-proj-revenue" class="text-sm sm:text-base md:text-lg font-bold text-[#a3e635] font-mono mt-1 break-words">Gs. 562.500.000</div>
             </div>
           </div>
 
           <div>
             <div class="flex justify-between text-xs text-[#86868b] mb-1.5 font-mono">
-              <span>Incremento Anual Estimado:</span>
+              <span data-i18n="roi_extra_annual_lbl">Incremento Anual Estimado:</span>
               <span id="roi-extra-annual" class="text-white font-semibold">+Gs. 4.050.000.000/año</span>
             </div>
             <div class="w-full h-2 bg-white/10 rounded-full overflow-hidden">
@@ -430,7 +448,7 @@
             </div>
           </div>
 
-          <a href="#contacto" id="roi-audit-cta-btn" class="btn-apple-primary w-full text-center text-xs py-3 block">
+          <a href="#contacto" id="roi-audit-cta-btn" class="btn-apple-primary w-full text-center text-xs py-3 block" data-i18n="roi_btn_audit">
             Solicitar Auditoría de Conversión →
           </a>
         </div>
@@ -448,12 +466,12 @@
       
       <div class="text-center max-w-2xl mx-auto mb-12 sm:mb-16">
         <div class="inline-flex items-center gap-2 apple-pill mb-4">
-          <span>Capacidades</span>
+          <span data-i18n="bento_pill">Capacidades</span>
         </div>
-        <h2 class="text-2xl sm:text-4xl font-bold text-white tracking-tight">
+        <h2 class="text-2xl sm:text-4xl font-bold text-white tracking-tight" data-i18n="bento_title">
           Ingeniería de software integral.
         </h2>
-        <p class="text-[#86868b] mt-3 text-xs sm:text-sm px-2">
+        <p class="text-[#86868b] mt-3 text-xs sm:text-sm px-2" data-i18n="bento_desc">
           Desarrollo web moderno, diseño de interfaz sobrio e integración de modelos de inteligencia artificial.
         </p>
       </div>
@@ -466,9 +484,9 @@
             <div class="w-10 h-10 rounded-xl bg-white/[0.04] border border-white/10 flex items-center justify-center text-[#a3e635] mb-4 sm:mb-5">
               <i data-lucide="code-2" class="w-5 h-5"></i>
             </div>
-            <span class="text-xs font-mono text-[#86868b] uppercase">Desarrollo Web</span>
-            <h3 class="text-lg sm:text-xl font-bold text-white mt-1 mb-2">Next.js 14 & TypeScript</h3>
-            <p class="text-[#86868b] text-xs sm:text-sm leading-relaxed mb-5 sm:mb-6">
+            <span class="text-xs font-mono text-[#86868b] uppercase" data-i18n="bento_t1_tag">Desarrollo Web</span>
+            <h3 class="text-lg sm:text-xl font-bold text-white mt-1 mb-2" data-i18n="bento_t1_title">Next.js 14 & TypeScript</h3>
+            <p class="text-[#86868b] text-xs sm:text-sm leading-relaxed mb-5 sm:mb-6" data-i18n="bento_t1_desc">
               Arquitectura modular con renderizado híbrido y empaquetado ultra-liviano. Código limpio, mantenible y preparado para escalar.
             </p>
           </div>
@@ -483,9 +501,9 @@
             <div class="w-10 h-10 rounded-xl bg-white/[0.04] border border-white/10 flex items-center justify-center text-[#a3e635] mb-4 sm:mb-5">
               <i data-lucide="bot" class="w-5 h-5"></i>
             </div>
-            <span class="text-xs font-mono text-[#86868b] uppercase">Sistemas de IA</span>
-            <h3 class="text-lg sm:text-xl font-bold text-white mt-1 mb-2">Agentes Inteligentes</h3>
-            <p class="text-[#86868b] text-xs sm:text-sm leading-relaxed mb-5 sm:mb-6">
+            <span class="text-xs font-mono text-[#86868b] uppercase" data-i18n="bento_t2_tag">Sistemas de IA</span>
+            <h3 class="text-lg sm:text-xl font-bold text-white mt-1 mb-2" data-i18n="bento_t2_title">Agentes Inteligentes</h3>
+            <p class="text-[#86868b] text-xs sm:text-sm leading-relaxed mb-5 sm:mb-6" data-i18n="bento_t2_desc">
               Automatización de atención, calificación de leads y asistentes de voz integrados con RAG y MCP.
             </p>
           </div>
@@ -500,9 +518,9 @@
             <div class="w-10 h-10 rounded-xl bg-white/[0.04] border border-white/10 flex items-center justify-center text-[#a3e635] mb-4 sm:mb-5">
               <i data-lucide="layout" class="w-5 h-5"></i>
             </div>
-            <span class="text-xs font-mono text-[#86868b] uppercase">Diseño de Interfaz</span>
-            <h3 class="text-lg sm:text-xl font-bold text-white mt-1 mb-2">UI/UX Sobrio</h3>
-            <p class="text-[#86868b] text-xs sm:text-sm leading-relaxed mb-5 sm:mb-6">
+            <span class="text-xs font-mono text-[#86868b] uppercase" data-i18n="bento_t3_tag">Diseño de Interfaz</span>
+            <h3 class="text-lg sm:text-xl font-bold text-white mt-1 mb-2" data-i18n="bento_t3_title">UI/UX Sobrio</h3>
+            <p class="text-[#86868b] text-xs sm:text-sm leading-relaxed mb-5 sm:mb-6" data-i18n="bento_t3_desc">
               Diseño enfocado en claridad, jerarquía y confianza. Sistemas de diseño completos y consistentes.
             </p>
           </div>
@@ -517,9 +535,9 @@
             <div class="w-10 h-10 rounded-xl bg-white/[0.04] border border-white/10 flex items-center justify-center text-[#a3e635] mb-4 sm:mb-5">
               <i data-lucide="database" class="w-5 h-5"></i>
             </div>
-            <span class="text-xs font-mono text-[#86868b] uppercase">Infraestructura</span>
-            <h3 class="text-lg sm:text-xl font-bold text-white mt-1 mb-2">Bases de Datos & Backend Serverless</h3>
-            <p class="text-[#86868b] text-xs sm:text-sm leading-relaxed mb-5 sm:mb-6">
+            <span class="text-xs font-mono text-[#86868b] uppercase" data-i18n="bento_t4_tag">Infraestructura</span>
+            <h3 class="text-lg sm:text-xl font-bold text-white mt-1 mb-2" data-i18n="bento_t4_title">Bases de Datos & Backend Serverless</h3>
+            <p class="text-[#86868b] text-xs sm:text-sm leading-relaxed mb-5 sm:mb-6" data-i18n="bento_t4_desc">
               PostgreSQL administrado en Supabase con autenticación segura, políticas de privacidad RLS y pagos con Stripe.
             </p>
           </div>
@@ -534,9 +552,9 @@
             <div class="w-10 h-10 rounded-xl bg-white/[0.04] border border-white/10 flex items-center justify-center text-[#a3e635] mb-4 sm:mb-5">
               <i data-lucide="gauge" class="w-5 h-5"></i>
             </div>
-            <span class="text-xs font-mono text-[#86868b] uppercase">Optimización</span>
-            <h3 class="text-lg sm:text-xl font-bold text-white mt-1 mb-2">Core Web Vitals</h3>
-            <p class="text-[#86868b] text-xs sm:text-sm leading-relaxed mb-5 sm:mb-6">
+            <span class="text-xs font-mono text-[#86868b] uppercase" data-i18n="bento_t5_tag">Optimización</span>
+            <h3 class="text-lg sm:text-xl font-bold text-white mt-1 mb-2" data-i18n="bento_t5_title">Core Web Vitals</h3>
+            <p class="text-[#86868b] text-xs sm:text-sm leading-relaxed mb-5 sm:mb-6" data-i18n="bento_t5_desc">
               Puntuación 100/100 en Google PageSpeed, indexación técnica estructurada y tiempos de carga instantáneos.
             </p>
           </div>
@@ -551,9 +569,9 @@
             <div class="w-10 h-10 rounded-xl bg-white/[0.04] border border-white/10 flex items-center justify-center text-[#a3e635] mb-4 sm:mb-5">
               <i data-lucide="shield-check" class="w-5 h-5"></i>
             </div>
-            <span class="text-xs font-mono text-[#86868b] uppercase">Garantía</span>
-            <h3 class="text-lg sm:text-xl font-bold text-white mt-1 mb-2">Soporte Continuo</h3>
-            <p class="text-[#86868b] text-xs sm:text-sm leading-relaxed mb-5 sm:mb-6">
+            <span class="text-xs font-mono text-[#86868b] uppercase" data-i18n="bento_t6_tag">Garantía</span>
+            <h3 class="text-lg sm:text-xl font-bold text-white mt-1 mb-2" data-i18n="bento_t6_title">Soporte Continuo</h3>
+            <p class="text-[#86868b] text-xs sm:text-sm leading-relaxed mb-5 sm:mb-6" data-i18n="bento_t6_desc">
               Monitoreo activo de disponibilidad, actualizaciones de seguridad y mejoras continuas de producto.
             </p>
           </div>
@@ -581,12 +599,12 @@
       <div class="text-center max-w-3xl mx-auto mb-12 sm:mb-16">
         <div class="inline-flex items-center gap-2 apple-pill mb-4 border border-[#a3e635]/30 bg-[#a3e635]/10">
           <span class="w-2 h-2 rounded-full bg-[#a3e635] beacon-glow"></span>
-          <span class="text-[#a3e635] font-mono text-[11px] font-semibold tracking-wider">ESPECIALISTAS EN IA // AGENTES AUTÓNOMOS</span>
+          <span class="text-[#a3e635] font-mono text-[11px] font-semibold tracking-wider" data-i18n="ai_hub_pill">ESPECIALISTAS EN IA // AGENTES AUTÓNOMOS</span>
         </div>
         <h2 class="text-3xl sm:text-5xl lg:text-6xl font-bold text-white tracking-tight">
-          Chatbots & Agentes de IA que <span class="text-transparent bg-clip-text bg-gradient-to-r from-white via-white to-[#a3e635]">convierten 24/7.</span>
+          <span data-i18n="ai_hub_title">Chatbots & Agentes de IA que</span> <span class="text-transparent bg-clip-text bg-gradient-to-r from-white via-white to-[#a3e635]" data-i18n="ai_hub_title_grad">convierten 24/7.</span>
         </h2>
-        <p class="text-[#86868b] mt-4 text-xs sm:text-sm md:text-base leading-relaxed max-w-2xl mx-auto">
+        <p class="text-[#86868b] mt-4 text-xs sm:text-sm md:text-base leading-relaxed max-w-2xl mx-auto" data-i18n="ai_hub_desc">
           Diseñamos e integramos agentes conversacionales autónomos con arquitectura <strong class="text-white">RAG (Retrieval-Augmented Generation)</strong>, cero alucinaciones y conexión nativa con WhatsApp, Web y tus bases de datos.
         </p>
       </div>
@@ -605,8 +623,8 @@
             </div>
             <div>
               <div class="flex items-center gap-2">
-                <h3 class="text-sm sm:text-base font-bold text-white">ThinkLab Agent Studio</h3>
-                <span class="text-[10px] font-mono bg-[#a3e635]/15 text-[#a3e635] px-2 py-0.5 rounded-full border border-[#a3e635]/30">v3.2 Edge AI</span>
+                <h3 class="text-sm sm:text-base font-bold text-white" data-i18n="ai_studio_title">ThinkLab Agent Studio</h3>
+                <span class="text-[10px] font-mono bg-[#a3e635]/15 text-[#a3e635] px-2 py-0.5 rounded-full border border-[#a3e635]/30" data-i18n="ai_studio_tag">v3.2 Edge AI</span>
               </div>
               <p class="text-xs text-[#86868b] font-mono">Claude 3.5 Sonnet • GPT-4o • Supabase Vector</p>
             </div>
@@ -615,13 +633,13 @@
           <!-- Interactive Use-Case Tabs -->
           <div class="flex flex-wrap gap-1.5 p-1 bg-black/40 rounded-xl sm:rounded-full border border-white/10" id="ai-demo-tabs">
             <button data-ai-tab="whatsapp" class="px-3.5 py-1.5 rounded-lg sm:rounded-full text-xs font-medium transition-all ai-tab-active flex items-center gap-1.5">
-              <span>💬 WhatsApp Sales</span>
+              <span data-i18n="ai_tab_wa">💬 WhatsApp Sales</span>
             </button>
             <button data-ai-tab="rag" class="px-3.5 py-1.5 rounded-lg sm:rounded-full text-xs font-medium text-[#86868b] hover:text-white transition-all flex items-center gap-1.5">
-              <span>🧠 Asistente RAG</span>
+              <span data-i18n="ai_tab_rag">🧠 Asistente RAG</span>
             </button>
             <button data-ai-tab="automation" class="px-3.5 py-1.5 rounded-lg sm:rounded-full text-xs font-medium text-[#86868b] hover:text-white transition-all flex items-center gap-1.5">
-              <span>⚡ Workflows & CRM</span>
+              <span data-i18n="ai_tab_automation">⚡ Workflows & CRM</span>
             </button>
           </div>
 
@@ -642,7 +660,7 @@
                 <span id="ai-simulation-channel" class="text-white font-medium ml-2">WhatsApp API // +595 983 463553</span>
               </div>
               <span class="text-[10px] text-[#a3e635] flex items-center gap-1">
-                <span class="w-1.5 h-1.5 rounded-full bg-[#a3e635] animate-ping"></span> En línea
+                <span class="w-1.5 h-1.5 rounded-full bg-[#a3e635] animate-ping"></span> <span data-i18n="ai_online">En línea</span>
               </span>
             </div>
 
@@ -653,9 +671,9 @@
 
             <!-- Simulation Action Bar -->
             <div class="pt-4 mt-3 border-t border-white/[0.06] flex items-center justify-between gap-2">
-              <span class="text-[11px] text-[#86868b] font-mono">Prueba este flujo en vivo:</span>
+              <span class="text-[11px] text-[#86868b] font-mono" data-i18n="ai_sample_label">Prueba este flujo en vivo:</span>
               <button id="ai-trigger-sample-btn" class="btn-apple-lime text-black font-semibold text-xs py-1.5 px-3 rounded-lg flex items-center gap-1.5 shadow">
-                <span>Reiniciar Demo</span>
+                <span data-i18n="ai_btn_restart">Reiniciar Demo</span>
                 <span>↻</span>
               </button>
             </div>
@@ -678,14 +696,14 @@
             <!-- Live Telemetry KPI Cards -->
             <div class="grid grid-cols-2 gap-3 pt-2">
               <div class="p-3.5 rounded-xl bg-white/[0.02] border border-white/[0.06]">
-                <span class="text-[10px] sm:text-[11px] text-[#86868b] font-mono">LATENCIA DE RESPUESTA</span>
+                <span class="text-[10px] sm:text-[11px] text-[#86868b] font-mono" data-i18n="ai_tab_kpi1_lbl">LATENCIA DE RESPUESTA</span>
                 <div class="text-lg sm:text-xl font-bold text-white font-mono mt-0.5">&lt; 280ms</div>
                 <div class="text-[10px] text-[#a3e635] mt-0.5">Vercel Edge Network</div>
               </div>
               <div class="p-3.5 rounded-xl bg-white/[0.02] border border-white/[0.06]">
-                <span class="text-[10px] sm:text-[11px] text-[#86868b] font-mono">PRECISIÓN VECTORIAL</span>
+                <span class="text-[10px] sm:text-[11px] text-[#86868b] font-mono" data-i18n="ai_tab_kpi2_lbl">PRECISIÓN VECTORIAL</span>
                 <div class="text-lg sm:text-xl font-bold text-[#a3e635] font-mono mt-0.5">99.8%</div>
-                <div class="text-[10px] text-[#86868b] mt-0.5">Cero Alucinaciones</div>
+                <div class="text-[10px] text-[#86868b] mt-0.5" data-i18n="ai_tab_kpi2_sub">Cero Alucinaciones</div>
               </div>
             </div>
 
@@ -706,9 +724,9 @@
             <div class="pt-3 flex flex-col sm:flex-row gap-2.5">
               <button id="open-thinkbot-demo-btn" class="btn-apple-primary text-xs py-2.5 px-4 flex-1 text-center justify-center flex items-center gap-2">
                 <span class="w-2 h-2 rounded-full bg-[#a3e635]"></span>
-                <span>Probar Think Bot AI</span>
+                <span data-i18n="ai_btn_try_bot">Probar Think Bot AI</span>
               </button>
-              <a href="#contacto" class="btn-apple-secondary text-xs py-2.5 px-4 text-center">
+              <a href="#contacto" class="btn-apple-secondary text-xs py-2.5 px-4 text-center" data-i18n="ai_btn_quote">
                 Cotizar Agente IA
               </a>
             </div>
@@ -730,12 +748,12 @@
                 <path d="M12.04 2c-5.46 0-9.91 4.45-9.91 9.91 0 1.75.46 3.45 1.32 4.95L2.05 22l5.25-1.38c1.45.79 3.08 1.21 4.74 1.21 5.46 0 9.91-4.45 9.91-9.91 0-2.65-1.03-5.14-2.9-7.01A9.816 9.816 0 0 0 12.04 2zm.01 1.67c2.2 0 4.26.86 5.82 2.42a8.225 8.225 0 0 1 2.41 5.83c0 4.54-3.7 8.24-8.24 8.24-1.48 0-2.93-.4-4.2-1.15l-.3-.18-3.12.82.83-3.04-.2-.31a8.196 8.196 0 0 1-1.26-4.38c0-4.54 3.7-8.24 8.24-8.24zm4.52 11.66c-.25-.13-1.47-.72-1.7-.81-.23-.08-.39-.13-.56.13-.17.25-.64.81-.79.97-.14.17-.29.19-.54.06-.25-.13-1.06-.39-2.03-1.25-.75-.67-1.26-1.5-1.41-1.75-.14-.25-.02-.38.11-.51.11-.11.25-.29.37-.44.13-.14.17-.25.25-.42.08-.17.04-.31-.02-.44-.06-.13-.56-1.34-.76-1.84-.2-.49-.4-.42-.56-.43h-.47c-.17 0-.44.06-.67.31-.23.25-.88.86-.88 2.1 0 1.24.9 2.44 1.03 2.61.13.17 1.78 2.71 4.3 3.8.6.26 1.07.41 1.44.53.61.19 1.16.17 1.6.1.49-.07 1.47-.6 1.68-1.18.21-.58.21-1.07.14-1.18-.06-.11-.23-.17-.48-.29z"/>
               </svg>
             </div>
-            <h4 class="text-base font-bold text-white">WhatsApp Multicanal</h4>
-            <p class="text-xs text-[#86868b] leading-relaxed">
+            <h4 class="text-base font-bold text-white" data-i18n="bento_wa_title">WhatsApp Multicanal</h4>
+            <p class="text-xs text-[#86868b] leading-relaxed" data-i18n="bento_wa_desc">
               Atención inmediata en el canal #1 de ventas de Latinoamérica. Respuestas con botones interactivos, catálogos y derivación fluida.
             </p>
           </div>
-          <div class="mt-4 pt-3 border-t border-white/[0.06] text-[11px] font-mono text-[#25D366]">
+          <div class="mt-4 pt-3 border-t border-white/[0.06] text-[11px] font-mono text-[#25D366]" data-i18n="bento_wa_tag">
             API Oficial Meta Cloud
           </div>
         </div>
@@ -746,12 +764,12 @@
             <div class="w-10 h-10 rounded-2xl bg-[#a3e635]/15 border border-[#a3e635]/30 flex items-center justify-center text-[#a3e635] font-mono font-bold text-sm">
               RAG
             </div>
-            <h4 class="text-base font-bold text-white">Cero Alucinaciones</h4>
-            <p class="text-xs text-[#86868b] leading-relaxed">
+            <h4 class="text-base font-bold text-white" data-i18n="bento_rag_title">Cero Alucinaciones</h4>
+            <p class="text-xs text-[#86868b] leading-relaxed" data-i18n="bento_rag_desc">
               El agente consulta únicamente tus manuales, políticas, PDFs y base de datos con embeddings vectoriales en Supabase PostgreSQL.
             </p>
           </div>
-          <div class="mt-4 pt-3 border-t border-white/[0.06] text-[11px] font-mono text-[#a3e635]">
+          <div class="mt-4 pt-3 border-t border-white/[0.06] text-[11px] font-mono text-[#a3e635]" data-i18n="bento_rag_tag">
             pgvector + Supabase
           </div>
         </div>
@@ -762,12 +780,12 @@
             <div class="w-10 h-10 rounded-2xl bg-cyan-500/15 border border-cyan-500/30 flex items-center justify-center text-cyan-400 font-bold">
               🎙️
             </div>
-            <h4 class="text-base font-bold text-white">Agentes de Voz AI</h4>
-            <p class="text-xs text-[#86868b] leading-relaxed">
+            <h4 class="text-base font-bold text-white" data-i18n="bento_voice_title">Agentes de Voz AI</h4>
+            <p class="text-xs text-[#86868b] leading-relaxed" data-i18n="bento_voice_desc">
               Llamadas telefónicas y notas de voz hiperrealistas con ElevenLabs y WebSockets bidireccionales en tiempo real.
             </p>
           </div>
-          <div class="mt-4 pt-3 border-t border-white/[0.06] text-[11px] font-mono text-cyan-400">
+          <div class="mt-4 pt-3 border-t border-white/[0.06] text-[11px] font-mono text-cyan-400" data-i18n="bento_voice_tag">
             ElevenLabs + WebSockets
           </div>
         </div>
@@ -778,12 +796,12 @@
             <div class="w-10 h-10 rounded-2xl bg-purple-500/15 border border-purple-500/30 flex items-center justify-center text-purple-400 font-bold">
               ⚡
             </div>
-            <h4 class="text-base font-bold text-white">Workflows n8n & CRM</h4>
-            <p class="text-xs text-[#86868b] leading-relaxed">
+            <h4 class="text-base font-bold text-white" data-i18n="bento_crm_title">Workflows n8n & CRM</h4>
+            <p class="text-xs text-[#86868b] leading-relaxed" data-i18n="bento_crm_desc">
               Conexión bidireccional con HubSpot, Notion, Google Sheets, Make y Stripe para automatizar tareas operativas de punta a punta.
             </p>
           </div>
-          <div class="mt-4 pt-3 border-t border-white/[0.06] text-[11px] font-mono text-purple-400">
+          <div class="mt-4 pt-3 border-t border-white/[0.06] text-[11px] font-mono text-purple-400" data-i18n="bento_crm_tag">
             n8n • Webhooks • APIs
           </div>
         </div>
@@ -801,12 +819,12 @@
       
       <div class="text-center max-w-2xl mx-auto mb-12 sm:mb-16">
         <div class="inline-flex items-center gap-2 apple-pill mb-4">
-          <span>Metodología</span>
+          <span data-i18n="process_pill">Metodología</span>
         </div>
-        <h2 class="text-2xl sm:text-4xl font-bold text-white tracking-tight">
+        <h2 class="text-2xl sm:text-4xl font-bold text-white tracking-tight" data-i18n="process_title">
           El proceso de 4 semanas.
         </h2>
-        <p class="text-[#86868b] mt-3 text-xs sm:text-sm px-2">
+        <p class="text-[#86868b] mt-3 text-xs sm:text-sm px-2" data-i18n="process_desc">
           Un flujo estructurado en 5 etapas para asegurar calidad y entrega puntual.
         </p>
       </div>
@@ -816,23 +834,23 @@
         <!-- Step Selector -->
         <div class="lg:col-span-5 space-y-2" id="process-step-list">
           <button data-step-btn="0" class="w-full text-left p-3.5 sm:p-4 rounded-xl border border-white/30 bg-white/10 text-white transition-all flex items-center justify-between text-xs sm:text-sm">
-            <span class="font-medium">01. Estrategia & Arquitectura</span>
+            <span class="font-medium" data-i18n="step0_name">01. Estrategia & Arquitectura</span>
             <i data-lucide="chevron-right" class="w-4 h-4 text-[#a3e635] flex-shrink-0"></i>
           </button>
           <button data-step-btn="1" class="w-full text-left p-3.5 sm:p-4 rounded-xl border border-white/5 bg-white/[0.02] text-[#86868b] hover:text-white transition-all flex items-center justify-between text-xs sm:text-sm">
-            <span class="font-medium">02. Diseño de Interfaz & UI Kit</span>
+            <span class="font-medium" data-i18n="step1_name">02. Diseño de Interfaz & UI Kit</span>
             <i data-lucide="chevron-right" class="w-4 h-4 flex-shrink-0"></i>
           </button>
           <button data-step-btn="2" class="w-full text-left p-3.5 sm:p-4 rounded-xl border border-white/5 bg-white/[0.02] text-[#86868b] hover:text-white transition-all flex items-center justify-between text-xs sm:text-sm">
-            <span class="font-medium">03. Desarrollo Frontend & Backend</span>
+            <span class="font-medium" data-i18n="step2_name">03. Desarrollo Frontend & Backend</span>
             <i data-lucide="chevron-right" class="w-4 h-4 flex-shrink-0"></i>
           </button>
           <button data-step-btn="3" class="w-full text-left p-3.5 sm:p-4 rounded-xl border border-white/5 bg-white/[0.02] text-[#86868b] hover:text-white transition-all flex items-center justify-between text-xs sm:text-sm">
-            <span class="font-medium">04. Rendimiento & Seguridad</span>
+            <span class="font-medium" data-i18n="step3_name">04. Rendimiento & Seguridad</span>
             <i data-lucide="chevron-right" class="w-4 h-4 flex-shrink-0"></i>
           </button>
           <button data-step-btn="4" class="w-full text-left p-3.5 sm:p-4 rounded-xl border border-white/5 bg-white/[0.02] text-[#86868b] hover:text-white transition-all flex items-center justify-between text-xs sm:text-sm">
-            <span class="font-medium">05. Despliegue Global & Soporte</span>
+            <span class="font-medium" data-i18n="step4_name">05. Despliegue Global & Soporte</span>
             <i data-lucide="chevron-right" class="w-4 h-4 flex-shrink-0"></i>
           </button>
         </div>
@@ -855,12 +873,12 @@
       
       <div class="text-center max-w-2xl mx-auto mb-12 sm:mb-16">
         <div class="inline-flex items-center gap-2 apple-pill mb-4">
-          <span>✦ Portafolio Seleccionado</span>
+          <span data-i18n="featured_pill">✦ Portafolio Seleccionado</span>
         </div>
-        <h2 class="text-2xl sm:text-4xl md:text-5xl font-bold text-white tracking-tight">
+        <h2 class="text-2xl sm:text-4xl md:text-5xl font-bold text-white tracking-tight" data-i18n="featured_title">
           Trabajos Destacados
         </h2>
-        <p class="text-[#86868b] mt-3 text-xs sm:text-sm md:text-base max-w-xl mx-auto px-2">
+        <p class="text-[#86868b] mt-3 text-xs sm:text-sm md:text-base max-w-xl mx-auto px-2" data-i18n="featured_desc">
           Plataformas que combinan diseño de vanguardia, experiencia de usuario y código sólido.
         </p>
       </div>
@@ -877,7 +895,7 @@
               <img src="./aqui-estamos-preview.jpg" alt="Aquí Estamos - Plataforma de Servicios y Reservas en Asunción" class="w-full h-full object-cover opacity-90 group-hover:opacity-100 group-hover:scale-105 transition-all duration-700" />
               <div class="absolute inset-0 bg-gradient-to-t from-[#131316] via-transparent to-transparent"></div>
               <div class="absolute top-3 left-3 flex items-center gap-1.5">
-                <span class="apple-pill-lime text-[10px] font-mono font-bold">✦ CASO DE ÉXITO EN VIVO</span>
+                <span class="apple-pill-lime text-[10px] font-mono font-bold" data-i18n="featured_badge_live">✦ CASO DE ÉXITO EN VIVO</span>
               </div>
               <div class="absolute bottom-3 right-3">
                 <span class="text-[10px] font-mono text-[#a3e635] bg-black/75 backdrop-blur-md px-2.5 py-0.5 rounded-md border border-[#a3e635]/30 font-semibold">100/100 PageSpeed</span>
@@ -889,25 +907,25 @@
                 <span>Aquí Estamos</span>
                 <span class="text-[10px] font-mono text-[#a3e635] font-semibold bg-[#a3e635]/10 px-2 py-0.5 rounded-full border border-[#a3e635]/20">Paraguay</span>
               </h3>
-              <span class="text-xs font-mono text-[#a3e635]">En Producción</span>
+              <span class="text-xs font-mono text-[#a3e635]" data-i18n="featured_badge_prod">En Producción</span>
             </div>
             
-            <p class="text-xs sm:text-sm text-[#86868b] leading-relaxed mb-5">
+            <p class="text-xs sm:text-sm text-[#86868b] leading-relaxed mb-5" data-i18n="aqui_estamos_desc">
               Plataforma digital de reservas y cotización de servicios por horas en Asunción y Gran Asunción. Sistema de agendamiento en 60 segundos, tarifas planas en Gs., personal verificado e integración con WhatsApp Business API.
             </p>
 
             <div class="p-3.5 rounded-xl bg-white/[0.02] border border-white/[0.06] space-y-2 mb-5">
               <div class="flex justify-between text-xs font-mono">
-                <span class="text-[#86868b]">Agendamiento</span>
-                <span class="text-white font-semibold">60s Reserva Online</span>
+                <span class="text-[#86868b]" data-i18n="aqui_estamos_m1_lbl">Agendamiento</span>
+                <span class="text-white font-semibold" data-i18n="aqui_estamos_m1_val">60s Reserva Online</span>
               </div>
               <div class="flex justify-between text-xs font-mono">
-                <span class="text-[#86868b]">Satisfacción Clientes</span>
-                <span class="text-[#a3e635] font-semibold">4.9 / 5.0 (+1.5k servicios)</span>
+                <span class="text-[#86868b]" data-i18n="aqui_estamos_m2_lbl">Satisfacción Clientes</span>
+                <span class="text-[#a3e635] font-semibold" data-i18n="aqui_estamos_m2_val">4.9 / 5.0 (+1.5k servicios)</span>
               </div>
               <div class="flex justify-between text-xs font-mono">
-                <span class="text-[#86868b]">Conversión Directa</span>
-                <span class="text-[#a3e635] font-semibold">+420% Reservas</span>
+                <span class="text-[#86868b]" data-i18n="aqui_estamos_m3_lbl">Conversión Directa</span>
+                <span class="text-[#a3e635] font-semibold" data-i18n="aqui_estamos_m3_val">+420% Reservas</span>
               </div>
             </div>
           </div>
@@ -915,7 +933,7 @@
           <div class="border-t border-white/[0.08] pt-4 flex items-center justify-between">
             <span class="text-[11px] font-mono text-[#86868b]">Next.js 14 • Vercel • WhatsApp API</span>
             <a href="https://aqui-estamos-v3.vercel.app/" target="_blank" rel="noopener noreferrer" class="btn-apple-lime text-black font-semibold text-xs py-1.5 px-3 rounded-xl flex items-center gap-1 hover:opacity-90 transition-opacity shadow-sm">
-              <span>Visitar Web</span>
+              <span data-i18n="featured_visit_web">Visitar Web</span>
               <span>↗</span>
             </a>
           </div>
@@ -940,25 +958,25 @@
               <h3 class="text-xl sm:text-2xl font-bold text-white group-hover:text-[#a3e635] transition-colors">
                 Vespera Atelier
               </h3>
-              <span class="text-xs font-mono text-[#a3e635]">Destacado</span>
+              <span class="text-xs font-mono text-[#a3e635]" data-i18n="featured_badge_destacado">Destacado</span>
             </div>
             
-            <p class="text-xs sm:text-sm text-[#86868b] leading-relaxed mb-5">
+            <p class="text-xs sm:text-sm text-[#86868b] leading-relaxed mb-5" data-i18n="vespera_desc">
               Experiencia inmersiva de alta costura con visualizador 3D interactivo, checkout instantáneo y sincronización Stripe.
             </p>
 
             <div class="p-3.5 rounded-xl bg-white/[0.02] border border-white/[0.06] space-y-2 mb-5">
               <div class="flex justify-between text-xs font-mono">
-                <span class="text-[#86868b]">Conversión Móvil</span>
-                <span class="text-[#a3e635] font-semibold">+380% Incremento</span>
+                <span class="text-[#86868b]" data-i18n="vespera_m1_lbl">Conversión Móvil</span>
+                <span class="text-[#a3e635] font-semibold" data-i18n="vespera_m1_val">+380% Incremento</span>
               </div>
               <div class="flex justify-between text-xs font-mono">
-                <span class="text-[#86868b]">Core Web Vitals</span>
-                <span class="text-white font-semibold">100/100 PageSpeed</span>
+                <span class="text-[#86868b]" data-i18n="vespera_m2_lbl">Core Web Vitals</span>
+                <span class="text-white font-semibold" data-i18n="vespera_m2_val">100/100 PageSpeed</span>
               </div>
               <div class="flex justify-between text-xs font-mono">
-                <span class="text-[#86868b]">Facturación Mes 1</span>
-                <span class="text-white font-semibold">Gs. 18.000M Facturados</span>
+                <span class="text-[#86868b]" data-i18n="vespera_m3_lbl">Facturación Mes 1</span>
+                <span class="text-white font-semibold" data-i18n="vespera_m3_val">Gs. 18.000M Facturados</span>
               </div>
             </div>
           </div>
@@ -966,7 +984,7 @@
           <div class="border-t border-white/[0.08] pt-4 flex items-center justify-between">
             <span class="text-[11px] font-mono text-[#86868b]">Three.js • Stripe • Edge CDN</span>
             <a href="#contacto" class="apple-link text-xs">
-              <span>Ver Caso</span>
+              <span data-i18n="featured_view_case">Ver Caso</span>
               <span>→</span>
             </a>
           </div>
@@ -994,22 +1012,22 @@
               <span class="text-xs font-mono text-[#86868b]">2026</span>
             </div>
             
-            <p class="text-xs sm:text-sm text-[#86868b] leading-relaxed mb-5">
+            <p class="text-xs sm:text-sm text-[#86868b] leading-relaxed mb-5" data-i18n="aura_desc">
               Plataforma de orquestación de agentes inteligentes en tiempo real con latencia inferior a 200ms y base de datos vectorial.
             </p>
 
             <div class="p-3.5 rounded-xl bg-white/[0.02] border border-white/[0.06] space-y-2 mb-5">
               <div class="flex justify-between text-xs font-mono">
-                <span class="text-[#86868b]">Rendimiento</span>
-                <span class="text-white font-semibold">0.2s Latencia</span>
+                <span class="text-[#86868b]" data-i18n="aura_m1_lbl">Rendimiento</span>
+                <span class="text-white font-semibold" data-i18n="aura_m1_val">0.2s Latencia</span>
               </div>
               <div class="flex justify-between text-xs font-mono">
-                <span class="text-[#86868b]">Retención</span>
-                <span class="text-[#a3e635] font-semibold">+310% Crecimiento</span>
+                <span class="text-[#86868b]" data-i18n="aura_m2_lbl">Retención</span>
+                <span class="text-[#a3e635] font-semibold" data-i18n="aura_m2_val">+310% Crecimiento</span>
               </div>
               <div class="flex justify-between text-xs font-mono">
-                <span class="text-[#86868b]">Disponibilidad</span>
-                <span class="text-white font-semibold">99.99% Uptime</span>
+                <span class="text-[#86868b]" data-i18n="aura_m3_lbl">Disponibilidad</span>
+                <span class="text-white font-semibold" data-i18n="aura_m3_val">99.99% Uptime</span>
               </div>
             </div>
           </div>
@@ -1017,7 +1035,7 @@
           <div class="border-t border-white/[0.08] pt-4 flex items-center justify-between">
             <span class="text-[11px] font-mono text-[#86868b]">Next.js • Supabase • Claude</span>
             <a href="#contacto" class="apple-link text-xs">
-              <span>Ver Caso</span>
+              <span data-i18n="featured_view_case">Ver Caso</span>
               <span>→</span>
             </a>
           </div>
@@ -1045,22 +1063,22 @@
               <span class="text-xs font-mono text-[#86868b]">2026</span>
             </div>
             
-            <p class="text-xs sm:text-sm text-[#86868b] leading-relaxed mb-5">
+            <p class="text-xs sm:text-sm text-[#86868b] leading-relaxed mb-5" data-i18n="zenith_desc">
               Portal institucional para fondos de inversión privados con encriptación avanzada, auditorías de seguridad y analíticas en tiempo real.
             </p>
 
             <div class="p-3.5 rounded-xl bg-white/[0.02] border border-white/[0.06] space-y-2 mb-5">
               <div class="flex justify-between text-xs font-mono">
-                <span class="text-[#86868b]">Seguridad</span>
-                <span class="text-white font-semibold">Zero-Trust RLS</span>
+                <span class="text-[#86868b]" data-i18n="zenith_m1_lbl">Seguridad</span>
+                <span class="text-white font-semibold" data-i18n="zenith_m1_val">Zero-Trust RLS</span>
               </div>
               <div class="flex justify-between text-xs font-mono">
-                <span class="text-[#86868b]">Tiempo de Respuesta</span>
-                <span class="text-[#a3e635] font-semibold">0.18s Promedio</span>
+                <span class="text-[#86868b]" data-i18n="zenith_m2_lbl">Tiempo de Respuesta</span>
+                <span class="text-[#a3e635] font-semibold" data-i18n="zenith_m2_val">0.18s Promedio</span>
               </div>
               <div class="flex justify-between text-xs font-mono">
-                <span class="text-[#86868b]">Auditoría</span>
-                <span class="text-white font-semibold">100% Pentest Ok</span>
+                <span class="text-[#86868b]" data-i18n="zenith_m3_lbl">Auditoría</span>
+                <span class="text-white font-semibold" data-i18n="zenith_m3_val">100% Pentest Ok</span>
               </div>
             </div>
           </div>
@@ -1068,7 +1086,7 @@
           <div class="border-t border-white/[0.08] pt-4 flex items-center justify-between">
             <span class="text-[11px] font-mono text-[#86868b]">PostgreSQL • Auth0 • React</span>
             <a href="#contacto" class="apple-link text-xs">
-              <span>Ver Caso</span>
+              <span data-i18n="featured_view_case">Ver Caso</span>
               <span>→</span>
             </a>
           </div>
@@ -1083,12 +1101,12 @@
       
       <div class="text-center max-w-xl mx-auto mb-10 sm:mb-12">
         <div class="inline-flex items-center gap-2 apple-pill mb-4">
-          <span>Contacto</span>
+          <span data-i18n="contact_pill">Contacto</span>
         </div>
-        <h2 class="text-2xl sm:text-4xl font-bold text-white tracking-tight">
+        <h2 class="text-2xl sm:text-4xl font-bold text-white tracking-tight" data-i18n="contact_title">
           Inicia tu proyecto con Think Lab.
         </h2>
-        <p class="text-[#86868b] mt-3 text-xs sm:text-sm px-2">
+        <p class="text-[#86868b] mt-3 text-xs sm:text-sm px-2" data-i18n="contact_desc">
           Completa este formulario breve para coordinar una sesión estratégica con nuestro equipo de arquitectura.
         </p>
       </div>
@@ -1098,7 +1116,7 @@
         <div class="mb-6 sm:mb-8">
           <div class="flex justify-between text-xs text-[#86868b] font-mono mb-2">
             <span id="intake-indicator">Paso 1 de 3</span>
-            <span class="text-[#a3e635]">Confidencialidad Garantizada</span>
+            <span class="text-[#a3e635]" data-i18n="intake_confidentiality">Confidencialidad Garantizada</span>
           </div>
           <div class="w-full h-1.5 bg-white/10 rounded-full overflow-hidden">
             <div id="intake-progress" class="h-full bg-white transition-all duration-300" style="width: 33.3%;"></div>
@@ -1109,27 +1127,27 @@
           
           <!-- Step 1: Goal -->
           <div id="intake-step-1" class="space-y-4 sm:space-y-5">
-            <h3 class="text-base sm:text-lg font-semibold text-white mb-2">¿Cuál es el objetivo principal?</h3>
+            <h3 class="text-base sm:text-lg font-semibold text-white mb-2" data-i18n="intake_q1">¿Cuál es el objetivo principal?</h3>
             <div class="grid grid-cols-1 sm:grid-cols-2 gap-2.5 sm:gap-3">
               <label class="p-3.5 sm:p-4 rounded-xl border border-white/10 bg-white/[0.02] hover:border-white/30 cursor-pointer flex items-center gap-3 transition-all">
                 <input type="radio" name="goal" value="increase_sales" checked class="text-white" />
-                <span class="text-xs font-medium text-[#f5f5f7]">Aumentar Conversiones & Ventas</span>
+                <span class="text-xs font-medium text-[#f5f5f7]" data-i18n="intake_goal_sales">Aumentar Conversiones & Ventas</span>
               </label>
               <label class="p-3.5 sm:p-4 rounded-xl border border-white/10 bg-white/[0.02] hover:border-white/30 cursor-pointer flex items-center gap-3 transition-all">
                 <input type="radio" name="goal" value="launch_new" class="text-white" />
-                <span class="text-xs font-medium text-[#f5f5f7]">Lanzar Nuevo Producto o SaaS</span>
+                <span class="text-xs font-medium text-[#f5f5f7]" data-i18n="intake_goal_saas">Lanzar Nuevo Producto o SaaS</span>
               </label>
               <label class="p-3.5 sm:p-4 rounded-xl border border-white/10 bg-white/[0.02] hover:border-white/30 cursor-pointer flex items-center gap-3 transition-all">
                 <input type="radio" name="goal" value="redesign" class="text-white" />
-                <span class="text-xs font-medium text-[#f5f5f7]">Rediseño de Marca & Plataforma</span>
+                <span class="text-xs font-medium text-[#f5f5f7]" data-i18n="intake_goal_redesign">Rediseño de Marca & Plataforma</span>
               </label>
               <label class="p-3.5 sm:p-4 rounded-xl border border-white/10 bg-white/[0.02] hover:border-white/30 cursor-pointer flex items-center gap-3 transition-all">
                 <input type="radio" name="goal" value="ai_agents" class="text-white" />
-                <span class="text-xs font-medium text-[#f5f5f7]">Integración de Agentes de IA</span>
+                <span class="text-xs font-medium text-[#f5f5f7]" data-i18n="intake_goal_ai">Integración de Agentes de IA</span>
               </label>
             </div>
             <div class="flex justify-end pt-3">
-              <button type="button" id="intake-next-1" class="btn-apple-primary text-xs py-2 px-5 w-full sm:w-auto">
+              <button type="button" id="intake-next-1" class="btn-apple-primary text-xs py-2 px-5 w-full sm:w-auto" data-i18n="intake_btn_next">
                 Siguiente Paso →
               </button>
             </div>
@@ -1137,30 +1155,30 @@
 
           <!-- Step 2: Budget -->
           <div id="intake-step-2" class="space-y-4 sm:space-y-5 hidden">
-            <h3 class="text-base sm:text-lg font-semibold text-white mb-2">Inversión y plazo estimado</h3>
+            <h3 class="text-base sm:text-lg font-semibold text-white mb-2" data-i18n="intake_q2">Inversión y plazo estimado</h3>
             <div class="space-y-3 sm:space-y-4">
               <div>
-                <label class="block text-xs font-mono text-[#86868b] mb-1.5">Rango de Inversión:</label>
+                <label class="block text-xs font-mono text-[#86868b] mb-1.5" data-i18n="intake_lbl_budget">Rango de Inversión:</label>
                 <select class="w-full p-3 rounded-xl bg-black border border-white/10 text-xs text-[#f5f5f7] focus:border-white focus:outline-none">
-                  <option value="10m_25m">Gs. 10.000.000 - Gs. 25.000.000 (Landing / Inicial)</option>
-                  <option value="25m_50m" selected>Gs. 25.000.000 - Gs. 50.000.000 (Plataforma Completa & IA)</option>
-                  <option value="50m_plus">Gs. 50.000.000+ (Desarrollo Enterprise a Medida)</option>
+                  <option value="10m_25m" data-i18n="intake_budget_opt1">Gs. 10.000.000 - Gs. 25.000.000 (Landing / Inicial)</option>
+                  <option value="25m_50m" selected data-i18n="intake_budget_opt2">Gs. 25.000.000 - Gs. 50.000.000 (Plataforma Completa & IA)</option>
+                  <option value="50m_plus" data-i18n="intake_budget_opt3">Gs. 50.000.000+ (Desarrollo Enterprise a Medida)</option>
                 </select>
               </div>
               <div>
-                <label class="block text-xs font-mono text-[#86868b] mb-1.5">Plazo de Entrega Deseado:</label>
+                <label class="block text-xs font-mono text-[#86868b] mb-1.5" data-i18n="intake_lbl_deadline">Plazo de Entrega Deseado:</label>
                 <select class="w-full p-3 rounded-xl bg-black border border-white/10 text-xs text-[#f5f5f7] focus:border-white focus:outline-none">
-                  <option value="urgent">Prioritario (2 a 3 semanas)</option>
-                  <option value="1_month" selected>En el transcurso del mes</option>
-                  <option value="exploring">Planificación para el próximo trimestre</option>
+                  <option value="urgent" data-i18n="intake_deadline_opt1">Prioritario (2 a 3 semanas)</option>
+                  <option value="1_month" selected data-i18n="intake_deadline_opt2">En el transcurso del mes</option>
+                  <option value="exploring" data-i18n="intake_deadline_opt3">Planificación para el próximo trimestre</option>
                 </select>
               </div>
             </div>
             <div class="flex justify-between gap-3 pt-3">
-              <button type="button" id="intake-back-2" class="btn-apple-secondary text-xs py-2 px-4">
+              <button type="button" id="intake-back-2" class="btn-apple-secondary text-xs py-2 px-4" data-i18n="intake_btn_back">
                 ← Atrás
               </button>
-              <button type="button" id="intake-next-2" class="btn-apple-primary text-xs py-2 px-5">
+              <button type="button" id="intake-next-2" class="btn-apple-primary text-xs py-2 px-5" data-i18n="intake_btn_next">
                 Siguiente Paso →
               </button>
             </div>
@@ -1168,23 +1186,23 @@
 
           <!-- Step 3: Contact Info -->
           <div id="intake-step-3" class="space-y-4 sm:space-y-5 hidden">
-            <h3 class="text-base sm:text-lg font-semibold text-white mb-2">Información de Contacto</h3>
+            <h3 class="text-base sm:text-lg font-semibold text-white mb-2" data-i18n="intake_q3">Información de Contacto</h3>
             <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
               <div>
-                <label class="block text-xs font-mono text-[#86868b] mb-1">Nombre Completo *</label>
+                <label class="block text-xs font-mono text-[#86868b] mb-1" data-i18n="intake_lbl_name">Nombre Completo *</label>
                 <input type="text" id="intake-name" placeholder="Carlos Mendoza" required class="w-full p-3 rounded-xl bg-black border border-white/10 text-xs text-[#f5f5f7] focus:border-white focus:outline-none" />
               </div>
               <div>
-                <label class="block text-xs font-mono text-[#86868b] mb-1">Correo Corporativo *</label>
+                <label class="block text-xs font-mono text-[#86868b] mb-1" data-i18n="intake_lbl_email">Correo Corporativo *</label>
                 <input type="email" id="intake-email" placeholder="carlos@empresa.com" required class="w-full p-3 rounded-xl bg-black border border-white/10 text-xs text-[#f5f5f7] focus:border-white focus:outline-none" />
               </div>
               <div class="sm:col-span-2">
-                <label class="block text-xs font-mono text-[#86868b] mb-1">Sitio Web o Breve Descripción</label>
+                <label class="block text-xs font-mono text-[#86868b] mb-1" data-i18n="intake_lbl_website">Sitio Web o Breve Descripción</label>
                 <input type="text" id="intake-website" placeholder="https://empresa.com" class="w-full p-3 rounded-xl bg-black border border-white/10 text-xs text-[#f5f5f7] focus:border-white focus:outline-none" />
               </div>
             </div>
             <div class="flex justify-end pt-3">
-              <button type="submit" id="intake-submit" class="btn-apple-primary text-xs py-2.5 px-6 w-full sm:w-auto">
+              <button type="submit" id="intake-submit" class="btn-apple-primary text-xs py-2.5 px-6 w-full sm:w-auto" data-i18n="intake_btn_submit">
                 Enviar Solicitud
               </button>
             </div>
@@ -1206,17 +1224,17 @@
       
       <div class="text-center max-w-2xl mx-auto mb-10 sm:mb-12">
         <div class="inline-flex items-center gap-2 apple-pill mb-4">
-          <span>Inversión</span>
+          <span data-i18n="pricing_pill">Inversión</span>
         </div>
-        <h2 class="text-2xl sm:text-4xl font-bold text-white tracking-tight">
+        <h2 class="text-2xl sm:text-4xl font-bold text-white tracking-tight" data-i18n="pricing_title">
           Estructura de precios transparente.
         </h2>
 
         <div class="inline-flex items-center p-1 rounded-full bg-white/[0.04] border border-white/[0.08] mt-6 text-[11px] sm:text-xs font-mono max-w-full">
-          <button id="pricing-monthly-btn" class="px-3 sm:px-4 py-1.5 rounded-full bg-white text-black font-semibold transition-all">
+          <button id="pricing-monthly-btn" class="px-3 sm:px-4 py-1.5 rounded-full bg-white text-black font-semibold transition-all" data-i18n="pricing_toggle_monthly">
             Retainer Mensual
           </button>
-          <button id="pricing-project-btn" class="px-3 sm:px-4 py-1.5 rounded-full text-[#86868b] hover:text-white transition-all">
+          <button id="pricing-project-btn" class="px-3 sm:px-4 py-1.5 rounded-full text-[#86868b] hover:text-white transition-all" data-i18n="pricing_toggle_project">
             Pago Único
           </button>
         </div>
@@ -1230,18 +1248,18 @@
             <span class="text-xs font-mono text-[#86868b] uppercase">Launch</span>
             <div class="flex items-baseline gap-1 my-3 sm:my-4">
               <span id="price-starter" class="text-xl sm:text-2xl font-bold text-white font-mono">Gs. 5.500.000</span>
-              <span class="text-xs text-[#86868b] price-period">/mes</span>
+              <span class="text-xs text-[#86868b] price-period" data-i18n="pricing_period_month">/mes</span>
             </div>
-            <p class="text-xs text-[#86868b] mb-5 sm:mb-6">Para empresas en etapa inicial que buscan una presencia web impecable.</p>
+            <p class="text-xs text-[#86868b] mb-5 sm:mb-6" data-i18n="pricing_tier1_desc">Para empresas en etapa inicial que buscan una presencia web impecable.</p>
 
             <ul class="space-y-2 text-xs text-[#f5f5f7] border-t border-white/[0.08] pt-4 sm:pt-5 mb-6 sm:mb-8">
-              <li class="flex items-center gap-2"><i data-lucide="check" class="w-3.5 h-3.5 text-[#a3e635] flex-shrink-0"></i> Hasta 5 páginas personalizadas</li>
-              <li class="flex items-center gap-2"><i data-lucide="check" class="w-3.5 h-3.5 text-[#a3e635] flex-shrink-0"></i> Next.js 14 & Tailwind CSS</li>
-              <li class="flex items-center gap-2"><i data-lucide="check" class="w-3.5 h-3.5 text-[#a3e635] flex-shrink-0"></i> Core Web Vitals 95+</li>
-              <li class="flex items-center gap-2"><i data-lucide="check" class="w-3.5 h-3.5 text-[#a3e635] flex-shrink-0"></i> Despliegue en Vercel Edge</li>
+              <li class="flex items-center gap-2"><i data-lucide="check" class="w-3.5 h-3.5 text-[#a3e635] flex-shrink-0"></i> <span data-i18n="pricing_tier1_b1">Hasta 5 páginas personalizadas</span></li>
+              <li class="flex items-center gap-2"><i data-lucide="check" class="w-3.5 h-3.5 text-[#a3e635] flex-shrink-0"></i> <span data-i18n="pricing_tier1_b2">Next.js 14 & Tailwind CSS</span></li>
+              <li class="flex items-center gap-2"><i data-lucide="check" class="w-3.5 h-3.5 text-[#a3e635] flex-shrink-0"></i> <span data-i18n="pricing_tier1_b3">Core Web Vitals 95+</span></li>
+              <li class="flex items-center gap-2"><i data-lucide="check" class="w-3.5 h-3.5 text-[#a3e635] flex-shrink-0"></i> <span data-i18n="pricing_tier1_b4">Despliegue en Vercel Edge</span></li>
             </ul>
           </div>
-          <a href="#contacto" class="btn-apple-secondary text-xs py-2 text-center block">
+          <a href="#contacto" class="btn-apple-secondary text-xs py-2 text-center block" data-i18n="pricing_tier1_btn">
             Seleccionar Launch
           </a>
         </div>
@@ -1251,23 +1269,23 @@
           <div>
             <div class="flex justify-between items-center">
               <span class="text-xs font-mono text-[#a3e635] uppercase">Growth</span>
-              <span class="text-[10px] font-mono bg-[#a3e635]/20 text-[#a3e635] px-2 py-0.5 rounded-full">Recomendado</span>
+              <span class="text-[10px] font-mono bg-[#a3e635]/20 text-[#a3e635] px-2 py-0.5 rounded-full" data-i18n="pricing_tier2_badge">Recomendado</span>
             </div>
             <div class="flex items-baseline gap-1 my-3 sm:my-4">
               <span id="price-growth" class="text-xl sm:text-2xl font-bold text-white font-mono">Gs. 11.500.000</span>
-              <span class="text-xs text-[#86868b] price-period">/mes</span>
+              <span class="text-xs text-[#86868b] price-period" data-i18n="pricing_period_month">/mes</span>
             </div>
-            <p class="text-xs text-[#86868b] mb-5 sm:mb-6">Para marcas que buscan liderar con automatizaciones de IA y conversión continua.</p>
+            <p class="text-xs text-[#86868b] mb-5 sm:mb-6" data-i18n="pricing_tier2_desc">Para marcas que buscan liderar con automatizaciones de IA y conversión continua.</p>
 
             <ul class="space-y-2 text-xs text-[#f5f5f7] border-t border-white/[0.08] pt-4 sm:pt-5 mb-6 sm:mb-8">
-              <li class="flex items-center gap-2"><i data-lucide="check" class="w-3.5 h-3.5 text-[#a3e635] flex-shrink-0"></i> Todo lo incluido en Launch</li>
-              <li class="flex items-center gap-2"><i data-lucide="check" class="w-3.5 h-3.5 text-[#a3e635] flex-shrink-0"></i> Agente de IA personalizado (RAG)</li>
-              <li class="flex items-center gap-2"><i data-lucide="check" class="w-3.5 h-3.5 text-[#a3e635] flex-shrink-0"></i> Supabase PostgreSQL & Auth</li>
-              <li class="flex items-center gap-2"><i data-lucide="check" class="w-3.5 h-3.5 text-[#a3e635] flex-shrink-0"></i> Integración de pagos con Stripe</li>
-              <li class="flex items-center gap-2"><i data-lucide="check" class="w-3.5 h-3.5 text-[#a3e635] flex-shrink-0"></i> Soporte continuo prioritario</li>
+              <li class="flex items-center gap-2"><i data-lucide="check" class="w-3.5 h-3.5 text-[#a3e635] flex-shrink-0"></i> <span data-i18n="pricing_tier2_b1">Todo lo incluido en Launch</span></li>
+              <li class="flex items-center gap-2"><i data-lucide="check" class="w-3.5 h-3.5 text-[#a3e635] flex-shrink-0"></i> <span data-i18n="pricing_tier2_b2">Agente de IA personalizado (RAG)</span></li>
+              <li class="flex items-center gap-2"><i data-lucide="check" class="w-3.5 h-3.5 text-[#a3e635] flex-shrink-0"></i> <span data-i18n="pricing_tier2_b3">Supabase PostgreSQL & Auth</span></li>
+              <li class="flex items-center gap-2"><i data-lucide="check" class="w-3.5 h-3.5 text-[#a3e635] flex-shrink-0"></i> <span data-i18n="pricing_tier2_b4">Integración de pagos con Stripe</span></li>
+              <li class="flex items-center gap-2"><i data-lucide="check" class="w-3.5 h-3.5 text-[#a3e635] flex-shrink-0"></i> <span data-i18n="pricing_tier2_b5">Soporte continuo prioritario</span></li>
             </ul>
           </div>
-          <a href="#contacto" class="btn-apple-primary text-xs py-2 text-center block">
+          <a href="#contacto" class="btn-apple-primary text-xs py-2 text-center block" data-i18n="pricing_tier2_btn">
             Comenzar con Growth
           </a>
         </div>
@@ -1278,18 +1296,18 @@
             <span class="text-xs font-mono text-[#86868b] uppercase">Enterprise</span>
             <div class="flex items-baseline gap-1 my-3 sm:my-4">
               <span id="price-enterprise" class="text-xl sm:text-2xl font-bold text-white font-mono">Gs. 21.000.000</span>
-              <span class="text-xs text-[#86868b] price-period">/mes</span>
+              <span class="text-xs text-[#86868b] price-period" data-i18n="pricing_period_month">/mes</span>
             </div>
-            <p class="text-xs text-[#86868b] mb-5 sm:mb-6">Soluciones integrales de ingeniería para marcas corporativas y productos complejos.</p>
+            <p class="text-xs text-[#86868b] mb-5 sm:mb-6" data-i18n="pricing_tier3_desc">Soluciones integrales de ingeniería para marcas corporativas y productos complejos.</p>
 
             <ul class="space-y-2 text-xs text-[#f5f5f7] border-t border-white/[0.08] pt-4 sm:pt-5 mb-6 sm:mb-8">
-              <li class="flex items-center gap-2"><i data-lucide="check" class="w-3.5 h-3.5 text-[#a3e635] flex-shrink-0"></i> Arquitectura Full-Stack Enterprise</li>
-              <li class="flex items-center gap-2"><i data-lucide="check" class="w-3.5 h-3.5 text-[#a3e635] flex-shrink-0"></i> Agente de Voz ElevenLabs</li>
-              <li class="flex items-center gap-2"><i data-lucide="check" class="w-3.5 h-3.5 text-[#a3e635] flex-shrink-0"></i> Auditorías de seguridad y pentesting</li>
-              <li class="flex items-center gap-2"><i data-lucide="check" class="w-3.5 h-3.5 text-[#a3e635] flex-shrink-0"></i> Ingeniero de software dedicado</li>
+              <li class="flex items-center gap-2"><i data-lucide="check" class="w-3.5 h-3.5 text-[#a3e635] flex-shrink-0"></i> <span data-i18n="pricing_tier3_b1">Arquitectura Full-Stack Enterprise</span></li>
+              <li class="flex items-center gap-2"><i data-lucide="check" class="w-3.5 h-3.5 text-[#a3e635] flex-shrink-0"></i> <span data-i18n="pricing_tier3_b2">Agente de Voz ElevenLabs</span></li>
+              <li class="flex items-center gap-2"><i data-lucide="check" class="w-3.5 h-3.5 text-[#a3e635] flex-shrink-0"></i> <span data-i18n="pricing_tier3_b3">Auditorías de seguridad y pentesting</span></li>
+              <li class="flex items-center gap-2"><i data-lucide="check" class="w-3.5 h-3.5 text-[#a3e635] flex-shrink-0"></i> <span data-i18n="pricing_tier3_b4">Ingeniero de software dedicado</span></li>
             </ul>
           </div>
-          <a href="#contacto" class="btn-apple-secondary text-xs py-2 text-center block">
+          <a href="#contacto" class="btn-apple-secondary text-xs py-2 text-center block" data-i18n="pricing_tier3_btn">
             Contactar Enterprise
           </a>
         </div>
@@ -1307,9 +1325,9 @@
       
       <div class="text-center max-w-xl mx-auto mb-12 sm:mb-16">
         <div class="inline-flex items-center gap-2 apple-pill mb-4">
-          <span>Preguntas Frecuentes</span>
+          <span data-i18n="faq_pill">Preguntas Frecuentes</span>
         </div>
-        <h2 class="text-2xl sm:text-4xl font-bold text-white tracking-tight">
+        <h2 class="text-2xl sm:text-4xl font-bold text-white tracking-tight" data-i18n="faq_title">
           Claridad en cada detalle.
         </h2>
       </div>
@@ -1318,30 +1336,30 @@
         
         <div class="faq-item apple-card p-4 sm:p-5">
           <button class="faq-trigger w-full flex items-center justify-between text-left focus:outline-none gap-2">
-            <span class="text-xs sm:text-sm font-semibold text-white">¿Cuál es el tiempo de entrega de un proyecto?</span>
+            <span class="text-xs sm:text-sm font-semibold text-white" data-i18n="faq_q1">¿Cuál es el tiempo de entrega de un proyecto?</span>
             <i data-lucide="chevron-down" class="faq-icon w-4 h-4 text-[#86868b] transition-transform flex-shrink-0"></i>
           </button>
-          <div class="faq-answer text-xs text-[#86868b] pt-3 leading-relaxed">
+          <div class="faq-answer text-xs text-[#86868b] pt-3 leading-relaxed" data-i18n="faq_a1">
             Nuestro proceso estructurado toma un promedio de <strong>3 a 4 semanas</strong> desde el descubrimiento inicial hasta el despliegue en producción.
           </div>
         </div>
 
         <div class="faq-item apple-card p-4 sm:p-5">
           <button class="faq-trigger w-full flex items-center justify-between text-left focus:outline-none gap-2">
-            <span class="text-xs sm:text-sm font-semibold text-white">¿Cómo se integran los agentes de Inteligencia Artificial?</span>
+            <span class="text-xs sm:text-sm font-semibold text-white" data-i18n="faq_q2">¿Cómo se integran los agentes de Inteligencia Artificial?</span>
             <i data-lucide="chevron-down" class="faq-icon w-4 h-4 text-[#86868b] transition-transform flex-shrink-0"></i>
           </button>
-          <div class="faq-answer text-xs text-[#86868b] pt-3 leading-relaxed">
+          <div class="faq-answer text-xs text-[#86868b] pt-3 leading-relaxed" data-i18n="faq_a2">
             Conectamos modelos de última generación con bases de datos vectoriales en Supabase, permitiendo que el asistente responda con la información exacta de tu negocio de forma segura.
           </div>
         </div>
 
         <div class="faq-item apple-card p-4 sm:p-5">
           <button class="faq-trigger w-full flex items-center justify-between text-left focus:outline-none gap-2">
-            <span class="text-xs sm:text-sm font-semibold text-white">¿Quién es el dueño del código fuente y los activos?</span>
+            <span class="text-xs sm:text-sm font-semibold text-white" data-i18n="faq_q3">¿Quién es el dueño del código fuente y los activos?</span>
             <i data-lucide="chevron-down" class="faq-icon w-4 h-4 text-[#86868b] transition-transform flex-shrink-0"></i>
           </button>
-          <div class="faq-answer text-xs text-[#86868b] pt-3 leading-relaxed">
+          <div class="faq-answer text-xs text-[#86868b] pt-3 leading-relaxed" data-i18n="faq_a3">
             Al concluir el desarrollo, transferimos el 100% de los repositorios de GitHub, esquemas de bases de datos y accesos de hosting a tu organización.
           </div>
         </div>
@@ -1358,15 +1376,15 @@
     <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
       <div class="apple-card p-8 sm:p-12 md:p-16 border border-white/[0.08]">
         
-        <h2 class="text-2xl sm:text-4xl md:text-5xl font-bold text-white tracking-tight max-w-2xl mx-auto mb-3 sm:mb-4">
+        <h2 class="text-2xl sm:text-4xl md:text-5xl font-bold text-white tracking-tight max-w-2xl mx-auto mb-3 sm:mb-4" data-i18n="final_title">
           Construyamos algo extraordinario.
         </h2>
 
-        <p class="text-[#86868b] text-xs sm:text-base max-w-lg mx-auto mb-6 sm:mb-8 px-2">
+        <p class="text-[#86868b] text-xs sm:text-base max-w-lg mx-auto mb-6 sm:mb-8 px-2" data-i18n="final_desc">
           Agenda una llamada estratégica de 15 minutos para analizar los requerimientos de tu proyecto.
         </p>
 
-        <a href="#contacto" class="btn-apple-primary text-xs sm:text-sm py-2.5 sm:py-3 px-6 sm:px-8">
+        <a href="#contacto" class="btn-apple-primary text-xs sm:text-sm py-2.5 sm:py-3 px-6 sm:px-8" data-i18n="final_btn">
           Agendar Llamada
         </a>
 
@@ -1391,7 +1409,7 @@
             </a>
           </div>
           
-          <p class="text-xs text-[#86868b] max-w-sm leading-relaxed">
+          <p class="text-xs text-[#86868b] max-w-sm leading-relaxed" data-i18n="footer_desc">
             Estudio de ingeniería digital de alta gama y arquitecturas de inteligencia artificial. Construimos plataformas rápidas, sobrias y diseñadas para escalar.
           </p>
 
@@ -1401,7 +1419,7 @@
               <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#a3e635] opacity-75"></span>
               <span class="relative inline-flex rounded-full h-2 w-2 bg-[#a3e635] beacon-glow"></span>
             </span>
-            <span>Sistemas Operativos • Latencia Edge &lt; 15ms</span>
+            <span data-i18n="footer_status">Sistemas Operativos • Latencia Edge &lt; 15ms</span>
           </div>
 
           <!-- Direct WhatsApp Action -->
@@ -1410,39 +1428,39 @@
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-4 h-4 text-[#25D366] flex-shrink-0">
                 <path d="M12.04 2c-5.46 0-9.91 4.45-9.91 9.91 0 1.75.46 3.45 1.32 4.95L2.05 22l5.25-1.38c1.45.79 3.08 1.21 4.74 1.21 5.46 0 9.91-4.45 9.91-9.91 0-2.65-1.03-5.14-2.9-7.01A9.816 9.816 0 0 0 12.04 2zm.01 1.67c2.2 0 4.26.86 5.82 2.42a8.225 8.225 0 0 1 2.41 5.83c0 4.54-3.7 8.24-8.24 8.24-1.48 0-2.93-.4-4.2-1.15l-.3-.18-3.12.82.83-3.04-.2-.31a8.196 8.196 0 0 1-1.26-4.38c0-4.54 3.7-8.24 8.24-8.24zm4.52 11.66c-.25-.13-1.47-.72-1.7-.81-.23-.08-.39-.13-.56.13-.17.25-.64.81-.79.97-.14.17-.29.19-.54.06-.25-.13-1.06-.39-2.03-1.25-.75-.67-1.26-1.5-1.41-1.75-.14-.25-.02-.38.11-.51.11-.11.25-.29.37-.44.13-.14.17-.25.25-.42.08-.17.04-.31-.02-.44-.06-.13-.56-1.34-.76-1.84-.2-.49-.4-.42-.56-.43h-.47c-.17 0-.44.06-.67.31-.23.25-.88.86-.88 2.1 0 1.24.9 2.44 1.03 2.61.13.17 1.78 2.71 4.3 3.8.6.26 1.07.41 1.44.53.61.19 1.16.17 1.6.1.49-.07 1.47-.6 1.68-1.18.21-.58.21-1.07.14-1.18-.06-.11-.23-.17-.48-.29z"/>
               </svg>
-              <span>WhatsApp Directo: +595 983 463553</span>
+              <span data-i18n="footer_wa_direct">WhatsApp Directo: +595 983 463553</span>
             </a>
           </div>
         </div>
 
         <!-- Col 1: Soluciones (2 cols) -->
         <div class="lg:col-span-2 space-y-3">
-          <h4 class="font-semibold text-white tracking-tight">Capacidades</h4>
+          <h4 class="font-semibold text-white tracking-tight" data-i18n="footer_col_capabilities">Capacidades</h4>
           <ul class="space-y-2 text-xs">
-            <li><a href="#servicios" class="hover:text-white transition-colors">Ingeniería Web</a></li>
-            <li><a href="#servicios" class="hover:text-white transition-colors">Agentes de IA</a></li>
-            <li><a href="#servicios" class="hover:text-white transition-colors">Headless Commerce</a></li>
-            <li><a href="#servicios" class="hover:text-white transition-colors">Next.js & Supabase</a></li>
-            <li><a href="#servicios" class="hover:text-white transition-colors">Core Web Vitals</a></li>
+            <li><a href="#servicios" class="hover:text-white transition-colors" data-i18n="footer_cap_web">Ingeniería Web</a></li>
+            <li><a href="#servicios" class="hover:text-white transition-colors" data-i18n="footer_cap_ai">Agentes de IA</a></li>
+            <li><a href="#servicios" class="hover:text-white transition-colors" data-i18n="footer_cap_commerce">Headless Commerce</a></li>
+            <li><a href="#servicios" class="hover:text-white transition-colors" data-i18n="footer_cap_next">Next.js & Supabase</a></li>
+            <li><a href="#servicios" class="hover:text-white transition-colors" data-i18n="footer_cap_cwv">Core Web Vitals</a></li>
           </ul>
         </div>
 
         <!-- Col 2: Explorar (2 cols) -->
         <div class="lg:col-span-2 space-y-3">
-          <h4 class="font-semibold text-white tracking-tight">Explorar</h4>
+          <h4 class="font-semibold text-white tracking-tight" data-i18n="footer_col_explore">Explorar</h4>
           <ul class="space-y-2 text-xs">
-            <li><a href="#calculadora" class="hover:text-white transition-colors">Calculadora ROI</a></li>
-            <li><a href="#proceso" class="hover:text-white transition-colors">Metodología 5 Fases</a></li>
-            <li><a href="#destacados" class="hover:text-white transition-colors">Trabajos Destacados</a></li>
-            <li><a href="#precios" class="hover:text-white transition-colors">Paquetes de Inversión</a></li>
-            <li><a href="#faq" class="hover:text-white transition-colors">Preguntas Frecuentes</a></li>
-            <li><a href="/admin" class="hover:text-[#a3e635] text-white/70 transition-colors flex items-center gap-1 font-mono text-[11px]"><span>Panel Métricas</span><span class="text-[9px] bg-white/10 px-1 py-0.5 rounded text-[#a3e635]">Live</span></a></li>
+            <li><a href="#calculadora" class="hover:text-white transition-colors" data-i18n="footer_exp_roi">Calculadora ROI</a></li>
+            <li><a href="#proceso" class="hover:text-white transition-colors" data-i18n="footer_exp_process">Metodología 5 Fases</a></li>
+            <li><a href="#destacados" class="hover:text-white transition-colors" data-i18n="footer_exp_works">Trabajos Destacados</a></li>
+            <li><a href="#precios" class="hover:text-white transition-colors" data-i18n="footer_exp_pricing">Paquetes de Inversión</a></li>
+            <li><a href="#faq" class="hover:text-white transition-colors" data-i18n="footer_exp_faq">Preguntas Frecuentes</a></li>
+            <li><a href="/admin" class="hover:text-[#a3e635] text-white/70 transition-colors flex items-center gap-1 font-mono text-[11px]"><span data-i18n="footer_exp_metrics">Panel Métricas</span><span class="text-[9px] bg-white/10 px-1 py-0.5 rounded text-[#a3e635]">Live</span></a></li>
           </ul>
         </div>
 
         <!-- Col 3: Contacto & Info (3 cols) -->
         <div class="lg:col-span-3 space-y-3">
-          <h4 class="font-semibold text-white tracking-tight">Contacto</h4>
+          <h4 class="font-semibold text-white tracking-tight" data-i18n="footer_col_contact">Contacto</h4>
           <ul class="space-y-2 text-xs">
             <li>
               <a href="mailto:hola@thinklab.agency" class="hover:text-white transition-colors flex items-center gap-2">
@@ -1452,15 +1470,15 @@
             </li>
             <li class="flex items-center gap-2 text-[#86868b]">
               <i data-lucide="map-pin" class="w-3.5 h-3.5 text-[#86868b]"></i>
-              <span>Asunción, Paraguay • Global</span>
+              <span data-i18n="footer_loc">Asunción, Paraguay • Global</span>
             </li>
             <li class="flex items-center gap-2 text-[#86868b]">
               <i data-lucide="clock" class="w-3.5 h-3.5 text-[#86868b]"></i>
-              <span>Lun - Vie: 08:00 - 19:00 GMT-4</span>
+              <span data-i18n="footer_hours">Lun - Vie: 08:00 - 19:00 GMT-4</span>
             </li>
             <li class="pt-2">
               <a href="#contacto" class="btn-apple-lime text-xs py-2 px-3.5 inline-flex items-center justify-center gap-1.5 w-full sm:w-auto shadow-md">
-                <span>Agendar reunión estratégica</span>
+                <span data-i18n="footer_btn_strategy">Agendar reunión estratégica</span>
                 <span>→</span>
               </a>
             </li>
@@ -1471,7 +1489,7 @@
 
       <!-- Tech Stack Ticker -->
       <div class="border-t border-white/[0.06] py-5 flex flex-wrap items-center justify-between gap-4 text-[11px] font-mono text-[#86868b]">
-        <span class="text-white/40 uppercase tracking-wider text-[10px]">Stack de Alto Rendimiento:</span>
+        <span class="text-white/40 uppercase tracking-wider text-[10px]" data-i18n="footer_ticker_label">Stack de Alto Rendimiento:</span>
         <div class="flex flex-wrap items-center gap-3 sm:gap-6">
           <span class="hover:text-white transition-colors">Next.js 14</span>
           <span>•</span>
@@ -1490,15 +1508,15 @@
       <!-- Sub-Footer -->
       <div class="border-t border-white/[0.06] pt-6 flex flex-col sm:flex-row items-center justify-between gap-3 text-[11px] text-center sm:text-left">
         <div>
-          <span>© 2026 Think Lab. Todos los derechos reservados.</span>
+          <span data-i18n="footer_rights">© 2026 Think Lab. Todos los derechos reservados.</span>
         </div>
         
         <div class="flex items-center gap-4 text-[#86868b]">
-          <a href="#" class="hover:text-white transition-colors">Privacidad</a>
+          <a href="#" class="hover:text-white transition-colors" data-i18n="footer_privacy">Privacidad</a>
           <span>•</span>
-          <a href="#" class="hover:text-white transition-colors">Términos</a>
+          <a href="#" class="hover:text-white transition-colors" data-i18n="footer_terms">Términos</a>
           <span>•</span>
-          <a href="#" class="hover:text-white transition-colors">Seguridad</a>
+          <a href="#" class="hover:text-white transition-colors" data-i18n="footer_security">Seguridad</a>
         </div>
       </div>
 
@@ -1523,14 +1541,14 @@
           <div>
             <div class="flex items-center gap-2">
               <h3 class="text-xs font-bold text-white tracking-tight">Think Bot AI</h3>
-              <span class="text-[9px] font-mono bg-[#a3e635]/15 text-[#a3e635] px-1.5 py-0.2 rounded border border-[#a3e635]/30">Agente Activo</span>
+              <span class="text-[9px] font-mono bg-[#a3e635]/15 text-[#a3e635] px-1.5 py-0.2 rounded border border-[#a3e635]/30" data-i18n="thinkbot_active_agent">Agente Activo</span>
             </div>
-            <p class="text-[10px] text-[#86868b] font-mono">Ingeniería & Reserva de Citas</p>
+            <p class="text-[10px] text-[#86868b] font-mono" data-i18n="thinkbot_role">Ingeniería & Reserva de Citas</p>
           </div>
         </div>
 
         <div class="flex items-center gap-1.5">
-          <button id="thinkbot-reset-btn" title="Nueva consulta" class="w-7 h-7 rounded-full bg-white/5 hover:bg-white/10 text-[#86868b] hover:text-white flex items-center justify-center transition-colors text-xs" aria-label="Reiniciar conversación">
+          <button id="thinkbot-reset-btn" title="Nueva consulta" data-i18n-title="thinkbot_reset_title" class="w-7 h-7 rounded-full bg-white/5 hover:bg-white/10 text-[#86868b] hover:text-white flex items-center justify-center transition-colors text-xs" aria-label="Reiniciar conversación">
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-3.5 h-3.5">
               <path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"/>
               <path d="M3 3v5h5"/>
@@ -1546,23 +1564,23 @@
       <div id="thinkbot-messages" class="flex-1 p-4 overflow-y-auto space-y-3 text-xs">
         
         <!-- Welcome Message from Bot -->
-        <div class="flex items-start gap-2.5">
+        <div class="flex items-start gap-2.5" id="thinkbot-welcome-msg">
           <div class="w-6 h-6 rounded-full bg-white/10 border border-white/15 flex items-center justify-center flex-shrink-0 text-[10px] text-[#a3e635] font-mono">
             ✦
           </div>
           <div class="max-w-[85%] bg-white/[0.05] border border-white/[0.08] rounded-2xl rounded-tl-sm p-3 text-[#f5f5f7] leading-relaxed space-y-2">
-            <p>¡Hola! Es un gusto saludarte. Soy el asesor de atención técnica y comercial de <strong>ThinkLab</strong> (<a href="https://thinklabpy.online/" target="_blank" rel="noopener" class="text-[#a3e635] underline font-medium">thinklabpy.online</a>).</p>
-            <p class="text-[#86868b]">Soy experto en <strong>programación web</strong>, <strong>diseño UI/UX y apps móviles</strong>, y <strong>automatización de chatbots con IA</strong>. Estoy aquí para entender tus requerimientos y recomendarte las mejores alternativas.</p>
-            <p class="text-white font-medium">¿En qué proyecto o solución te gustaría que trabajemos hoy?</p>
+            <p data-i18n="thinkbot_welcome_p1">¡Hola! Es un gusto saludarte. Soy el asesor de atención técnica y comercial de <strong>ThinkLab</strong> (<a href="https://thinklabpy.online/" target="_blank" rel="noopener" class="text-[#a3e635] underline font-medium">thinklabpy.online</a>).</p>
+            <p class="text-[#86868b]" data-i18n="thinkbot_welcome_p2">Soy experto en <strong>programación web</strong>, <strong>diseño UI/UX y apps móviles</strong>, y <strong>automatización de chatbots con IA</strong>. Estoy aquí para entender tus requerimientos y recomendarte las mejores alternativas.</p>
+            <p class="text-white font-medium" data-i18n="thinkbot_welcome_p3">¿En qué proyecto o solución te gustaría que trabajemos hoy?</p>
           </div>
         </div>
 
         <!-- Quick Action Prompt Chips -->
         <div id="thinkbot-chips" class="flex flex-wrap gap-1.5 pt-1 pl-8">
-          <button class="thinkbot-chip" data-chip="🚀 Desarrollo Web & Software">🚀 Desarrollo Web & Software</button>
-          <button class="thinkbot-chip" data-chip="🤖 Chatbots & Agentes de IA">🤖 Chatbots & Agentes de IA</button>
-          <button class="thinkbot-chip" data-chip="📱 Diseño de Apps Móviles">📱 Diseño de Apps Móviles</button>
-          <button class="thinkbot-chip" data-chip="🗓️ Agendar llamada de negocios">🗓️ Agendar llamada de negocios</button>
+          <button class="thinkbot-chip" data-chip="🚀 Desarrollo Web & Software" data-i18n="thinkbot_chip_web">🚀 Desarrollo Web & Software</button>
+          <button class="thinkbot-chip" data-chip="🤖 Chatbots & Agentes de IA" data-i18n="thinkbot_chip_ai">🤖 Chatbots & Agentes de IA</button>
+          <button class="thinkbot-chip" data-chip="📱 Diseño de Apps Móviles" data-i18n="thinkbot_chip_mobile">📱 Diseño de Apps Móviles</button>
+          <button class="thinkbot-chip" data-chip="🗓️ Agendar llamada de negocios" data-i18n="thinkbot_chip_book">🗓️ Agendar llamada de negocios</button>
         </div>
 
       </div>
@@ -1572,14 +1590,14 @@
         <div class="flex items-center justify-between text-[11px] font-mono text-white">
           <span class="flex items-center gap-1.5 text-[#a3e635]">
             <i data-lucide="calendar" class="w-3.5 h-3.5"></i>
-            <span>Agendar Llamada de Negocios (15 a 25 min)</span>
+            <span data-i18n="thinkbot_booking_title">Agendar Llamada de Negocios (15 a 25 min)</span>
           </span>
-          <button id="thinkbot-cancel-booking" class="text-[#86868b] hover:text-white text-[10px]">Cancelar</button>
+          <button id="thinkbot-cancel-booking" class="text-[#86868b] hover:text-white text-[10px]" data-i18n="thinkbot_booking_cancel">Cancelar</button>
         </div>
         
         <div class="grid grid-cols-2 gap-2">
-          <input type="text" id="booking-name" placeholder="Tu nombre" class="w-full p-2 rounded-xl bg-black/60 border border-white/10 text-white text-[11px] focus:border-white focus:outline-none" />
-          <input type="email" id="booking-email" placeholder="Tu correo" class="w-full p-2 rounded-xl bg-black/60 border border-white/10 text-white text-[11px] focus:border-white focus:outline-none" />
+          <input type="text" id="booking-name" placeholder="Tu nombre" data-i18n-placeholder="thinkbot_booking_name_ph" class="w-full p-2 rounded-xl bg-black/60 border border-white/10 text-white text-[11px] focus:border-white focus:outline-none" />
+          <input type="email" id="booking-email" placeholder="Tu correo" data-i18n-placeholder="thinkbot_booking_email_ph" class="w-full p-2 rounded-xl bg-black/60 border border-white/10 text-white text-[11px] focus:border-white focus:outline-none" />
         </div>
 
         <div class="grid grid-cols-2 gap-2">
@@ -1594,8 +1612,7 @@
         </div>
 
         <button id="booking-submit-btn" class="w-full btn-apple-lime text-black font-semibold text-xs py-2 rounded-xl flex items-center justify-center gap-1.5 shadow-lg">
-          <span>Confirmar Llamada de Negocios</span>
-          <span>→</span>
+          <span data-i18n="thinkbot_booking_submit">Confirmar Llamada de Negocios →</span>
         </button>
       </div>
 
@@ -1605,6 +1622,7 @@
           type="text" 
           id="thinkbot-input" 
           placeholder="Escribe tu consulta o pide agendar..." 
+          data-i18n-placeholder="thinkbot_input_placeholder"
           autocomplete="off"
           class="flex-1 bg-white/[0.04] border border-white/10 rounded-xl px-3 py-2.5 text-xs text-white placeholder-[#86868b] focus:outline-none focus:border-white/30"
         />
@@ -1638,7 +1656,7 @@
           <span>Think Bot AI</span>
           <span class="w-1.5 h-1.5 rounded-full bg-[#a3e635]"></span>
         </div>
-        <div class="text-[10px] text-[#86868b] font-mono">Agendar cita o consultar</div>
+        <div class="text-[10px] text-[#86868b] font-mono" data-i18n="thinkbot_toggle_sub">Agendar cita o consultar</div>
       </div>
     </button>
 
@@ -1648,6 +1666,7 @@
   <div id="toast-container" class="fixed bottom-5 left-1/2 -translate-x-1/2 z-50 flex flex-col items-center gap-2 pointer-events-none"></div>
 
   <!-- Main JavaScript Controller -->
+  <script src="translations.js"></script>
   <script src="app.js"></script>
 </body>
 </html>
