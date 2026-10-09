@@ -579,8 +579,8 @@ function initIntakeWizard() {
       e.preventDefault();
       const email = document.getElementById('intake-email')?.value?.trim();
       const name = document.getElementById('intake-name')?.value?.trim();
-      const company = document.getElementById('intake-company')?.value?.trim();
-      const details = document.getElementById('intake-details')?.value?.trim();
+      const company = document.getElementById('intake-website')?.value?.trim() || document.getElementById('intake-company')?.value?.trim() || '';
+      const details = document.getElementById('intake-details')?.value?.trim() || '';
 
       if (!email || !name) {
         const errorMsg = currentLang === 'en'
@@ -590,16 +590,16 @@ function initIntakeWizard() {
         return;
       }
 
-      // Collect selected services
-      const selectedServices = Array.from(
-        step1.querySelectorAll('input[type="checkbox"]:checked')
-      ).map((cb) => cb.value || cb.nextElementSibling?.textContent?.trim());
+      // Collect selected goal / services from step 1
+      const selectedRadio = step1 ? step1.querySelector('input[name="goal"]:checked') : null;
+      const selectedGoalText = selectedRadio ? (selectedRadio.nextElementSibling?.textContent?.trim() || selectedRadio.value) : null;
+      const selectedServices = selectedGoalText ? [selectedGoalText] : ['Plataforma Web Completa'];
 
       // Collect selected budget & timeline from step 2
-      const budgetSelect = step2.querySelector('select');
-      const budgetText = budgetSelect ? budgetSelect.options[budgetSelect.selectedIndex]?.text : '';
-      const timelineSelect = step2.querySelectorAll('select')[1];
-      const timelineText = timelineSelect ? timelineSelect.options[timelineSelect.selectedIndex]?.text : '';
+      const budgetSelect = step2 ? step2.querySelector('select') : null;
+      const budgetText = budgetSelect ? budgetSelect.options[budgetSelect.selectedIndex]?.text : 'Gs. 25.000.000 - Gs. 50.000.000';
+      const timelineSelect = step2 ? step2.querySelectorAll('select')[1] : null;
+      const timelineText = timelineSelect ? timelineSelect.options[timelineSelect.selectedIndex]?.text : 'En el transcurso del mes';
 
       step3.classList.add('hidden');
       if (resultPanel) {

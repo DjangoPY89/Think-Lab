@@ -6,6 +6,7 @@
 const express = require('express');
 const router = express.Router();
 const db = require('../db');
+const { sendLeadNotification } = require('../mailer');
 
 // Validation helper
 function validateEmail(email) {
@@ -17,7 +18,7 @@ function validateEmail(email) {
  * POST /api/leads
  * Submit project request from intake wizard
  */
-router.post('/', (req, res) => {
+router.post('/', async (req, res) => {
   try {
     const { name, email, company, services, budget, timeline, details } = req.body;
 
@@ -51,6 +52,21 @@ router.post('/', (req, res) => {
     const leadId = result.lastInsertRowid;
 
     console.log(`📥 [NEW LEAD #${leadId}] ${name} (${email}) - ${servicesStr} - Presupuesto: ${budget}`);
+
+    // Send automated email notification to admin (juanas89@gmail.com)
+    sendLeadNotification({
+      leadId: Number(leadId),
+      name: name.trim(),
+      email: email.trim().toLowerCase(),
+      company: (company || '').trim(),
+      services: servicesStr,
+      budget: budget || 'No especificado',
+      timeline: timeline || 'Estándar',
+      details: (details || '').trim(),
+      ipAddress: clientIp
+    }).catch(err => {
+      console.error('⚠️ [MAIL ERROR] Background mail dispatch error:', err);
+    });
 
     return res.status(201).json({
       success: true,

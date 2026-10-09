@@ -14,6 +14,7 @@ const leadsRouter = require('./server/routes/leads');
 const roiRouter = require('./server/routes/roi');
 const chatRouter = require('./server/routes/chat');
 const appointmentsRouter = require('./server/routes/appointments');
+const { router: authRouter } = require('./server/routes/auth');
 
 const app = express();
 const PORT = process.env.PORT || 8000;
@@ -69,6 +70,7 @@ const publicPath = path.join(__dirname);
 app.use(express.static(publicPath));
 
 // API Routes
+app.use('/api/auth', authRouter);
 app.use('/api/leads', leadsRouter);
 app.use('/api/roi-assessment', roiRouter);
 app.use('/api/chat', chatRouter);
