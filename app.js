@@ -4,6 +4,22 @@
  * Style: Clean, Sober, Ultra-Refined
  */
 
+/**
+ * Resolves API URL correctly whether loaded via localhost:8000, Live Server (e.g. 5500), or file://
+ */
+function getApiUrl(endpoint) {
+  if (typeof window === 'undefined') return endpoint;
+  if (window.location.protocol === 'file:') {
+    return `http://localhost:8000${endpoint}`;
+  }
+  if (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1') {
+    if (window.location.port && window.location.port !== '8000') {
+      return `http://${window.location.hostname}:8000${endpoint}`;
+    }
+  }
+  return endpoint;
+}
+
 let currentLang = localStorage.getItem('thinklab_lang') || 'es';
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -339,7 +355,7 @@ function initRoiCalculator() {
       const ticket = parseInt(ticketInput.value);
       const convRate = parseFloat(convInput.value);
 
-      fetch('/api/roi-assessment', {
+      fetch(getApiUrl('/api/roi-assessment'), {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
@@ -629,7 +645,7 @@ function initIntakeWizard() {
         `;
 
         try {
-          const response = await fetch('/api/leads', {
+          const response = await fetch(getApiUrl('/api/leads'), {
             method: 'POST',
             headers: {
               'Content-Type': 'application/json',
@@ -1010,7 +1026,7 @@ function initThinkBotAI() {
     const targetThinkingDuration = 1200 + Math.floor(Math.random() * 1400);
 
     try {
-      const res = await fetch('/api/chat', {
+      const res = await fetch(getApiUrl('/api/chat'), {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ 
@@ -1103,7 +1119,7 @@ function initThinkBotAI() {
       bookingSubmitBtn.innerHTML = `<span>${currentLang === 'en' ? 'Booking appointment...' : 'Registrando cita...'}</span>`;
 
       try {
-        const res = await fetch('/api/appointments', {
+        const res = await fetch(getApiUrl('/api/appointments'), {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({

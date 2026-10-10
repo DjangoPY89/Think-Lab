@@ -80,25 +80,30 @@ router.post('/', async (req, res) => {
     }
 
     // 3. Send automated email notification to admin (juanas89@gmail.com)
-    sendLeadNotification({
-      leadId: Number(leadId),
-      name: name.trim(),
-      email: email.trim().toLowerCase(),
-      phone: (phone || '').trim(),
-      company: (company || '').trim(),
-      services: servicesStr,
-      budget: budget || 'No especificado',
-      timeline: timeline || 'Estándar',
-      details: (details || '').trim(),
-      ipAddress: clientIp
-    }).catch(err => {
-      console.error('⚠️ [MAIL ERROR] Background mail dispatch error:', err);
-    });
+    let emailResult = { sent: false };
+    try {
+      emailResult = await sendLeadNotification({
+        leadId: Number(leadId),
+        name: name.trim(),
+        email: email.trim().toLowerCase(),
+        phone: (phone || '').trim(),
+        company: (company || '').trim(),
+        services: servicesStr,
+        budget: budget || 'No especificado',
+        timeline: timeline || 'Estándar',
+        details: (details || '').trim(),
+        ipAddress: clientIp
+      });
+      console.log(`📬 [LEAD EMAIL RESULT] Sent to admin:`, emailResult.sent, emailResult.recipient || '');
+    } catch (mailErr) {
+      console.error('⚠️ [MAIL ERROR] Error dispatching notification email:', mailErr);
+    }
 
     return res.status(201).json({
       success: true,
       message: 'Solicitud recibida exitosamente. Un Lead Architect de Think Lab. se pondrá en contacto en breve.',
       leadId: Number(leadId),
+      emailSent: emailResult.sent || false,
       data: {
         name,
         email,
