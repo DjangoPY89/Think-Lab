@@ -12,26 +12,14 @@ const NOTIFICATION_RECIPIENT = process.env.NOTIFICATION_EMAIL || 'juanas89@gmail
  */
 function createTransporter() {
   const host = process.env.SMTP_HOST || 'smtp.gmail.com';
-  const user = (process.env.SMTP_USER || process.env.EMAIL_USER || '').trim();
-  const pass = (process.env.SMTP_PASS || process.env.EMAIL_PASS || '').trim();
+  const port = parseInt(process.env.SMTP_PORT, 10) || 465;
+  const secure = process.env.SMTP_SECURE === 'true' || port === 465;
+  const user = process.env.SMTP_USER || process.env.EMAIL_USER;
+  const pass = process.env.SMTP_PASS || process.env.EMAIL_PASS;
 
   if (!user || !pass) {
     return null;
   }
-
-  // Use native Gmail service config for maximum reliability with App Passwords
-  if (host === 'smtp.gmail.com' || user.endsWith('@gmail.com')) {
-    return nodemailer.createTransport({
-      service: 'gmail',
-      auth: {
-        user,
-        pass
-      }
-    });
-  }
-
-  const port = parseInt(process.env.SMTP_PORT, 10) || 465;
-  const secure = process.env.SMTP_SECURE === 'true' || port === 465;
 
   return nodemailer.createTransport({
     host,
@@ -200,7 +188,7 @@ function generateLeadEmailHtml(data) {
  * @returns {Promise<Object>}
  */
 async function sendLeadNotification(leadData) {
-  const recipient = (process.env.NOTIFICATION_EMAIL || NOTIFICATION_RECIPIENT || 'juanas89@gmail.com').trim();
+  const recipient = NOTIFICATION_RECIPIENT;
   const transporter = createTransporter();
 
   const subject = `🚀 Nuevo Proyecto Think Lab.: ${leadData.name} ${leadData.company ? `(${leadData.company})` : ''}`;
