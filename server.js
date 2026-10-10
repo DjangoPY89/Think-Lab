@@ -44,6 +44,8 @@ function getDeviceType(userAgent) {
   return 'Desktop';
 }
 
+const { supabase } = require('./server/supabase');
+
 // Track Landing Page Visitor Hits
 app.use((req, res, next) => {
   if (req.method === 'GET' && (req.path === '/' || req.path === '/index.html')) {
@@ -58,6 +60,17 @@ app.use((req, res, next) => {
         VALUES (?, ?, ?, ?, ?)
       `);
       stmt.run(clientIp, userAgent.substring(0, 200), referrer.substring(0, 150), req.path, device);
+
+      // Supabase cloud sync
+      if (supabase) {
+        supabase.from('site_visits').insert([{
+          ip_address: clientIp,
+          user_agent: userAgent.substring(0, 200),
+          referrer: referrer.substring(0, 150),
+          path: req.path,
+          device_type: device
+        }]).then(() => {}).catch(() => {});
+      }
     } catch (e) {
       console.error('Error logging visit:', e);
     }

@@ -7,6 +7,7 @@
 const express = require('express');
 const router = express.Router();
 const db = require('../db');
+const { supabase } = require('../supabase');
 
 // In-memory conversation state store per session
 const sessionStates = new Map();
@@ -641,6 +642,16 @@ router.post('/', async (req, res) => {
       `);
       stmt.run(session, message.substring(0, 500), botResponse.text, botResponse.intent);
       console.log(`💬 [CHAT LOGGED // ${session}] Msg #${state.messageCount} -> Intent: ${botResponse.intent}`);
+
+      // Supabase cloud sync
+      if (supabase) {
+        supabase.from('chat_logs').insert([{
+          session_id: session,
+          user_message: message.substring(0, 500),
+          bot_response: botResponse.text,
+          intent: botResponse.intent
+        }]).then(() => {}).catch(() => {});
+      }
     } catch (dbErr) {
       console.error('Error logging chat message:', dbErr);
     }

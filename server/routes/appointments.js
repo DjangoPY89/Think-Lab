@@ -1,11 +1,12 @@
 /**
  * Think Lab. - Appointments & Strategy Calls Router
- * Handles booking, validation, and listing of client appointments
+ * Handles booking, validation, listing of client appointments, and Supabase cloud sync
  */
 
 const express = require('express');
 const router = express.Router();
 const db = require('../db');
+const { supabase } = require('../supabase');
 
 function validateEmail(email) {
   const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -16,7 +17,7 @@ function validateEmail(email) {
  * POST /api/appointments
  * Book a new strategy call with Think Lab.
  */
-router.post('/', (req, res) => {
+router.post('/', async (req, res) => {
   try {
     const { client_name, client_email, client_phone, meeting_date, meeting_time, topic, notes } = req.body;
 
@@ -48,6 +49,22 @@ router.post('/', (req, res) => {
     );
 
     const appointmentId = result.lastInsertRowid;
+
+    // Supabase cloud sync
+    if (supabase) {
+      supabase.from('appointments').insert([{
+        client_name: client_name.trim(),
+        client_email: client_email.trim().toLowerCase(),
+        client_phone: (client_phone || '').trim(),
+        meeting_date: meeting_date.trim(),
+        meeting_time: meeting_time.trim(),
+        topic: (topic || 'Llamada de Negocios ThinkBot AI').trim(),
+        notes: (notes || '').trim(),
+        status: 'confirmed'
+      }]).then(({ error }) => {
+        if (!error) console.log('☁️ [SUPABASE SYNC] Appointment synced to cloud!');
+      }).catch(() => {});
+    }
 
     // Also sync to leads table for unified visibility
     try {
@@ -95,73 +112,93 @@ router.post('/', (req, res) => {
 
 /**
  * GET /api/appointments
- * List all scheduled appointments
+ * List all scheduled appointments (Supabase with SQLite fallback)
  */
-router.get('/', (req, res) => {
+router.get('/', async (req, res) => {
   try {
-    const stmt = db.db.prepare(`
-      SELECT * FROM appointments
-      ORDER BY meeting_date ASC, meeting_time ASC
-    `);
-    const appointments = stmt.all();
+    const { status, date } = req.query;
+
+    if (supabase) {
+      try {
+        let query = supabase.from('appointments').select('*').order('meeting_date', { ascending: true });
+        if (status) query = query.eq('status', status);
+        if (date) query = query.eq('meeting_date', date);
+
+        const { data, error } = await query;
+        if (!error && Array.isArray(data)) {
+          return res.json({
+            success: true,
+            source: 'supabase_cloud',
+            total: data.length,
+            appointments: data
+          });
+        }
+      } catch (e) {}
+    }
+
+    let query = 'SELECT * FROM appointments';
+    const params = [];
+    const conditions = [];
+
+    if (status) {
+      conditions.push('status = ?');
+      params.push(status);
+    }
+
+    if (date) {
+      conditions.push('meeting_date = ?');
+      params.push(date);
+    }
+
+    if (conditions.length > 0) {
+      query += ' WHERE ' + conditions.join(' AND ');
+    }
+
+    query += ' ORDER BY meeting_date ASC, meeting_time ASC';
+
+    const stmt = db.db.prepare(query);
+    const appointments = stmt.all(...params);
 
     return res.json({
       success: true,
+      source: 'sqlite_local',
       total: appointments.length,
       appointments
     });
   } catch (error) {
     console.error('❌ Error fetching appointments:', error);
-    return res.status(500).json({ success: false, error: 'Error al consultar las citas.' });
+    return res.status(500).json({ success: false, error: 'Error al consultar citas agendadas.' });
   }
 });
 
 /**
- * PATCH /api/appointments/:id
- * Update appointment status
+ * PATCH /api/appointments/:id/status
  */
-router.patch('/:id', (req, res) => {
+router.patch('/:id/status', (req, res) => {
   try {
     const { id } = req.params;
     const { status } = req.body;
 
-    const allowed = ['confirmed', 'completed', 'cancelled', 'rescheduled'];
+    const allowed = ['confirmed', 'completed', 'rescheduled', 'cancelled'];
     if (!status || !allowed.includes(status)) {
-      return res.status(400).json({ success: false, error: `Estado inválido. Válidos: ${allowed.join(', ')}` });
+      return res.status(400).json({ success: false, error: 'Estado de cita inválido.' });
     }
 
     const stmt = db.db.prepare('UPDATE appointments SET status = ? WHERE id = ?');
     const result = stmt.run(status, id);
 
+    if (supabase) {
+      supabase.from('appointments').update({ status }).eq('id', id).then(() => {}).catch(() => {});
+    }
+
     if (result.changes === 0) {
       return res.status(404).json({ success: false, error: 'Cita no encontrada.' });
     }
 
-    return res.json({ success: true, message: 'Estado de la cita actualizado.', status });
+    return res.json({ success: true, message: 'Estado de cita actualizado.', status });
   } catch (error) {
     console.error('❌ Error updating appointment:', error);
     return res.status(500).json({ success: false, error: 'Error al actualizar la cita.' });
-  }
-});
-
-/**
- * DELETE /api/appointments/:id
- * Cancel/Delete appointment
- */
-router.delete('/:id', (req, res) => {
-  try {
-    const { id } = req.params;
-    const stmt = db.db.prepare('DELETE FROM appointments WHERE id = ?');
-    const result = stmt.run(id);
-
-    if (result.changes === 0) {
-      return res.status(404).json({ success: false, error: 'Cita no encontrada.' });
-    }
-
-    return res.json({ success: true, message: 'Cita eliminada correctamente.' });
-  } catch (error) {
-    console.error('❌ Error deleting appointment:', error);
-    return res.status(500).json({ success: false, error: 'Error al eliminar la cita.' });
   }
 });
 

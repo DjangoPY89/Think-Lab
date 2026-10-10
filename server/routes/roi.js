@@ -1,11 +1,12 @@
 /**
  * Think Lab. - ROI Assessment Router
- * Handles conversion growth calculations and user audit submissions
+ * Handles conversion growth calculations, user audit submissions, and Supabase cloud sync
  */
 
 const express = require('express');
 const router = express.Router();
 const db = require('../db');
+const { supabase } = require('../supabase');
 
 /**
  * POST /api/roi-assessment
@@ -49,40 +50,78 @@ router.post('/', (req, res) => {
       clientIp
     );
 
-    console.log(`📊 [ROI AUDIT #${result.lastInsertRowid}] Tráfico: ${parsedTraffic} | Ticket: Gs. ${parsedTicket} | Extra Anual: +Gs. ${extraAnnual}`);
+    const assessmentId = result.lastInsertRowid;
+
+    // Supabase cloud sync
+    if (supabase) {
+      supabase.from('roi_assessments').insert([{
+        traffic: parsedTraffic,
+        ticket_gs: parsedTicket,
+        conversion_rate: parsedConv,
+        projected_conversion_rate: projectedConv,
+        current_monthly_revenue_gs: currentMonthly,
+        projected_monthly_revenue_gs: projectedMonthly,
+        extra_annual_revenue_gs: extraAnnual,
+        multiplier,
+        contact_email: contact_email || null,
+        ip_address: clientIp
+      }]).then(() => {}).catch(() => {});
+    }
+
+    console.log(`📊 [ROI AUDIT #${assessmentId}] Tráfico: ${parsedTraffic} | Ticket: Gs. ${parsedTicket} | Extra Anual: +Gs. ${extraAnnual}`);
 
     return res.status(201).json({
       success: true,
-      assessmentId: Number(result.lastInsertRowid),
+      assessmentId: Number(assessmentId),
       data: {
         traffic: parsedTraffic,
         ticket_gs: parsedTicket,
         conversion_rate: parsedConv,
         projected_conversion_rate: projectedConv,
-        current_monthly_gs: currentMonthly,
-        projected_monthly_gs: projectedMonthly,
-        extra_annual_gs: extraAnnual,
+        current_monthly_revenue_gs: currentMonthly,
+        projected_monthly_revenue_gs: projectedMonthly,
+        extra_annual_revenue_gs: extraAnnual,
         multiplier
       }
     });
   } catch (error) {
-    console.error('❌ Error processing ROI assessment:', error);
-    return res.status(500).json({ success: false, error: 'Error al procesar la proyección ROI.' });
+    console.error('❌ Error saving ROI assessment:', error);
+    return res.status(500).json({ success: false, error: 'Error al procesar el cálculo de ROI.' });
   }
 });
 
 /**
- * GET /api/roi-assessments
- * List stored ROI assessments
+ * GET /api/roi-assessment
+ * Retrieve latest ROI assessments
  */
-router.get('/', (req, res) => {
+router.get('/', async (req, res) => {
   try {
-    const stmt = db.db.prepare('SELECT * FROM roi_assessments ORDER BY created_at DESC LIMIT 50');
+    if (supabase) {
+      try {
+        const { data, error } = await supabase.from('roi_assessments').select('*').order('created_at', { ascending: false }).limit(20);
+        if (!error && Array.isArray(data)) {
+          return res.json({
+            success: true,
+            source: 'supabase_cloud',
+            total: data.length,
+            assessments: data
+          });
+        }
+      } catch (e) {}
+    }
+
+    const stmt = db.db.prepare('SELECT * FROM roi_assessments ORDER BY created_at DESC LIMIT 20');
     const assessments = stmt.all();
-    return res.json({ success: true, total: assessments.length, assessments });
+
+    return res.json({
+      success: true,
+      source: 'sqlite_local',
+      total: assessments.length,
+      assessments
+    });
   } catch (error) {
     console.error('❌ Error fetching ROI assessments:', error);
-    return res.status(500).json({ success: false, error: 'Error al consultar evaluaciones.' });
+    return res.status(500).json({ success: false, error: 'Error al consultar evaluaciones ROI.' });
   }
 });
 

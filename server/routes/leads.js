@@ -1,12 +1,13 @@
 /**
  * Think Lab. - Leads Router
- * Handles intake wizard submissions, lead tracking, and status updates
+ * Handles intake wizard submissions, lead tracking, status updates, and Supabase cloud sync
  */
 
 const express = require('express');
 const router = express.Router();
 const db = require('../db');
 const { sendLeadNotification } = require('../mailer');
+const { supabase } = require('../supabase');
 
 // Validation helper
 function validateEmail(email) {
@@ -33,6 +34,7 @@ router.post('/', async (req, res) => {
     const servicesStr = Array.isArray(services) ? services.join(', ') : (services || 'General');
     const clientIp = req.headers['x-forwarded-for'] || req.socket.remoteAddress || '127.0.0.1';
 
+    // 1. Insert into local SQLite database
     const insertStmt = db.db.prepare(`
       INSERT INTO leads (name, email, company, services, budget, timeline, details, ip_address)
       VALUES (?, ?, ?, ?, ?, ?, ?, ?)
@@ -53,7 +55,29 @@ router.post('/', async (req, res) => {
 
     console.log(`📥 [NEW LEAD #${leadId}] ${name} (${email}) - ${servicesStr} - Presupuesto: ${budget}`);
 
-    // Send automated email notification to admin (juanas89@gmail.com)
+    // 2. Sync asynchronously with Supabase Cloud
+    if (supabase) {
+      supabase.from('leads').insert([{
+        name: name.trim(),
+        email: email.trim().toLowerCase(),
+        company: (company || '').trim(),
+        services: servicesStr,
+        budget: budget || 'No especificado',
+        timeline: timeline || 'Estándar',
+        details: (details || '').trim(),
+        ip_address: clientIp
+      }]).then(({ error }) => {
+        if (error) {
+          console.warn('⚠️ [SUPABASE SYNC] Could not insert to Supabase (check if schema is applied):', error.message);
+        } else {
+          console.log('☁️ [SUPABASE SYNC] Lead synced to Supabase Cloud PostgreSQL!');
+        }
+      }).catch(err => {
+        console.warn('⚠️ [SUPABASE ERROR]:', err.message);
+      });
+    }
+
+    // 3. Send automated email notification to admin (juanas89@gmail.com)
     sendLeadNotification({
       leadId: Number(leadId),
       name: name.trim(),
@@ -88,11 +112,31 @@ router.post('/', async (req, res) => {
 
 /**
  * GET /api/leads
- * Retrieve all registered leads
+ * Retrieve all registered leads (Queries Supabase with SQLite fallback)
  */
-router.get('/', (req, res) => {
+router.get('/', async (req, res) => {
   try {
     const { status } = req.query;
+
+    if (supabase) {
+      try {
+        let query = supabase.from('leads').select('*').order('created_at', { ascending: false });
+        if (status) query = query.eq('status', status);
+
+        const { data, error } = await query;
+        if (!error && Array.isArray(data)) {
+          return res.json({
+            success: true,
+            source: 'supabase_cloud',
+            total: data.length,
+            leads: data
+          });
+        }
+      } catch (cloudErr) {
+        console.warn('⚠️ Supabase fetch fallback to SQLite:', cloudErr.message);
+      }
+    }
+
     let query = 'SELECT * FROM leads';
     const params = [];
 
@@ -108,6 +152,7 @@ router.get('/', (req, res) => {
 
     return res.json({
       success: true,
+      source: 'sqlite_local',
       total: leads.length,
       leads
     });
@@ -142,7 +187,7 @@ router.get('/:id', (req, res) => {
  * PATCH /api/leads/:id
  * Update lead status
  */
-router.patch('/:id', (req, res) => {
+router.patch('/:id', async (req, res) => {
   try {
     const { id } = req.params;
     const { status } = req.body;
@@ -155,8 +200,14 @@ router.patch('/:id', (req, res) => {
       });
     }
 
+    // Update SQLite
     const stmt = db.db.prepare('UPDATE leads SET status = ? WHERE id = ?');
     const result = stmt.run(status, id);
+
+    // Update Supabase
+    if (supabase) {
+      supabase.from('leads').update({ status }).eq('id', id).then(() => {}).catch(() => {});
+    }
 
     if (result.changes === 0) {
       return res.status(404).json({ success: false, error: 'Prospecto no encontrado.' });
@@ -178,6 +229,10 @@ router.delete('/:id', (req, res) => {
     const { id } = req.params;
     const stmt = db.db.prepare('DELETE FROM leads WHERE id = ?');
     const result = stmt.run(id);
+
+    if (supabase) {
+      supabase.from('leads').delete().eq('id', id).then(() => {}).catch(() => {});
+    }
 
     if (result.changes === 0) {
       return res.status(404).json({ success: false, error: 'Prospecto no encontrado.' });
