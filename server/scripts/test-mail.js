@@ -6,14 +6,15 @@ async function runTest() {
   console.log('🧪 Iniciando prueba de envío de correo para Think Lab...\n');
 
   const leadMock = {
-    leadId: 101,
+    leadId: 102,
     name: 'Juan Solalinde (Test)',
     email: 'juanas89@gmail.com',
+    phone: '+595 981 123 456',
     company: 'Think Lab. Digital',
     services: 'Integración de Agentes de IA & Plataforma Web',
-    budget: 'Gs. 25.000.000 - Gs. 50.000.000 (Plataforma Completa & IA)',
+    budget: 'A definir en llamada',
     timeline: 'Prioritario (2 a 3 semanas)',
-    details: 'Este es un correo de prueba para verificar que las notificaciones del formulario "Inicia tu proyecto con Think Lab." lleguen correctamente a juanas89@gmail.com.',
+    details: 'Verificando nuevo campo de teléfono y opción de presupuesto a definir en llamada con aviso por mail.',
     ipAddress: '127.0.0.1',
     date: new Date().toLocaleString('es-ES', { timeZone: 'America/Asuncion' })
   };

@@ -27,6 +27,7 @@ function initSchema() {
       id INTEGER PRIMARY KEY AUTOINCREMENT,
       name TEXT NOT NULL,
       email TEXT NOT NULL,
+      phone TEXT,
       company TEXT,
       services TEXT,
       budget TEXT,
@@ -96,6 +97,13 @@ function initSchema() {
     CREATE INDEX IF NOT EXISTS idx_visits_created ON site_visits(created_at DESC);
     CREATE INDEX IF NOT EXISTS idx_appointments_date ON appointments(meeting_date DESC);
   `);
+
+  // Safe migration for existing databases
+  try {
+    db.exec('ALTER TABLE leads ADD COLUMN phone TEXT;');
+  } catch (e) {
+    // Column already exists, ignore
+  }
 
   console.log('⚡ [DB] SQLite Database initialized & schema migrated successfully at:', dbPath);
 }

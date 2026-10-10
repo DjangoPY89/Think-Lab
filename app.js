@@ -527,6 +527,7 @@ function initIntakeWizard() {
   const next1 = document.getElementById('intake-next-1');
   const next2 = document.getElementById('intake-next-2');
   const back2 = document.getElementById('intake-back-2');
+  const back3 = document.getElementById('intake-back-3');
   const submitBtn = document.getElementById('intake-submit');
 
   const progressBar = document.getElementById('intake-progress');
@@ -574,11 +575,19 @@ function initIntakeWizard() {
     });
   }
 
+  if (back3) {
+    back3.addEventListener('click', () => {
+      currentStep = 2;
+      updateSteps();
+    });
+  }
+
   if (submitBtn) {
     submitBtn.addEventListener('click', async (e) => {
       e.preventDefault();
       const email = document.getElementById('intake-email')?.value?.trim();
       const name = document.getElementById('intake-name')?.value?.trim();
+      const phone = document.getElementById('intake-phone')?.value?.trim() || '';
       const company = document.getElementById('intake-website')?.value?.trim() || document.getElementById('intake-company')?.value?.trim() || '';
       const details = document.getElementById('intake-details')?.value?.trim() || '';
 
@@ -628,6 +637,7 @@ function initIntakeWizard() {
             body: JSON.stringify({
               name,
               email,
+              phone,
               company,
               services: selectedServices.length > 0 ? selectedServices : ['Plataforma Web Completa'],
               budget: budgetText,

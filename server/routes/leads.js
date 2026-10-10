@@ -21,7 +21,7 @@ function validateEmail(email) {
  */
 router.post('/', async (req, res) => {
   try {
-    const { name, email, company, services, budget, timeline, details } = req.body;
+    const { name, email, phone, company, services, budget, timeline, details } = req.body;
 
     if (!name || !name.trim()) {
       return res.status(400).json({ success: false, error: 'El nombre es obligatorio.' });
@@ -36,13 +36,14 @@ router.post('/', async (req, res) => {
 
     // 1. Insert into local SQLite database
     const insertStmt = db.db.prepare(`
-      INSERT INTO leads (name, email, company, services, budget, timeline, details, ip_address)
-      VALUES (?, ?, ?, ?, ?, ?, ?, ?)
+      INSERT INTO leads (name, email, phone, company, services, budget, timeline, details, ip_address)
+      VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)
     `);
 
     const result = insertStmt.run(
       name.trim(),
       email.trim().toLowerCase(),
+      (phone || '').trim(),
       (company || '').trim(),
       servicesStr,
       budget || 'No especificado',
@@ -53,13 +54,14 @@ router.post('/', async (req, res) => {
 
     const leadId = result.lastInsertRowid;
 
-    console.log(`📥 [NEW LEAD #${leadId}] ${name} (${email}) - ${servicesStr} - Presupuesto: ${budget}`);
+    console.log(`📥 [NEW LEAD #${leadId}] ${name} (${email}) - Tel: ${phone || 'N/A'} - ${servicesStr} - Presupuesto: ${budget}`);
 
     // 2. Sync asynchronously with Supabase Cloud
     if (supabase) {
       supabase.from('leads').insert([{
         name: name.trim(),
         email: email.trim().toLowerCase(),
+        phone: (phone || '').trim(),
         company: (company || '').trim(),
         services: servicesStr,
         budget: budget || 'No especificado',
@@ -82,6 +84,7 @@ router.post('/', async (req, res) => {
       leadId: Number(leadId),
       name: name.trim(),
       email: email.trim().toLowerCase(),
+      phone: (phone || '').trim(),
       company: (company || '').trim(),
       services: servicesStr,
       budget: budget || 'No especificado',
@@ -99,6 +102,7 @@ router.post('/', async (req, res) => {
       data: {
         name,
         email,
+        phone,
         company,
         services: servicesStr,
         budget

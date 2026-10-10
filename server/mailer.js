@@ -12,14 +12,26 @@ const NOTIFICATION_RECIPIENT = process.env.NOTIFICATION_EMAIL || 'juanas89@gmail
  */
 function createTransporter() {
   const host = process.env.SMTP_HOST || 'smtp.gmail.com';
-  const port = parseInt(process.env.SMTP_PORT, 10) || 465;
-  const secure = process.env.SMTP_SECURE === 'true' || port === 465;
-  const user = process.env.SMTP_USER || process.env.EMAIL_USER;
-  const pass = process.env.SMTP_PASS || process.env.EMAIL_PASS;
+  const user = (process.env.SMTP_USER || process.env.EMAIL_USER || '').trim();
+  const pass = (process.env.SMTP_PASS || process.env.EMAIL_PASS || '').trim();
 
   if (!user || !pass) {
     return null;
   }
+
+  // Use native Gmail service config for maximum reliability with App Passwords
+  if (host === 'smtp.gmail.com' || user.endsWith('@gmail.com')) {
+    return nodemailer.createTransport({
+      service: 'gmail',
+      auth: {
+        user,
+        pass
+      }
+    });
+  }
+
+  const port = parseInt(process.env.SMTP_PORT, 10) || 465;
+  const secure = process.env.SMTP_SECURE === 'true' || port === 465;
 
   return nodemailer.createTransport({
     host,
@@ -36,10 +48,15 @@ function createTransporter() {
  * Builds a styled, modern HTML email template
  */
 function generateLeadEmailHtml(data) {
-  const { leadId, name, email, company, services, budget, timeline, details, date, ipAddress } = data;
+  const { leadId, name, email, phone, company, services, budget, timeline, details, date, ipAddress } = data;
   const companyDisplay = company && company.trim() ? company : 'No especificada';
+  const phoneDisplay = phone && phone.trim() ? phone : 'No proporcionado';
   const detailsDisplay = details && details.trim() ? details : 'Sin observaciones adicionales';
   const dateFormatted = date || new Date().toLocaleString('es-ES', { timeZone: 'America/Asuncion' });
+
+  // Clean phone for WhatsApp link
+  const cleanPhone = phone ? phone.replace(/[^0-9]/g, '') : '';
+  const waUrl = cleanPhone ? `https://wa.me/${cleanPhone}?text=${encodeURIComponent(`Hola ${name}, te contacto desde Think Lab. sobre tu proyecto web.`)}` : '';
 
   return `
   <!DOCTYPE html>
@@ -77,7 +94,7 @@ function generateLeadEmailHtml(data) {
             <tr>
               <td style="padding: 28px 32px;">
                 <p style="margin: 0 0 20px 0; font-size: 14px; line-height: 1.6; color: #a1a1a6;">
-                  Se ha completado un nuevo formulario en <strong style="color: #ffffff;">"Inicia tu proyecto con Think Lab."</strong>. A continuación se presentan los detalles del cliente:
+                  Se ha completado el formulario <strong style="color: #ffffff;">"Inicia tu proyecto con Think Lab."</strong>. A continuación se presentan los detalles del cliente:
                 </p>
 
                 <!-- Lead Details Card -->
@@ -99,6 +116,18 @@ function generateLeadEmailHtml(data) {
                           <td width="140" style="font-size: 12px; color: #86868b; font-weight: 600; text-transform: uppercase; letter-spacing: 0.05em;">Correo:</td>
                           <td style="font-size: 14px; color: #a3e635; font-weight: 500;">
                             <a href="mailto:${email}" style="color: #a3e635; text-decoration: none;">${email}</a>
+                          </td>
+                        </tr>
+                      </table>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td style="padding: 14px 18px; border-bottom: 1px solid rgba(255,255,255,0.05);">
+                      <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                        <tr>
+                          <td width="140" style="font-size: 12px; color: #86868b; font-weight: 600; text-transform: uppercase; letter-spacing: 0.05em;">Teléfono / WhatsApp:</td>
+                          <td style="font-size: 14px; color: #ffffff; font-weight: 600;">
+                            ${phone ? `<a href="tel:${phone}" style="color: #ffffff; text-decoration: none;">${phoneDisplay}</a>` : phoneDisplay}
                           </td>
                         </tr>
                       </table>
@@ -156,11 +185,16 @@ function generateLeadEmailHtml(data) {
                   </tr>
                 </table>
 
-                <!-- Action Button -->
+                <!-- Action Buttons -->
                 <div style="text-align: center; margin: 28px 0 10px 0;">
-                  <a href="mailto:${email}?subject=Think%20Lab.%20-%20Reuni%C3%B3n%20Estrat%C3%A9gica%20de%20Proyecto" style="display: inline-block; background-color: #ffffff; color: #000000; font-size: 13px; font-weight: 600; text-decoration: none; padding: 12px 28px; border-radius: 999px; box-shadow: 0 4px 12px rgba(255,255,255,0.15);">
-                    ✉️ Responder a ${name} (${email})
+                  <a href="mailto:${email}?subject=Think%20Lab.%20-%20Reuni%C3%B3n%20Estrat%C3%A9gica%20de%20Proyecto" style="display: inline-block; background-color: #ffffff; color: #000000; font-size: 13px; font-weight: 600; text-decoration: none; padding: 12px 24px; border-radius: 999px; margin-right: 8px; margin-bottom: 8px; box-shadow: 0 4px 12px rgba(255,255,255,0.15);">
+                    ✉️ Responder por Correo
                   </a>
+                  ${waUrl ? `
+                  <a href="${waUrl}" target="_blank" style="display: inline-block; background-color: #25D366; color: #ffffff; font-size: 13px; font-weight: 600; text-decoration: none; padding: 12px 24px; border-radius: 999px; margin-bottom: 8px; box-shadow: 0 4px 12px rgba(37,211,102,0.25);">
+                    💬 Contactar por WhatsApp
+                  </a>
+                  ` : ''}
                 </div>
               </td>
             </tr>
@@ -188,7 +222,7 @@ function generateLeadEmailHtml(data) {
  * @returns {Promise<Object>}
  */
 async function sendLeadNotification(leadData) {
-  const recipient = NOTIFICATION_RECIPIENT;
+  const recipient = (process.env.NOTIFICATION_EMAIL || NOTIFICATION_RECIPIENT || 'juanas89@gmail.com').trim();
   const transporter = createTransporter();
 
   const subject = `🚀 Nuevo Proyecto Think Lab.: ${leadData.name} ${leadData.company ? `(${leadData.company})` : ''}`;
@@ -200,6 +234,7 @@ async function sendLeadNotification(leadData) {
 Lead ID: #${leadData.leadId || 'N/A'}
 Nombre: ${leadData.name}
 Correo: ${leadData.email}
+Teléfono: ${leadData.phone || 'No especificado'}
 Empresa / Web: ${leadData.company || 'No especificada'}
 Objetivo / Servicios: ${leadData.services || 'General'}
 Presupuesto: ${leadData.budget || 'No especificado'}
@@ -261,4 +296,3 @@ module.exports = {
   generateLeadEmailHtml,
   NOTIFICATION_RECIPIENT
 };
-

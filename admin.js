@@ -574,13 +574,24 @@ document.addEventListener('DOMContentLoaded', () => {
 
   function openLeadModal(lead) {
     if (!leadModal || !modalLeadBody) return;
+    const cleanPhone = lead.phone ? lead.phone.replace(/[^0-9]/g, '') : '';
+    const waUrl = cleanPhone ? `https://wa.me/${cleanPhone}?text=${encodeURIComponent(`Hola ${lead.name}, te contacto desde Think Lab.`)}` : '';
+
     modalLeadTitle.textContent = `Detalles de ${lead.name}`;
     modalLeadBody.innerHTML = `
       <div class="space-y-3 font-mono text-xs">
-        <div class="p-3 bg-white/[0.02] border border-white/10 rounded-xl space-y-1">
-          <div class="text-[#86868b] text-[10px]">CORREO ELECTRÓNICO</div>
-          <div class="text-white font-sans text-sm font-medium">
-            <a href="mailto:${lead.email}" class="hover:underline text-[#a3e635]">${lead.email}</a>
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-2">
+          <div class="p-3 bg-white/[0.02] border border-white/10 rounded-xl space-y-1">
+            <div class="text-[#86868b] text-[10px]">CORREO ELECTRÓNICO</div>
+            <div class="text-white font-sans text-sm font-medium">
+              <a href="mailto:${lead.email}" class="hover:underline text-[#a3e635]">${lead.email}</a>
+            </div>
+          </div>
+          <div class="p-3 bg-white/[0.02] border border-white/10 rounded-xl space-y-1">
+            <div class="text-[#86868b] text-[10px]">TELÉFONO / WHATSAPP</div>
+            <div class="text-white font-sans text-sm font-medium">
+              ${lead.phone ? `<a href="tel:${lead.phone}" class="hover:underline text-white">${lead.phone}</a>` : '<span class="text-[#86868b]">No especificado</span>'}
+            </div>
           </div>
         </div>
 
@@ -610,10 +621,15 @@ document.addEventListener('DOMContentLoaded', () => {
           <span>Registrado: ${formatDate(lead.created_at)}</span>
         </div>
 
-        <div class="pt-2">
-          <a href="mailto:${lead.email}?subject=Think%20Lab.%20-%20Reuni%C3%B3n%20Estrat%C3%A9gica" class="btn-apple-primary w-full text-center block py-2.5 text-xs font-semibold">
-            Enviar Correo a ${lead.name}
+        <div class="pt-2 flex flex-col sm:flex-row gap-2">
+          <a href="mailto:${lead.email}?subject=Think%20Lab.%20-%20Reuni%C3%B3n%20Estrat%C3%A9gica" class="btn-apple-primary flex-1 text-center block py-2.5 text-xs font-semibold">
+            ✉️ Enviar Correo
           </a>
+          ${waUrl ? `
+          <a href="${waUrl}" target="_blank" class="bg-[#25D366] hover:bg-[#20ba5a] text-white flex-1 text-center block py-2.5 text-xs font-semibold rounded-full transition-all">
+            💬 Abrir WhatsApp
+          </a>
+          ` : ''}
         </div>
       </div>
     `;
