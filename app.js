@@ -6,6 +6,22 @@
 
 let currentLang = localStorage.getItem('thinklab_lang') || 'es';
 
+/**
+ * Resolves API URL correctly whether loaded via localhost:8000, Live Server (e.g. 5500), or file://
+ */
+function getApiUrl(endpoint) {
+  if (typeof window === 'undefined') return endpoint;
+  if (window.location.protocol === 'file:') {
+    return `http://localhost:8000${endpoint}`;
+  }
+  if (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1') {
+    if (window.location.port && window.location.port !== '8000') {
+      return `http://${window.location.hostname}:8000${endpoint}`;
+    }
+  }
+  return endpoint;
+}
+
 document.addEventListener('DOMContentLoaded', () => {
   // Initialize Lucide Icons
   if (window.lucide) {
@@ -339,7 +355,7 @@ function initRoiCalculator() {
       const ticket = parseInt(ticketInput.value);
       const convRate = parseFloat(convInput.value);
 
-      fetch('/api/roi-assessment', {
+      fetch(getApiUrl('/api/roi-assessment'), {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
@@ -574,125 +590,133 @@ function initIntakeWizard() {
     });
   }
 
-  if (submitBtn) {
-    submitBtn.addEventListener('click', async (e) => {
-      e.preventDefault();
-      const email = document.getElementById('intake-email')?.value?.trim();
-      const name = document.getElementById('intake-name')?.value?.trim();
-      const company = document.getElementById('intake-website')?.value?.trim() || document.getElementById('intake-company')?.value?.trim() || '';
-      const details = document.getElementById('intake-details')?.value?.trim() || '';
+  const intakeForm = document.getElementById('intake-form');
 
-      if (!email || !name) {
-        const errorMsg = currentLang === 'en'
-          ? 'Please complete your name and corporate email.'
-          : 'Por favor completa tu nombre y correo electrónico.';
-        showToast(errorMsg);
-        return;
-      }
+  async function handleIntakeSubmit(e) {
+    if (e) e.preventDefault();
+    const email = document.getElementById('intake-email')?.value?.trim();
+    const name = document.getElementById('intake-name')?.value?.trim();
+    const company = document.getElementById('intake-website')?.value?.trim() || document.getElementById('intake-company')?.value?.trim() || '';
+    const details = document.getElementById('intake-details')?.value?.trim() || '';
 
-      // Collect selected goal / services from step 1
-      const selectedRadio = step1 ? step1.querySelector('input[name="goal"]:checked') : null;
-      const selectedGoalText = selectedRadio ? (selectedRadio.nextElementSibling?.textContent?.trim() || selectedRadio.value) : null;
-      const selectedServices = selectedGoalText ? [selectedGoalText] : ['Plataforma Web Completa'];
+    if (!email || !name) {
+      const errorMsg = currentLang === 'en'
+        ? 'Please complete your name and corporate email.'
+        : 'Por favor completa tu nombre y correo electrónico.';
+      showToast(errorMsg);
+      return;
+    }
 
-      // Collect selected budget & timeline from step 2
-      const budgetSelect = step2 ? step2.querySelector('select') : null;
-      const budgetText = budgetSelect ? budgetSelect.options[budgetSelect.selectedIndex]?.text : 'Gs. 25.000.000 - Gs. 50.000.000';
-      const timelineSelect = step2 ? step2.querySelectorAll('select')[1] : null;
-      const timelineText = timelineSelect ? timelineSelect.options[timelineSelect.selectedIndex]?.text : 'En el transcurso del mes';
+    // Collect selected goal / services from step 1
+    const selectedRadio = step1 ? step1.querySelector('input[name="goal"]:checked') : null;
+    const selectedGoalText = selectedRadio ? (selectedRadio.nextElementSibling?.textContent?.trim() || selectedRadio.value) : null;
+    const selectedServices = selectedGoalText ? [selectedGoalText] : ['Plataforma Web Completa'];
 
-      step3.classList.add('hidden');
-      if (resultPanel) {
-        resultPanel.classList.remove('hidden');
-        const loadingTitle = currentLang === 'en'
-          ? 'Registering Project in Think Lab.'
-          : 'Registrando Propuesta en Think Lab.';
-        const loadingSub = currentLang === 'en'
-          ? 'Connecting to database and assigning Lead Architect...'
-          : 'Conectando con base de datos y asignando Lead Architect...';
+    // Collect selected budget & timeline from step 2
+    const budgetSelect = step2 ? step2.querySelector('select') : null;
+    const budgetText = budgetSelect ? budgetSelect.options[budgetSelect.selectedIndex]?.text : 'Gs. 25.000.000 - Gs. 50.000.000';
+    const timelineSelect = step2 ? step2.querySelectorAll('select')[1] : null;
+    const timelineText = timelineSelect ? timelineSelect.options[timelineSelect.selectedIndex]?.text : 'En el transcurso del mes';
 
-        resultPanel.innerHTML = `
-          <div class="text-center py-8">
-            <div class="w-10 h-10 border-2 border-white/20 border-t-[#a3e635] rounded-full animate-spin mx-auto mb-4"></div>
-            <h4 class="text-lg font-semibold text-white mb-1">${loadingTitle}</h4>
-            <p class="text-xs text-[#86868b] font-mono">${loadingSub}</p>
-          </div>
-        `;
+    step3.classList.add('hidden');
+    if (resultPanel) {
+      resultPanel.classList.remove('hidden');
+      const loadingTitle = currentLang === 'en'
+        ? 'Registering Project in Think Lab.'
+        : 'Registrando Propuesta en Think Lab.';
+      const loadingSub = currentLang === 'en'
+        ? 'Connecting to database and sending notification...'
+        : 'Conectando con base de datos y notificando a arquitectura...';
 
-        try {
-          const response = await fetch('/api/leads', {
-            method: 'POST',
-            headers: {
-              'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({
-              name,
-              email,
-              company,
-              services: selectedServices.length > 0 ? selectedServices : ['Plataforma Web Completa'],
-              budget: budgetText,
-              timeline: timelineText,
-              details,
-            }),
-          });
+      resultPanel.innerHTML = `
+        <div class="text-center py-8">
+          <div class="w-10 h-10 border-2 border-white/20 border-t-[#a3e635] rounded-full animate-spin mx-auto mb-4"></div>
+          <h4 class="text-lg font-semibold text-white mb-1">${loadingTitle}</h4>
+          <p class="text-xs text-[#86868b] font-mono">${loadingSub}</p>
+        </div>
+      `;
 
-          const data = await response.json();
+      try {
+        const response = await fetch(getApiUrl('/api/leads'), {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            name,
+            email,
+            company,
+            services: selectedServices.length > 0 ? selectedServices : ['Plataforma Web Completa'],
+            budget: budgetText,
+            timeline: timelineText,
+            details,
+          }),
+        });
 
-          if (response.ok && data.success) {
-            const successTitle = currentLang === 'en'
-              ? `Application Received (Lead #${data.leadId})`
-              : `Solicitud Recibida (Lead #${data.leadId})`;
-            const confSub = currentLang === 'en'
-              ? `Confirmation recorded for ${email}`
-              : `Confirmación registrada para ${email}`;
-            const bodyMsg = currentLang === 'en'
-              ? `Thank you, <strong>${name}</strong>. Your requirement for <strong>${company || 'your company'}</strong> has been stored successfully in our database. A Think Lab. Lead Architect will be in touch shortly.`
-              : `Gracias, <strong>${name}</strong>. Tu requerimiento para <strong>${company || 'tu empresa'}</strong> ha sido guardado exitosamente en nuestra base de datos. Un Lead Architect de <strong>Think Lab.</strong> se pondrá en contacto en breve.`;
-            const statusLabel = currentLang === 'en' ? '● Status: Assigned to Lead Architect' : '● Estado: Asignado a Arquitectura';
-            const servLabel = currentLang === 'en' ? 'Services:' : 'Servicios:';
-            const budgetLabel = currentLang === 'en' ? 'Budget:' : 'Presupuesto:';
+        const data = await response.json();
 
-            resultPanel.innerHTML = `
-              <div class="p-6 rounded-2xl bg-white/[0.03] border border-white/10 text-left">
-                <div class="flex items-center gap-3 mb-3">
-                  <span class="w-7 h-7 rounded-full bg-[#a3e635]/20 text-[#a3e635] flex items-center justify-center font-bold text-xs">✓</span>
-                  <div>
-                    <h4 class="text-base font-semibold text-white">${successTitle}</h4>
-                    <p class="text-xs text-[#86868b]">${confSub}</p>
-                  </div>
-                </div>
-                <p class="text-sm text-[#86868b] mb-4 leading-relaxed">
-                  ${bodyMsg}
-                </p>
-                <div class="p-3 rounded-xl bg-black/50 border border-white/[0.06] text-xs font-mono text-[#86868b] space-y-1">
-                  <div class="text-[#a3e635]">${statusLabel}</div>
-                  <div>${servLabel} ${data.data.services}</div>
-                  <div>${budgetLabel} ${data.data.budget}</div>
+        if (response.ok && data.success) {
+          const successTitle = currentLang === 'en'
+            ? `Application Received (Lead #${data.leadId})`
+            : `Solicitud Recibida (Lead #${data.leadId})`;
+          const confSub = currentLang === 'en'
+            ? `Confirmation recorded for ${email}`
+            : `Confirmación registrada para ${email}`;
+          const bodyMsg = currentLang === 'en'
+            ? `Thank you, <strong>${name}</strong>. Your requirement for <strong>${company || 'your company'}</strong> has been stored successfully in our database. A Think Lab. Lead Architect will be in touch shortly.`
+            : `Gracias, <strong>${name}</strong>. Tu requerimiento para <strong>${company || 'tu empresa'}</strong> ha sido guardado exitosamente en nuestra base de datos. Un Lead Architect de <strong>Think Lab.</strong> se pondrá en contacto en breve.`;
+          const statusLabel = currentLang === 'en' ? '● Status: Assigned to Lead Architect' : '● Estado: Asignado a Arquitectura';
+          const servLabel = currentLang === 'en' ? 'Services:' : 'Servicios:';
+          const budgetLabel = currentLang === 'en' ? 'Budget:' : 'Presupuesto:';
+
+          resultPanel.innerHTML = `
+            <div class="p-6 rounded-2xl bg-white/[0.03] border border-white/10 text-left">
+              <div class="flex items-center gap-3 mb-3">
+                <span class="w-7 h-7 rounded-full bg-[#a3e635]/20 text-[#a3e635] flex items-center justify-center font-bold text-xs">✓</span>
+                <div>
+                  <h4 class="text-base font-semibold text-white">${successTitle}</h4>
+                  <p class="text-xs text-[#86868b]">${confSub}</p>
                 </div>
               </div>
-            `;
-            showToast(currentLang === 'en' ? 'Project application submitted successfully to Think Lab.!' : '¡Solicitud registrada con éxito en Think Lab.!');
-          } else {
-            throw new Error(data.error || 'Error al procesar la solicitud');
-          }
-        } catch (error) {
-          console.error('Error submitting lead:', error);
-          resultPanel.innerHTML = `
-            <div class="p-6 rounded-2xl bg-red-500/10 border border-red-500/20 text-left">
-              <h4 class="text-sm font-semibold text-red-400 mb-1">${currentLang === 'en' ? 'Connection Error' : 'Hubo un problema al conectar con el servidor'}</h4>
-              <p class="text-xs text-[#86868b] mb-3">${error.message || (currentLang === 'en' ? 'Could not save information.' : 'No se pudo guardar la información.')}</p>
-              <button id="intake-retry-btn" class="btn-apple-secondary text-xs py-1.5 px-3">
-                ${currentLang === 'en' ? 'Try Again' : 'Intentar Nuevamente'}
-              </button>
+              <p class="text-sm text-[#86868b] mb-4 leading-relaxed">
+                ${bodyMsg}
+              </p>
+              <div class="p-3 rounded-xl bg-black/50 border border-white/[0.06] text-xs font-mono text-[#86868b] space-y-1">
+                <div class="text-[#a3e635]">${statusLabel}</div>
+                <div>${servLabel} ${data.data.services}</div>
+                <div>${budgetLabel} ${data.data.budget}</div>
+              </div>
             </div>
           `;
-          document.getElementById('intake-retry-btn')?.addEventListener('click', () => {
-            resultPanel.classList.add('hidden');
-            step3.classList.remove('hidden');
-          });
+          showToast(currentLang === 'en' ? 'Project application submitted successfully to Think Lab.!' : '¡Solicitud registrada con éxito en Think Lab.!');
+        } else {
+          throw new Error(data.error || 'Error al procesar la solicitud');
         }
+      } catch (error) {
+        console.error('Error submitting lead:', error);
+        resultPanel.innerHTML = `
+          <div class="p-6 rounded-2xl bg-red-500/10 border border-red-500/20 text-left">
+            <h4 class="text-sm font-semibold text-red-400 mb-1">${currentLang === 'en' ? 'Connection Error' : 'Hubo un problema al conectar con el servidor'}</h4>
+            <p class="text-xs text-[#86868b] mb-3">${error.message || (currentLang === 'en' ? 'Could not save information. Please make sure the server is running.' : 'No se pudo guardar la información. Asegúrate de que el servidor esté activo.')}</p>
+            <button id="intake-retry-btn" class="btn-apple-secondary text-xs py-1.5 px-3">
+              ${currentLang === 'en' ? 'Try Again' : 'Intentar Nuevamente'}
+            </button>
+          </div>
+        `;
+        document.getElementById('intake-retry-btn')?.addEventListener('click', () => {
+          resultPanel.classList.add('hidden');
+          step3.classList.remove('hidden');
+        });
       }
-    });
+    }
+  }
+
+  if (submitBtn) {
+    submitBtn.addEventListener('click', handleIntakeSubmit);
+  }
+  if (intakeForm) {
+    intakeForm.addEventListener('submit', handleIntakeSubmit);
+  }
   }
 }
 
@@ -1000,7 +1024,7 @@ function initThinkBotAI() {
     const targetThinkingDuration = 1200 + Math.floor(Math.random() * 1400);
 
     try {
-      const res = await fetch('/api/chat', {
+      const res = await fetch(getApiUrl('/api/chat'), {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ 
@@ -1093,7 +1117,7 @@ function initThinkBotAI() {
       bookingSubmitBtn.innerHTML = `<span>${currentLang === 'en' ? 'Booking appointment...' : 'Registrando cita...'}</span>`;
 
       try {
-        const res = await fetch('/api/appointments', {
+        const res = await fetch(getApiUrl('/api/appointments'), {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({

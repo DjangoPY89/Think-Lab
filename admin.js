@@ -3,6 +3,22 @@
  * Connects directly to backend API (/api/auth, /api/stats, /api/leads, /api/roi-assessments)
  */
 
+/**
+ * Resolves API URL correctly whether loaded via localhost:8000, Live Server (e.g. 5500), or file://
+ */
+function getApiUrl(endpoint) {
+  if (typeof window === 'undefined') return endpoint;
+  if (window.location.protocol === 'file:') {
+    return `http://localhost:8000${endpoint}`;
+  }
+  if (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1') {
+    if (window.location.port && window.location.port !== '8000') {
+      return `http://${window.location.hostname}:8000${endpoint}`;
+    }
+  }
+  return endpoint;
+}
+
 document.addEventListener('DOMContentLoaded', () => {
   const AUTH_TOKEN_KEY = 'thinklab_admin_token';
   const AUTH_USER_KEY = 'thinklab_admin_user';
@@ -125,7 +141,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     try {
-      const res = await fetch('/api/auth/me', {
+      const res = await fetch(getApiUrl('/api/auth/me'), {
         headers: getAuthHeaders()
       });
       const data = await res.json();
@@ -166,7 +182,7 @@ document.addEventListener('DOMContentLoaded', () => {
       }
 
       try {
-        const response = await fetch('/api/auth/login', {
+        const response = await fetch(getApiUrl('/api/auth/login'), {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({ username, password })
@@ -219,7 +235,7 @@ document.addEventListener('DOMContentLoaded', () => {
   if (logoutBtn) {
     logoutBtn.addEventListener('click', async () => {
       try {
-        await fetch('/api/auth/logout', {
+        await fetch(getApiUrl('/api/auth/logout'), {
           method: 'POST',
           headers: getAuthHeaders()
         });
@@ -281,7 +297,7 @@ document.addEventListener('DOMContentLoaded', () => {
   async function loadDashboardData() {
     try {
       // 1. Fetch Stats & Visitor counts
-      const statsRes = await fetch('/api/stats', { headers: getAuthHeaders() });
+      const statsRes = await fetch(getApiUrl('/api/stats'), { headers: getAuthHeaders() });
       const statsData = await statsRes.json();
       if (statsData.success && statsData.stats) {
         const s = statsData.stats;
@@ -305,7 +321,7 @@ document.addEventListener('DOMContentLoaded', () => {
       }
 
       // 2. Fetch Leads
-      const leadsRes = await fetch('/api/leads', { headers: getAuthHeaders() });
+      const leadsRes = await fetch(getApiUrl('/api/leads'), { headers: getAuthHeaders() });
       const leadsData = await leadsRes.json();
       if (leadsData.success) {
         allLeads = leadsData.leads || [];
@@ -313,21 +329,21 @@ document.addEventListener('DOMContentLoaded', () => {
       }
 
       // 3. Fetch ROI Assessments
-      const roiRes = await fetch('/api/roi-assessment', { headers: getAuthHeaders() });
+      const roiRes = await fetch(getApiUrl('/api/roi-assessment'), { headers: getAuthHeaders() });
       const roiData = await roiRes.json();
       if (roiData.success && roiList) {
         renderRoiList(roiData.assessments || []);
       }
 
       // 4. Fetch Appointments (Think Bot AI)
-      const appRes = await fetch('/api/appointments', { headers: getAuthHeaders() });
+      const appRes = await fetch(getApiUrl('/api/appointments'), { headers: getAuthHeaders() });
       const appData = await appRes.json();
       if (appData.success) {
         renderAppointmentsTable(appData.appointments || []);
       }
 
       // 5. Fetch Chatbot Logs (Think Bot AI)
-      const chatRes = await fetch('/api/chat-logs', { headers: getAuthHeaders() });
+      const chatRes = await fetch(getApiUrl('/api/chat-logs'), { headers: getAuthHeaders() });
       const chatData = await chatRes.json();
       if (chatData.success) {
         renderChatLogsTable(chatData.logs || []);
@@ -548,7 +564,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   async function updateLeadStatus(id, status) {
     try {
-      const res = await fetch(`/api/leads/${id}`, {
+      const res = await fetch(getApiUrl(`/api/leads/${id}`), {
         method: 'PATCH',
         headers: {
           'Content-Type': 'application/json',
